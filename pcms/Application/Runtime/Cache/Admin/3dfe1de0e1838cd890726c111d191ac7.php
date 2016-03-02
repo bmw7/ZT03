@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/theme_inner.css">
-	<link rel="stylesheet" type="text/css" href="/pcms/Public/admin/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/theme_inner.css">
+	<link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/css/custom.css">
 </head>
 <body>
 <div id="title">欢迎 <span style="color:#18b4ed">${loginName!"系统管理员"}</span> 登陆后台管理系统</div>

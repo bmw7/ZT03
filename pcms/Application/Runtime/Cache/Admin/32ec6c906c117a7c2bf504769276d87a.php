@@ -5,16 +5,16 @@
     <title>后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel='stylesheet' type='text/css' href='/pcms/Public/admin/assets/skin/default_skin/css/font-opensans.css'> <!-- Font CSS -->
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/font-roboto.css">  <!-- Theme CSS -->
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/theme.css">
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/css/custom.css">
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/admin-tools/admin-forms/css/admin-forms.css"> <!-- Admin Forms CSS -->
+    <link rel='stylesheet' type='text/css' href='/git/pcms/Public/admin/assets/skin/default_skin/css/font-opensans.css'> <!-- Font CSS -->
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/font-roboto.css">  <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/admin-tools/admin-forms/css/admin-forms.css"> <!-- Admin Forms CSS -->
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-   		<script src="/pcms/Public/admin/assets/js/ie9/html5shiv.js"></script>
-   		<script src="/pcms/Public/admin/assets/js/ie9/respond.min.js"></script>
+   		<script src="/git/pcms/Public/admin/assets/js/ie9/html5shiv.js"></script>
+   		<script src="/git/pcms/Public/admin/assets/js/ie9/respond.min.js"></script>
     <![endif]-->
 </head>
 <body class="external-page sb-l-c sb-r-c">
@@ -39,7 +39,7 @@
 
                         <div class="col-xs-6 va-m pln">
                             <a href="${base}/admin">
-                                <img src="/pcms/Public/admin/assets/img/logos/logo_white.png" title="后台管理系统" class="img-responsive w250">
+                                <img src="/git/pcms/Public/admin/assets/img/logos/logo_white.png" title="后台管理系统" class="img-responsive w250">
                             </a>
                         </div>
 
@@ -132,31 +132,31 @@
     <!-- BEGIN: PAGE SCRIPTS -->
 
     <!-- jQuery -->
-    <script type="text/javascript" src="/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/js/jquery.cookie.js"></script>
     
     <!-- Bootstrap -->
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/bootstrap/bootstrap.min.js"></script>
  
     <!-- Page Plugins -->
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/pages/login/EasePack.min.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/pages/login/rAF.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/pages/login/TweenLite.min.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/pages/login/login.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/pages/login/EasePack.min.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/pages/login/rAF.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/pages/login/TweenLite.min.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/pages/login/login.js"></script>
 
     <!-- Theme Javascript -->
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/utility/utility.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/main.js"></script>
-    <script type="text/javascript" src="/pcms/Public/admin/assets/js/demo.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/utility/utility.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/main.js"></script>
+    <script type="text/javascript" src="/git/pcms/Public/admin/assets/js/demo.js"></script>
     
     <!-- Vadlidate And RSA Encrypt Service -->
-    <script type="text/javascript" src="/pcms/Public/admin/js/jquery.validate.js"></script>
-	<script type="text/javascript" src="/pcms/Public/admin/js/rsa/jsbn.js"></script>
-	<script type="text/javascript" src="/pcms/Public/admin/js/rsa/prng4.js"></script>
-	<script type="text/javascript" src="/pcms/Public/admin/js/rsa/rng.js"></script>
-	<script type="text/javascript" src="/pcms/Public/admin/js/rsa/rsa.js"></script>
-	<script type="text/javascript" src="/pcms/Public/admin/js/rsa/base64.js"></script> 
+    <script type="text/javascript" src="/git/pcms/Public/admin/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="/git/pcms/Public/admin/js/rsa/jsbn.js"></script>
+	<script type="text/javascript" src="/git/pcms/Public/admin/js/rsa/prng4.js"></script>
+	<script type="text/javascript" src="/git/pcms/Public/admin/js/rsa/rng.js"></script>
+	<script type="text/javascript" src="/git/pcms/Public/admin/js/rsa/rsa.js"></script>
+	<script type="text/javascript" src="/git/pcms/Public/admin/js/rsa/base64.js"></script> 
 
     <!-- Page Javascript -->
     <script type="text/javascript">

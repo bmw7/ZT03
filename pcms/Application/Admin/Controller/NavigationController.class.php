@@ -4,9 +4,8 @@ use Admin\Common\AuthController;
 
 class NavigationController extends AuthController{
     public function show(){      
-        $service = A('Navigation','Service');
-        $service->getTree();
-        //$this->assign("tree",$service->getTree());
+        $category = A('Category','Service');
+        $this->assign("tree",$category->getTree('Navigation'));
         $this->display();
     }
     

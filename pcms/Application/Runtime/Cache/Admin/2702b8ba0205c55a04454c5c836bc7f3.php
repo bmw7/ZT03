@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/theme_inner.css">
+	<link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/theme_inner.css">
     <!-- Admin Forms CSS -->
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/css/custom.css">
-    <script type="text/javascript" src="/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/css/custom.css">
+    <script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script>
      // 弹出框提示
  	 if('${info}' != ""){
@@ -164,12 +164,10 @@
 
         <tbody>
                                                                                                                                
-   		<volist name="tree" id="navigation">
-   		
-			<tr>
-			    <td><input type="checkbox" class="item" name="${navigation.id}"></td>
+   		<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$navigation): $mod = ($i % 2 );++$i;?><tr>
+			    <td><input type="checkbox" class="item" name="<?php echo ($navigation["id"]); ?>"></td>
 				<td>
-					<span style="margin-left: <?php echo ($navigation["grade * 20"]); ?>px;<#if navigation.grade == 0> color: #000000;</#if>">
+					<span style="margin-left: <?php echo ($navigation['grade'] * 20); ?>px">
 						<?php echo ($navigation["name"]); ?>
 					</span>
 				</td>
@@ -201,8 +199,7 @@
 					<a href="/admin/setting/navigation/edit/${navigation.id}">编辑</a>&nbsp;&nbsp;
 					<a href="#" onclick="del('/admin/setting/navigation/del/${navigation.id}',this.name)" name="${navigation.name}">删除</a>
 				</td>
-			</tr>
-		</#list>
+			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
        </tbody>
        
 </table>

@@ -6,9 +6,6 @@ CREATE TABLE `tp_category` (
   `orders` smallint default NULL,
   `parentId` smallint default NULL,
   `type` tinyint default NULL,
-  `seoTitle` varchar(255) default NULL,
-  `seoKeywords` varchar(255) default NULL,
-  `seoDescription` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

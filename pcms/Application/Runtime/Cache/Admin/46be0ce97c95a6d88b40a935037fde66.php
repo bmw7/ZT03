@@ -8,11 +8,11 @@
     <meta name="renderer" content="webkit"> <!-- 针对国产浏览器的设置 -->
 
     <!-- Font CSS -->
-    <link rel='stylesheet' type='text/css' href='/pcms/Public/admin/assets/skin/default_skin/css/font-opensans.css'>
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/font-roboto.css">
+    <link rel='stylesheet' type='text/css' href='/git/pcms/Public/admin/assets/skin/default_skin/css/font-opensans.css'>
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/font-roboto.css">
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" type="text/css" href="/pcms/Public/admin/assets/skin/default_skin/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/theme.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -220,19 +220,19 @@
     <!-- BEGIN: PAGE SCRIPTS -->
 
 <!-- jQuery -->
-<script type="text/javascript" src="/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="/pcms/Public/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
 
 <!-- Bootstrap -->
-<script type="text/javascript" src="/pcms/Public/admin/assets/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/assets/js/bootstrap/bootstrap.min.js"></script>
 
 <!-- BootboxJS -->
-<script type="text/javascript" src="/pcms/Public/admin/vendor/plugins/bootboxjs/bootbox.min.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/vendor/plugins/bootboxjs/bootbox.min.js"></script>
 
 <!-- Theme Javascript -->
-<script type="text/javascript" src="/pcms/Public/admin/assets/js/utility/utility.js"></script>
-<script type="text/javascript" src="/pcms/Public/admin/assets/js/main.js"></script>
-<script type="text/javascript" src="/pcms/Public/admin/assets/js/demo.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/assets/js/utility/utility.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/assets/js/main.js"></script>
+<script type="text/javascript" src="/git/pcms/Public/admin/assets/js/demo.js"></script>
 <script type="text/javascript">
 var setFrameHeight;
 var setHeight;
