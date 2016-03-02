@@ -14,6 +14,7 @@ class ArticleController extends AuthController{
         $Article->create();
         $Article->add();       
     }
+    
 }
 
 

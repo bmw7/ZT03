@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
-<script>if("${info}" != ""){ parent.bootAlert("${info}"); }</script>
+<script>if("${info}" != ""){ //parent.bootAlert("${info}"); }</script>
 </head>
 <body>
 <div class="custom_main">
@@ -31,14 +31,13 @@
 	            <label class="field select">
 	                <select name="parentId" id="category">
 	                    <option value="0" id="option0" name="0" >请选择上级分类</option>
-	                   	<#list tree as category>
-	                    	<option value="${category.id}" id="option${category.id}" name="${category.grade+1}">
-								<#if category.grade != 0>
-									<#list 1..category.grade as i>&nbsp;&nbsp;</#list>
-								</#if>
+	                   	<volist name="tree" id="category">
+	                    	<option value="{$category.id}" id="option{$category.id}" name="{$category['grade']+1}">
+								<span style="margin-left: {($category['grade']-1) * 20}px">
 								${category.name}
+								</span>
 							</option>
-						</#list>
+						</volist>
 	                </select>
 	                <!-- grade -->
 	                <input type="hidden" name="grade" id="grade" value="0" />
@@ -56,28 +55,7 @@
 					</select></label>
             </div>
 		</div>
-                       
-        <div class="form-group">
-            <label for="seoTitle" class="col-md-1 col-sm-1  control-label">页面标题</label>
-            <div class="col-md-5 col-sm-5">
-                <input type="text" name="seoTitle" id="seoTitle" class="form-control" placeholder="请输入页面标题">
-            </div>                 
-        </div>
-                       
-        <div class="form-group">
-            <label for="seoKeywords" class="col-md-1 col-sm-1  control-label">页面关键词</label>
-            <div class="col-md-5 col-sm-5">
-                <input type="text" name="seoKeywords" id="seoKeywords" class="form-control" placeholder="请输入页面关键词">
-            </div>                
-        </div>
-
-        <div class="form-group">
-            <label for="seoDescription" class="col-md-1 col-sm-1  control-label">页面描述</label>
-            <div class="col-md-5 col-sm-5">
-                <input type="text" name="seoDescription" id="seoDescription" class="form-control" placeholder="请输入页面描述">
-            </div>               
-        </div>
-
+ 
         <div class="form-group">
             <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>
             <div class="admin-form col-md-5 col-sm-5">

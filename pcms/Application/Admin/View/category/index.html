@@ -10,7 +10,7 @@
 <script>
     //消息提示框
 	if("${info}" != ""){
-	parent.bootAlert("${info}");
+	//parent.bootAlert("${info}");
     }
     
 	// 删除确认框 
@@ -109,7 +109,7 @@ $(document).ready(function(){
 <div class="custom_main">
 	<div class="custom_title">
 		<span class="custom_title_word">文章分类</span>
-		<div class="widget-menu pull-right mr10"><a href="${base}/admin/article/category/add"><i class="fa fa-plus-square"></i> &nbsp;添加分类</a></div>
+		<div class="widget-menu pull-right mr10"><a href="{:U('admin/category/add')}"><i class="fa fa-plus-square"></i> &nbsp;添加分类</a></div>
 	</div>
 	
 	<div class="custom_body">
@@ -125,29 +125,27 @@ $(document).ready(function(){
             </thead>
 
             <tbody>                            
-				<#list tree as articleCategory>
+				<volist name="tree" id="category">
 				<tr>
 				    <td><span class="glyphicons glyphicons-unchecked"></span></td>
-					<td><span style="margin-left: ${articleCategory.grade * 20}px">${articleCategory.name}</span></td>
+					<td><span style="margin-left: {$category['grade'] * 20}px">{$category.name}</span></td>
 					<td>
-						<#if articleCategory.type == 0><span class="glyphicons glyphicons-text_underline">&nbsp;标题</span>
-					    <#elseif articleCategory.type == 1><span class="glyphicons glyphicons-unchecked">&nbsp;单篇</span>
-					    <#elseif articleCategory.type == 2><span class="glyphicons glyphicons-more_windows">&nbsp;多篇</span>
-					    <#elseif articleCategory.type == 3><span class="glyphicons glyphicons-unchecked">&nbsp;单篇(图片)</span>
-					    <#elseif articleCategory.type == 4><span class="glyphicons glyphicons-more_windows">&nbsp;多篇(图片)</span>
-					    </#if>
+						<if   condition="$category.type eq 0"><span class="glyphicons glyphicons-text_underline">&nbsp;标题</span>
+					    <elseif condition="$category.type eq 1" /><span class="glyphicons glyphicons-unchecked">&nbsp;单篇</span>
+					    <elseif condition="$category.type eq 2" /><span class="glyphicons glyphicons-more_windows">&nbsp;多篇</span>
+					    </if>
 					</td>
 					
 					<td>
-					<a href="#" class="moveup" id="${articleCategory.id}" orders="${articleCategory.orders}" grade="${articleCategory.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="${articleCategory.id}" orders="${articleCategory.orders}" grade="${articleCategory.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
+					<a href="#" class="moveup" id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
 					</td>
 					
 					<td>
-					<a href="${base}/admin/article/category/edit/${articleCategory.id}">编辑</a>&nbsp;&nbsp;
-					<a href="javascript:;" onclick="del('${base}/admin/article/category/del/${articleCategory.id}',this.name)" name="${articleCategory.name}">删除</a>						
+					<a href="${base}/admin/article/category/edit/{$category.id}">编辑</a>&nbsp;&nbsp;
+					<a href="javascript:;" onclick="del('${base}/admin/article/category/del/{$category.id}',this.name)" name="{$category.name}">删除</a>						
 					</td>
 				</tr>
-				</#list>             
+				</volist>             
 		    </tbody>
 		    <tr class="row-label"><td colspan="5">&nbsp;</td></tr>
 		</table>

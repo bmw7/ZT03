@@ -128,21 +128,13 @@
 	<div class="form-group">
 	
 	<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加一级项目:</label>
-	<div class="col-md-3 col-sm-3" style="padding-top:15px">
-		<select name="categoryId" class="form-control input-sm">  
-			<option value="0#articleCategory">请选择</option>	
-			<volist name="categoryTree" id="category">
-			<option value="{$category.id}#category"><#if category.grade != 0><#list 1..category.grade as i>&nbsp;&nbsp;</#list></#if>${category.name}</option>
-			</volist>
-		</select>
-	</div>
-	
+
 	<div class="col-md-2 col-sm-2" style="padding-top:15px">
-		<input type="text" name="name" placeholder="一级栏目名称(选填)" class="form-control input-sm" />				
+		<input type="text" name="name" placeholder="一级栏目名称" class="form-control input-sm" />				
 	</div>
 	
 	<div class="col-md-4 col-sm-4" style="padding-top:15px">
-		<input type="text" name="url" placeholder="一级栏目网址(选填)" class="form-control input-sm" />				
+		<input type="text" name="url" placeholder="一级栏目网址" class="form-control input-sm" />				
 	</div>
 	<div class="admin-form">
 	<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
@@ -181,14 +173,8 @@
 				
 				<form id="inputForm" action="/admin/setting/navigation/saveChild" method="post">
 
-					<select name="categoryId" class="custom_input_sm">  
-					<option value="0#${navigation.id}#articleCategory">添加子栏目</option>	
-					<volist name="categoryTree" id="category">
-					<option value="${category.id}#${navigation.id}#articleCategory"><#if category.grade != 0><#list 1..category.grade as i>&nbsp;&nbsp;</#list></#if>${category.name}</option>
-					</#list>
-					</select>
-					<input type="text" class="custom_input_sm" name="name" placeholder="子栏目名称(选填)" size="15" />
-					<input type="text" class="custom_input_sm" name="url" placeholder="子栏目网址(选填)"  size="30" />				
+					<input type="text" class="custom_input_sm" name="name" placeholder="子栏目名称" size="30" style="font-size:11px;text-indent:5px"/>
+					<input type="text" class="custom_input_sm" name="url" placeholder="子栏目网址"  size="30" style="font-size:11px;text-indent:5px"/>				
 					<input type="submit" class="custom_input_sm btn custom_input_btn" value="添 加"/>
 				</form>
 					
