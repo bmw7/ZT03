@@ -57,14 +57,9 @@
                 <label class="field select">        
                 <select name="articleCategoryIdAndType" id="articleCategoryIdAndType" class="custom_select">
                     <option value="0and0"><span class="custom_option_title">请选择分类</span></option>
-                    <#list articleCategoryTree as articleCategory>
-                    	<option value="${articleCategory.id}and${articleCategory.type}">
-    					<#if articleCategory.grade != 0>
-    						<#list 1..articleCategory.grade as i>&nbsp;&nbsp;</#list>
-    					</#if>
-    					${articleCategory.name}
-    					</option>
-                    </#list>
+                    <?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>and<?php echo ($category["type"]); ?>">
+    						<?php $__FOR_START_28523__=1;$__FOR_END_28523__=$category["grade"];for($i=$__FOR_START_28523__;$i < $__FOR_END_28523__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
+    					</option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
                 <i class="arrow"></i>            
 				</label>

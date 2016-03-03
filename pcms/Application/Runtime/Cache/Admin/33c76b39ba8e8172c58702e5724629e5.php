@@ -25,7 +25,13 @@
          	$('.item').prop('checked', $(this).is(':checked')); 
      	}); 
     
-      	
+		// 赋值grade
+		$('#category').change(function(){
+			var optionId = "option"+$(this).val();
+			var optionName = $('#'+optionId).attr("name");
+			$('#grade').val(optionName);
+		});
+		
      	// 获取与点击<a>元素有相同grade的上一层的 <a>元素的父级<tr>元素   -- @param $self 为<a>元素; @param $prev为$self的父级<tr>元素的上级<tr>元素
      	function samePrev($self,$prev){
      	    // 若不是常规的列表中的tr,则跳出
@@ -122,19 +128,32 @@
 <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
     <thead>
         
-<tr><!-- 添加一级项目 -->
+<tr><!-- 添加栏目 -->
 	
-	<form id="inputForm" class="form-horizontal" action="<?php echo U(admin/navigation/save);?>" method="post">
+	<form id="inputForm" class="form-horizontal" action="<?php echo U('admin/navigation/save');?>" method="post">
 	<div class="form-group">
 	
-	<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加一级项目:</label>
+	<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加栏目:</label>
 
+	<div class="col-md-2 col-sm-2  admin-form">
+		<label class="field select">
+			<select name="parent_id" id="category" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
+				<option value="0">&nbsp;&nbsp;请选择上级分类</option>
+				<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>" id="option<?php echo ($category["id"]); ?>" name="<?php echo ($category['grade']+1); ?>">
+						<?php $__FOR_START_26254__=1;$__FOR_END_26254__=$category["grade"];for($i=$__FOR_START_26254__;$i < $__FOR_END_26254__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
+					</option><?php endforeach; endif; else: echo "" ;endif; ?>
+			</select>
+		    <!-- grade -->
+		    <input type="hidden" name="grade" id="grade" value="1" />
+	    </label>
+	</div>
+	
 	<div class="col-md-2 col-sm-2" style="padding-top:15px">
-		<input type="text" name="name" placeholder="一级栏目名称" class="form-control input-sm" />				
+		<input type="text" name="name" placeholder="栏目名称" class="form-control input-sm" />				
 	</div>
 	
 	<div class="col-md-4 col-sm-4" style="padding-top:15px">
-		<input type="text" name="url" placeholder="一级栏目网址" class="form-control input-sm" />				
+		<input type="text" name="url" placeholder="栏目网址" class="form-control input-sm" />				
 	</div>
 	<div class="admin-form">
 	<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
@@ -148,10 +167,9 @@
          
             <tr>
                 <th><input type="checkbox" id="all"></th>
-                <th width="20%">导航栏目</th>
-                <th width="60%">添加子栏目</th>
-                <th width="10%">排序调整</th>
-                <th width="10%">管理操作</th>
+                <th width="60%">导航栏目</th>
+                <th width="20%">排序调整</th>
+                <th width="20%">管理操作</th>
             </tr>
             
         </thead>
@@ -161,31 +179,17 @@
    		<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$navigation): $mod = ($i % 2 );++$i;?><tr>
 			    <td><input type="checkbox" class="item" name="<?php echo ($navigation["id"]); ?>"></td>
 				<td>
-					<span style="margin-left: <?php echo ($navigation['grade'] * 20); ?>px">
+					<span style="margin-left: <?php echo ($navigation['grade'] * 20 - 20); ?>px">
 						<?php echo ($navigation["name"]); ?>
 					</span>
 				</td>
-				
-				<td><!-- 添加子项目 -->
-					
-				
-				<form id="inputForm" action="/admin/setting/navigation/saveChild" method="post">
 
-					<input type="text" class="custom_input_sm" name="name" placeholder="子栏目名称" size="30" style="font-size:11px;text-indent:5px"/>
-					<input type="text" class="custom_input_sm" name="url" placeholder="子栏目网址"  size="30" style="font-size:11px;text-indent:5px"/>				
-					<input type="submit" class="custom_input_sm btn custom_input_btn" value="添 加"/>
-				</form>
-					
-							
-				</td>
-				
-				
 				<td>
 					<a href="#" class="moveup" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
 				</td>
 				<td>
-					<a href="/admin/setting/navigation/edit/${navigation.id}">编辑</a>&nbsp;&nbsp;
-					<a href="#" onclick="del('/admin/setting/navigation/del/${navigation.id}',this.name)" name="${navigation.name}">删除</a>
+					<a href="<?php echo U('admin/navigation/edit',array('id'=>$navigation[id]));?>">编辑</a>&nbsp;&nbsp;
+					<a href="#" onclick="del('<?php echo U('/admin/navigation/del',array('id'=>$navigation[id]));?>',this.name)" name="${navigation.name}">删除</a>
 				</td>
 			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
        </tbody>

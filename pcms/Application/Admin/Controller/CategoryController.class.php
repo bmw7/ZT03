@@ -33,10 +33,6 @@ class CategoryController extends AuthController{
 	public function edit() {
 		$category = M('category');
 		$this->assign("current",$category->find(I('get.id')));
-		
-		$categoryService = A('Category','Service');
-		$this->assign("tree",$categoryService->getTree('Category'));
-		
 		$this->display();
 	}
 	

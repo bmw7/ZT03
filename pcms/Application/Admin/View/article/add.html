@@ -55,16 +55,13 @@
             <div class="col-md-2 col-sm-2  admin-form">
             	
                 <label class="field select">        
-                <select name="articleCategoryIdAndType" id="articleCategoryIdAndType" class="custom_select">
+                <select name="idAndType" id="idAndType" class="custom_select">
                     <option value="0and0"><span class="custom_option_title">请选择分类</span></option>
-                    <#list articleCategoryTree as articleCategory>
-                    	<option value="${articleCategory.id}and${articleCategory.type}">
-    					<#if articleCategory.grade != 0>
-    						<#list 1..articleCategory.grade as i>&nbsp;&nbsp;</#list>
-    					</#if>
-    					${articleCategory.name}
+                    <volist name="tree" id="category">
+                    	<option value="{$category.id}and{$category.type}">
+    						<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>&nbsp;&nbsp;{$category.name}	
     					</option>
-                    </#list>
+                    </volist>
                 </select>
                 <i class="arrow"></i>            
 				</label>

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	
 	// 若选择了 标题 类型，则取消提交
 	$('#inputForm').submit(function(){
-		var articleType = $('#articleCategoryIdAndType').val().split("and")[1];
+		var articleType = $('#idAndType').val().split("and")[1];
 		if(parseInt(articleType) == 0){
 		    alert("未正确选择文章类型，请重新选择。");
 			return false;
