@@ -127,7 +127,7 @@ $(document).ready(function(){
             <tbody>                            
 				<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><tr>
 				    <td><span class="glyphicons glyphicons-unchecked"></span></td>
-					<td><span style="margin-left: <?php echo ($category['grade'] * 20); ?>px"><?php echo ($category["name"]); ?></span></td>
+					<td><span style="margin-left: <?php echo ($category['grade'] * 20 - 20); ?>px"><?php echo ($category["name"]); ?></span></td>
 					<td>
 						<?php if($category["type"] == 0): ?><span class="glyphicons glyphicons-text_underline">&nbsp;标题</span>
 					    <?php elseif($category["type"] == 1): ?><span class="glyphicons glyphicons-unchecked">&nbsp;单篇</span>
@@ -139,8 +139,8 @@ $(document).ready(function(){
 					</td>
 					
 					<td>
-					<a href="${base}/admin/article/category/edit/<?php echo ($category["id"]); ?>">编辑</a>&nbsp;&nbsp;
-					<a href="javascript:;" onclick="del('${base}/admin/article/category/del/<?php echo ($category["id"]); ?>',this.name)" name="<?php echo ($category["name"]); ?>">删除</a>						
+					<a href="<?php echo U('admin/category/edit',array('id'=>$category[id]));?>">编辑</a>&nbsp;&nbsp;
+					<a href="javascript:;" onclick="del('<?php echo U('/admin/category/del',array('id'=>$category[id]));?>',this.name)" name="<?php echo ($category["name"]); ?>">删除</a>						
 					</td>
 				</tr><?php endforeach; endif; else: echo "" ;endif; ?>             
 		    </tbody>

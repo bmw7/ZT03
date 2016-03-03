@@ -35,7 +35,7 @@ class CategoryService{
      *  */
     public function hasChildren($target,$results){
     	foreach ($results as $item){
-    		if ($target[id] == $item[parentid]){
+    		if ($target[id] == $item[parent_id]){
     			return true;
     		}
     	}
@@ -53,7 +53,7 @@ class CategoryService{
     public function getChildren($target,$reults){
     	$sub = array();
     	foreach ($reults as $item){
-    		if ($target[id] == $item[parentid]) {  
+    		if ($target[id] == $item[parent_id]) {  
     			array_push($sub,$item);
     			if ($this->hasChildren($item, $reults)){
 	    			$sub = array_merge($sub,$this->getChildren($item, $reults));
