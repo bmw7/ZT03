@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="custom_body"> 
-        <form class="form-horizontal" action="${base}/admin/article/category/save" id="inputForm" method="post" role="form">  
+        <form class="form-horizontal" action="<?php echo U('admin/category/save');?>" id="inputForm" method="post" role="form">  
         <div class="form-group">
             <label for="name" class="col-md-1 col-sm-1  control-label">分类名称</label>
             <div class="col-md-5 col-sm-5">
@@ -29,16 +29,16 @@
          	<label for="inputStandard" class="col-md-1 col-sm-1  control-label">上级分类</label>
             <div class="col-md-2 col-sm-2  admin-form">
 	            <label class="field select">
-	                <select name="parentId" id="category">
-	                    <option value="0" id="option0" name="0" >请选择上级分类</option>
+	                <select name="parentid" id="category">
+	                    <option value="0" id="option1" name="1" >请选择上级分类</option>
 	                   	<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>" id="option<?php echo ($category["id"]); ?>" name="<?php echo ($category['grade']+1); ?>">
 								<span style="margin-left: {($category['grade']-1) * 20}px">
-								${category.name}
+								<?php echo ($category["name"]); ?>
 								</span>
 							</option><?php endforeach; endif; else: echo "" ;endif; ?>
 	                </select>
 	                <!-- grade -->
-	                <input type="hidden" name="grade" id="grade" value="0" />
+	                <input type="hidden" name="grade" id="grade" value="1" />
 	            </label>
             </div>
 
@@ -94,6 +94,7 @@ $(document).ready(function() {
 		var optionId = "option"+$(this).val();
 		var optionName = $('#'+optionId).attr("name");
 		$('#grade').val(optionName);
+		alert($('#grade').val());
 	});
 	
 });

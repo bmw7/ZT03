@@ -16,4 +16,10 @@ class CategoryController extends AuthController{
 		$this->display();
 	}
 	
+	public function save(){
+		$category = M('category');
+		$category->create();
+		$category->add();
+	}
+	
 }
