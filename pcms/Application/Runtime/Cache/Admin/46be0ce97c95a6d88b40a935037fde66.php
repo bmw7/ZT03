@@ -133,7 +133,7 @@
 
                     <li>
                         <a href="${base}/admin/article/manage" target="iframe">
-                            <span class="glyphicons glyphicons-file_import"></span>
+                            <span class="glyphicons glyphicons-text_height"></span>
                             <span class="sidebar-title">文章管理</span>
                         </a>
                     </li>
@@ -142,6 +142,13 @@
                         <a href="<?php echo U('admin/category/index');?>" target="iframe">
                             <span class="glyphicons glyphicons-list"></span>
                             <span class="sidebar-title">文章分类</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="<?php echo U('admin/tags/index');?>" target="iframe">
+                            <span class="glyphicons glyphicons-tag"></span>
+                            <span class="sidebar-title">标签管理</span>
                         </a>
                     </li>
                     

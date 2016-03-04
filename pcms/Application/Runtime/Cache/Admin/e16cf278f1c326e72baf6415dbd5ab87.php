@@ -55,10 +55,10 @@
             <div class="col-md-2 col-sm-2  admin-form">
             	
                 <label class="field select">        
-                <select name="articleCategoryIdAndType" id="articleCategoryIdAndType" class="custom_select">
-                    <option value="0and0"><span class="custom_option_title">请选择分类</span></option>
-                    <?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>and<?php echo ($category["type"]); ?>">
-    						<?php $__FOR_START_28523__=1;$__FOR_END_28523__=$category["grade"];for($i=$__FOR_START_28523__;$i < $__FOR_END_28523__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
+                <select name="category_id" id="category_id" class="custom_select">
+                    <option><span class="custom_option_title">请选择分类</span></option>
+                    <?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>">
+    						<?php $__FOR_START_926__=1;$__FOR_END_926__=$category["grade"];for($i=$__FOR_START_926__;$i < $__FOR_END_926__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
     					</option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
                 <i class="arrow"></i>            
@@ -77,14 +77,14 @@
 	        <div class="form-group">
 		        <label class="col-md-1 col-sm-1 control-label">关键词语</label>
 	            <div class="col-md-11 col-sm-11">
-	                <input type="text" name="seoKeywords" class="form-control" placeholder="请输入页面关键词">
+	                <input type="text" name="seo_keywords" class="form-control" placeholder="请输入页面关键词">
 	            </div>     
 	        </div>
 		
 	        <div class="form-group">
 	            <label class="col-md-1 col-sm-1 control-label">页面描述</label>
 	            <div class="col-md-11 col-sm-11">
-	                <input type="text" name="seoDescription" class="form-control" placeholder="请输入页面描述">
+	                <input type="text" name="seo_description" class="form-control" placeholder="请输入页面描述">
 	            </div> 
 	        </div>
         </div>

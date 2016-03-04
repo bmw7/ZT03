@@ -140,7 +140,7 @@
 			<select name="parent_id" id="category" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
 				<option value="0">&nbsp;&nbsp;请选择上级分类</option>
 				<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>" id="option<?php echo ($category["id"]); ?>" name="<?php echo ($category['grade']+1); ?>">
-						<?php $__FOR_START_26254__=1;$__FOR_END_26254__=$category["grade"];for($i=$__FOR_START_26254__;$i < $__FOR_END_26254__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
+						<?php $__FOR_START_7641__=1;$__FOR_END_7641__=$category["grade"];for($i=$__FOR_START_7641__;$i < $__FOR_END_7641__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
 					</option><?php endforeach; endif; else: echo "" ;endif; ?>
 			</select>
 		    <!-- grade -->
