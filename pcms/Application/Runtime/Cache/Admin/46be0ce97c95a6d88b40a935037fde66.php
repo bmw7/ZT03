@@ -146,7 +146,7 @@
                     </li>
                     
                     <li>
-                        <a href="<?php echo U('admin/tags/index');?>" target="iframe">
+                        <a href="<?php echo U('admin/tag/index');?>" target="iframe">
                             <span class="glyphicons glyphicons-tag"></span>
                             <span class="sidebar-title">标签管理</span>
                         </a>

@@ -1,13 +1,13 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/skin/default_skin/css/theme_inner.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
     <!-- Admin Forms CSS -->
-    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
-    <link rel="stylesheet" type="text/css" href="/git/pcms/Public/admin/css/custom.css">
-    <script type="text/javascript" src="/git/pcms/Public/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
+    <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script>
      // 弹出框提示
  	 if('${info}' != ""){
@@ -122,43 +122,56 @@
 <body>
 <div class="custom_main">
 <div class="custom_title">
-	<span class="custom_title_word">导航设置</span>
+	<span class="custom_title_word">标签管理</span>
 </div>
 <div class="custom_body">
 <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
     <thead>
         
-<tr><!-- 添加栏目 -->
-	
-	<form id="inputForm" class="form-horizontal" action="<?php echo U('admin/navigation/save');?>" method="post">
-	<div class="form-group">
-	
-	<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加栏目:</label>
+<tr>
 
-	<div class="col-md-2 col-sm-2  admin-form">
-		<label class="field select">
-			<select name="parent_id" id="category" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
-				<option value="0">&nbsp;&nbsp;请选择上级分类</option>
-				<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>" id="option<?php echo ($category["id"]); ?>" name="<?php echo ($category['grade']+1); ?>">
-						<?php $__FOR_START_10538__=1;$__FOR_END_10538__=$category["grade"];for($i=$__FOR_START_10538__;$i < $__FOR_END_10538__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
-					</option><?php endforeach; endif; else: echo "" ;endif; ?>
-			</select>
-		    <!-- grade -->
-		    <input type="hidden" name="grade" id="grade" value="1" />
-	    </label>
-	</div>
+	<!-- 添加标签组名 -->
+	<form id="inputForm" class="form-horizontal" action="{:U('admin/tag/add_group')}" method="post">
+		<div class="form-group">
+		
+		<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加组名:</label>	
+		<div class="col-md-2 col-sm-2" style="padding-top:15px">
+			<input type="text" name="name" placeholder="标签组名称" class="form-control input-sm" />				
+		</div>
+		
+		<div class="admin-form">
+			<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
+		</div>
+		</div>
+	</form>
 	
-	<div class="col-md-2 col-sm-2" style="padding-top:15px">
-		<input type="text" name="name" placeholder="栏目名称" class="form-control input-sm" />				
-	</div>
+	<!-- 添加标签 -->
+	<form id="inputForm" class="form-horizontal" action="{:U('admin/tag/add_tag')}" method="post">
+		<div class="form-group">
+		
+		<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加标签:</label>
 	
-	<div class="col-md-4 col-sm-4" style="padding-top:15px">
-		<input type="text" name="url" placeholder="栏目网址" class="form-control input-sm" />				
-	</div>
-	<div class="admin-form">
-	<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
-	</div>
-	</div>
+		<div class="col-md-2 col-sm-2  admin-form">
+			<label class="field select">
+				<select name="group_id" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
+					<option value="0">&nbsp;&nbsp;选择标签组</option>
+					<volist name="groups" id="group">
+						<option value="{$group.id}">
+							{$group.name}	
+						</option>
+					</volist>
+				</select>
+		    </label>
+		</div>
+		
+		<div class="col-md-2 col-sm-2" style="padding-top:15px;padding-left:0px;padding-bottom:30px">
+			<input type="text" name="name" placeholder="标签名称" class="form-control input-sm" />				
+		</div>
+		
+		<div class="admin-form">
+			<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
+		</div>
+		</div>
 	</form>
 	
 	
@@ -166,32 +179,30 @@
          
          
             <tr>
-                <th><input type="checkbox" id="all"></th>
-                <th width="60%">导航栏目</th>
-                <th width="20%">排序调整</th>
-                <th width="20%">管理操作</th>
+              
+                <th width="20%">标签组名</th>
+                <th width="70%">标签内容</th>
+                <th width="10%">管理操作</th>
             </tr>
             
         </thead>
 
         <tbody>
                                                                                                                                
-   		<?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$navigation): $mod = ($i % 2 );++$i;?><tr>
-			    <td><input type="checkbox" class="item" name="<?php echo ($navigation["id"]); ?>"></td>
-				<td>
-					<span style="margin-left: <?php echo ($navigation['grade'] * 20 - 20); ?>px">
-						<?php echo ($navigation["name"]); ?>
-					</span>
-				</td>
+   		<volist name="groups" id="group">
+   		
+			<tr>
+			    
+				<td>{$group.name}</td>
 
 				<td>
-					<a href="#" class="moveup" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
+					<cu:taglist group_id="1"></cu:taglist>
 				</td>
 				<td>
-					<a href="<?php echo U('admin/navigation/edit',array('id'=>$navigation[id]));?>">编辑</a>&nbsp;&nbsp;
-					<a href="#" onclick="del('<?php echo U('/admin/navigation/del',array('id'=>$navigation[id]));?>',this.name)" name="${navigation.name}">删除</a>
+					<a href="#" onclick="del('{:U('/admin/navigation/del',array('id'=>$navigation[id]))}',this.name)" name="${navigation.name}">删除本组</a>
 				</td>
-			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+			</tr>
+		</volist>
        </tbody>
        
 </table>
@@ -201,3 +212,4 @@
 
 </body>
 </html>
+

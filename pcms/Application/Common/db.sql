@@ -1,15 +1,17 @@
-​标签管理
+/* ​标签组  */
+CREATE TABLE `tp_tag_group` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-tp_tags
--------
-id
-group_id
-name
-
-tp_tags_group
-id
-name
-
+/* 标签  */
+CREATE TABLE `tp_tag` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `group_id` int NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* 栏目表  */
 CREATE TABLE `tp_category` (

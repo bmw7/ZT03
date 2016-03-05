@@ -1,6 +1,11 @@
 <?php
 namespace Admin\Controller;
 use Admin\Common\AuthController;
+
+// +--------------------------------------------
+// | Controller - 文章发布/文章管理
+// +--------------------------------------------
+
 class ArticleController extends AuthController{
 	
 	/** 添加页面*/
