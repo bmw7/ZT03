@@ -53,7 +53,7 @@ CREATE TABLE `tp_article` (
 CREATE TABLE `tp_article_image` (
   `id` int NOT NULL auto_increment,
   `article_id` int NOT NULL,
-  `url` varchar(255) default NULL,
+  `filename` varchar(255) default NULL,
   `orders` int default NULL,
   `title` varchar(255) default NULL,
   PRIMARY KEY  (`id`)

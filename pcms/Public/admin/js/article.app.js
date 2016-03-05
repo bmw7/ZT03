@@ -73,7 +73,7 @@ require([ 'webuploader.flashonly' ], function( WebUploader ) {
             chunked: true,
             // runtimeOrder: 'flash',
             sendAsBinary: true,
-            server: '/zcms/admin/article/uploadimages',
+            server: '/git/pcms/admin/article/uploadimages',
             fileNumLimit: 300,
             fileSizeLimit: 200 * 1024 * 1024,    // 200 M
             fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M

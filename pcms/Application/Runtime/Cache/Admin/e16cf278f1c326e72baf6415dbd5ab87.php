@@ -58,7 +58,7 @@
                 <select name="category_id" id="category_id" class="custom_select">
                     <option><span class="custom_option_title">请选择分类</span></option>
                     <?php if(is_array($tree)): $i = 0; $__LIST__ = $tree;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$category): $mod = ($i % 2 );++$i;?><option value="<?php echo ($category["id"]); ?>">
-    						<?php $__FOR_START_15544__=1;$__FOR_END_15544__=$category["grade"];for($i=$__FOR_START_15544__;$i < $__FOR_END_15544__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
+    						<?php $__FOR_START_10515__=1;$__FOR_END_10515__=$category["grade"];for($i=$__FOR_START_10515__;$i < $__FOR_END_10515__;$i+=1){ ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php } ?>&nbsp;&nbsp;<?php echo ($category["name"]); ?>	
     					</option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
                 <i class="arrow"></i>            
