@@ -18,105 +18,6 @@
      function del(url,name){
         parent.bootConfirm(url,name);
      }
-     
-	 $(document).ready(function(){
-	    // 全选
-	 	$('#all').click(function() { 
-         	$('.item').prop('checked', $(this).is(':checked')); 
-     	}); 
-    
-		// 赋值grade
-		$('#category').change(function(){
-			var optionId = "option"+$(this).val();
-			var optionName = $('#'+optionId).attr("name");
-			$('#grade').val(optionName);
-		});
-		
-     	// 获取与点击<a>元素有相同grade的上一层的 <a>元素的父级<tr>元素   -- @param $self 为<a>元素; @param $prev为$self的父级<tr>元素的上级<tr>元素
-     	function samePrev($self,$prev){
-     	    // 若不是常规的列表中的tr,则跳出
-     		if($prev.find('.movedown').attr('grade') == null){ return null; }
-     		
-	        var selfGrade = $self.attr('grade');
-	    	var prevGrade = $prev.find('.moveup').attr('grade')
-	    	if(selfGrade == prevGrade){
-	    		return $prev;
-	    	}else{
-	    		var $pp = $prev.prev();
-	    		return samePrev($self,$pp);
-	    	}
-	    }
-	    
-	    
-	    // 获取与点击<a>元素有相同grade的下一层的 <a>元素的父级<tr>元素   -- @param $self 为<a>元素; @param $next为$self的父级<tr>元素的下级<tr>元素
-     	function sameNext($self,$next){
-     		// 若不是常规的列表中的tr,则跳出
-     		if($next.find('.movedown').attr('grade') == null){ return null; }
-     		
-	        var selfGrade = $self.attr('grade');
-	    	var nextGrade = $next.find('.movedown').attr('grade')
-	    	if(selfGrade == nextGrade){
-	    		return $next;
-	    	}else{
-	    		var $nn = $next.next();
-	    		return sameNext($self,$nn);
-	    	}
-	    }
-     	
-     	// 上移
-     	$('.moveup').click(function(){    	    
-     		var myGrade = $(this).attr('grade');
-     		var rpGrade = $(this).parent().parent().prev().find('.moveup').attr('grade');    // 第一个parent()到<td> 第二个parent()到 <tr> prev() 到上一个<tr>
-     		
-     		if(myGrade > rpGrade){ 
-     			parent.bootAlert('已经移动到本层级最顶端，无法再往上移动！'); 
-     		}else{
-     			var $self = $(this);
-     			var $prev = samePrev($self,$self.parent().parent().prev());
-     			
-     		    var myId = $self.attr('id');
-     	    	var rpId = $prev.find('.moveup').attr('id');
-	
-     	    	var myOrders = $self.attr('orders');
-     	    	var rpOrders = $prev.find('.moveup').attr('orders');
-     	    	
-     	    	$.ajax({
-			    	type: 'POST',
-			    	url:  '/admin/setting/navigation/move' ,
-			    	data: {'myId':myId,'rpId':rpId,'myOrders':myOrders,'rpOrders':rpOrders},
-			    	success: function(data){ parent.bootAlert(data); }
-				});	
-     		}
-     	});  
-     	
-     	// 下移
-     	$('.movedown').click(function(){
-     		var myGrade = $(this).attr('grade');
-     		var rpGrade = $(this).parent().parent().next().find('.movedown').attr('grade');
-     		if(myGrade > rpGrade){ 
-     			parent.bootAlert('已经移动到本层级最末端，无法再往下移动！'); 
-     		}else{
-     		    var $self = $(this);
-     			var $next = sameNext($self,$self.parent().parent().next());
-     			
-     		    var myId = $self.attr('id');
-     	    	var rpId = $next.find('.movedown').attr('id');
-     	    	
-     	    	var myOrders = $self.attr('orders');
-     	    	var rpOrders = $next.find('.movedown').attr('orders');
-     	    	
-     	    	$.ajax({
-			    	type: 'POST',
-			    	url:  '/admin/setting/navigation/move' ,
-			    	data: {'myId':myId,'rpId':rpId,'myOrders':myOrders,'rpOrders':rpOrders},
-			    	success: function(data){ parent.bootAlert(data); }
-				});	
-     		}
-     	});
-	    
-	     
-	    
-	 });
      </script>
 </head>
 <body>
@@ -176,8 +77,7 @@
 	
 	
 </tr> 
-         
-         
+
             <tr>
               
                 <th width="20%">标签组名</th>
@@ -195,11 +95,9 @@
 			    
 				<td>{$group.name}</td>
 
+				<td>{$group.id|showtags=###}</td>
 				<td>
-					<cu:taglist group_id="1"></cu:taglist>
-				</td>
-				<td>
-					<a href="#" onclick="del('{:U('/admin/navigation/del',array('id'=>$navigation[id]))}',this.name)" name="${navigation.name}">删除本组</a>
+					<a href="javascript:;" onclick="del('{:U('admin/tag/del_group',array('id'=>$group[id]))}',this.name)" name="{$group.name}">删除本组</a>
 				</td>
 			</tr>
 		</volist>

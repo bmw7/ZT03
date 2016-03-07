@@ -7,7 +7,5 @@ return array(
     'DB_PWD'    => 'zhangtao',  // 密码
     'DB_PORT'   => 3306,        // 端口
     'DB_PREFIX' => 'tp_',       // 数据库表前缀 
-    'DB_CHARSET'=> 'utf8',      // 字符集
-    
-	'TAGLIB_PRE_LOAD' => 'cu'   // 预加载自定义标签 
+    'DB_CHARSET'=> 'utf8'       // 字符集
 );

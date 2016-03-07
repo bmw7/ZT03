@@ -8,7 +8,7 @@ use Admin\Common\AuthController;
 
 class ArticleController extends AuthController{
 	
-	/** 添加页面*/
+	/** 添加页面  */
     public function add(){ 	
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Category'));
@@ -18,20 +18,50 @@ class ArticleController extends AuthController{
     /** 添加-保存  */
     public function save(){
         $Article = M('article');
-        $att['title'] = I('post.title');
-        $att['content'] = I('post.content');
-        $att['create_date'] = Date('Y-m-d H:i:s');
-        $att['category_id'] = I('post.category_id');
-        $att['source'] = I('post.source');
-        $att['seo_keywords'] = I('post.seo_keywords');
-        $att['seo_description'] = I('post.seo_description');
-        if ($Article->add($att)){
+		$Article->create();
+		$Article->create_date = Date('Y-m-d H:i:s');
+        if ($Article->add()){
+        	// 上传图片session存在
+        	if (session('?images')){
+        		$article_id = $Article->getLastInsID();
+        		$article_image = M('article_image');
+        		$images = session('images');
+        		for ($i=0;$i<count($images);$i++){
+        			// 保存图片名称和文章id
+        			$article_image->article_id = $article_id;
+        			$article_image->filename = $images[$i];
+        			$article_image->add();
+        			// 更新orders = id
+        			$id = $article_image->getLastInsID();
+        			$article_image->orders = $id;
+        			$article_image->where('id = '.$id)->save();
+        		}
+        		// 处理完毕，销毁session
+        		session('images',null);
+        	}
+        	
         	$this->success('添加成功！',U('admin/article/add'));
+        		
         }else{
         	$this->redirect(U('admin/article/add'), 3, '操作失败！页面跳转中...');
         }
         
     }
+    
+    /** 文章管理  */
+    public function manage(){
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Category'));
+    	$this->display();
+    }
+    
+    /** 文章列表  */
+    public function lists(){
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Category'));
+    	$this->display();
+    }
+    
     
     /** 图片上传  */
     public function uploadimages(){
@@ -41,7 +71,6 @@ class ArticleController extends AuthController{
     	header("Cache-Control: no-store, no-cache, must-revalidate");
     	header("Cache-Control: post-check=0, pre-check=0", false);
     	header("Pragma: no-cache");
-    	
     	
     	// Support CORS
     	// header("Access-Control-Allow-Origin: *");
@@ -189,9 +218,16 @@ class ArticleController extends AuthController{
     		}
     		@fclose($out);
     		
-    		$db = M('article_image');
-    		$att['filename'] = $randomFileName;
-    		$db->add($att);
+    		// 将上传文件名放入名为images的session
+    		if (!session('?images')){
+    			$att = array();
+    			array_push($att, $randomFileName);
+    			session('images',$att);
+    		}else{
+    			$att = session('images');
+    			array_push($att, $randomFileName);
+    			session('images',$att);
+    		}
     	}
     	
     	// Return Success JSON-RPC response
