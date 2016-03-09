@@ -24,7 +24,10 @@ class ArticleController extends AuthController{
 		
 		//选中置顶，时间加1000年
 		if(I('post.isTop')){
-			
+			//$ctrl = new \Org\Util\Date($Article->create_date);
+			//$da = $ctrl->dateAdd (1000,'yyyy');
+			$da = Date('Y-m-d H:i:s');
+			$Article->create_date = Date(mktime($da->$hours,$da->$minutes,$da->$seconds,$da->$month,$da->$day,3000));
 		}
 		
         if ($Article->add()){
@@ -79,12 +82,23 @@ class ArticleController extends AuthController{
     
     /** 文章编辑  */
     public function edit(){
+    	$id = I('get.id');
+    	
+    	// 文章内容
     	$Article = M('article');
-    	$db = $Article->where('id = '.I('get.id'))->select();
+    	$db = $Article->where('id = '.$id)->select();
     	$this->assign("article",$db[0]);
     	
+    	// 文章目录
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Category'));
+    	
+    	// 文章图片
+    	$article_image = M('article_image');
+    	$image = $article_image->where('article_id = '.$id)->order('orders asc')->select();
+    	if (count($image) > 0){
+    		$this->assign("images",$image);
+    	}
     	
     	$this->display();
     }
@@ -98,7 +112,56 @@ class ArticleController extends AuthController{
     /** 文章更新  */
     public function update(){
     	$Article = M('article');
-    	$Article->delete(I('get.id'));
+    	$Article->create();
+    	$Article->content = $_POST['content'];
+    	
+    	if ($Article->save()){
+    		// 上传图片session存在
+    		if (session('?images')){
+    			$article_id = I('post.id');
+    			$article_image = M('article_image');
+    			$images = session('images');
+    			for ($i=0;$i<count($images);$i++){
+    				// 保存图片名称和文章id
+    				$article_image->article_id = $article_id;
+    				$article_image->filename = $images[$i];
+    				$article_image->add();
+    				// 更新orders = id
+    				$id = $article_image->getLastInsID();
+    				$article_image->orders = $id;
+    				$article_image->where('id = '.$id)->save();
+    			}
+    			// 处理完毕，销毁session
+    			session('images',null);
+    		}   		 
+    		$this->success('更新成功！',U('admin/article/add'));
+    	}
+    }
+    
+    /** 图片删除  */
+    public function image_del(){
+    	$Article_image = M('Article_image');
+    	if ($Article_image->delete(I('post.imageId'))){
+    		unlink("upload" . DIRECTORY_SEPARATOR . I('post.imageName'));
+    		unlink("upload" . DIRECTORY_SEPARATOR . 'thumb_' . I('post.imageName'));
+    	}
+    }
+    
+    /** 图片移动  */
+    public function image_move(){
+    	$Article_image = M('Article_image');
+    	
+    	$originId = I('post.originId');
+    	$changeId = I('post.changeId');
+
+    	$origin_orders = $Article_image->where('id ='.$originId)->getField('orders');
+    	$change_orders = $Article_image->where('id ='.$changeId)->getField('orders');
+    	
+    	$Article_image->orders = $origin_orders;
+    	$Article_image->where('id ='.$changeId)->save();
+    	
+    	$Article_image->orders = $change_orders;
+    	$Article_image->where('id ='.$originId)->save();
     }
     
     /** 图片上传  */
@@ -266,6 +329,11 @@ class ArticleController extends AuthController{
     			array_push($att, $randomFileName);
     			session('images',$att);
     		}
+    		
+    		// 生成缩略图
+    		$image = new \Think\Image();
+    		$image->open($uploadPath);
+    		$image->thumb(150, 150)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
     	}
     	
     	// Return Success JSON-RPC response

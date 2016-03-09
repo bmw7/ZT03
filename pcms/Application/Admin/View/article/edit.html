@@ -40,7 +40,7 @@
         </div>
     	</span>   
     	
-    	<#if articleImages?exists>
+    	<present name="images">
     	<span class="pull-right">
         <label class="pull-right">&nbsp;&nbsp;图片管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 		<div class="switch switch-primary switch-inline switch-xs pull-right">
@@ -48,7 +48,7 @@
             <label for="manageImage"></label>
         </div>
     	</span>
-    	</#if>
+    	</present>
     	
     	<label class="pull-right">  
 	    	<span class="glyphicons glyphicons-rewind"></span>&nbsp;&nbsp;<a href="javascript:;" class="custom_href" onclick="window.history.back()">返回分类</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -58,7 +58,7 @@
 	<form class="form-horizontal" action="{:U('admin/article/update')}" id="inputForm" method="post" role="form">
 
 	<div class="custom_body">                        
-		<input type="hidden" name="id" value="${article.id}" >
+		<input type="hidden" name="id" value="{$article.id}" >
 		
 	    <div class="form-group">
 	
@@ -162,24 +162,22 @@
 	</form>
 	
 	<!-- 图片管理区域 -->
-	<#if articleImages?exists>
+	<present name="images">
 	<div id="manageImageArea">
-		<#list articleImages as articleImage>
-			<@articleThumbnail image = articleImage>
-				<div class="thumbnail" style="width:110px;float:left;margin-right:10px">
-			      <img src="${base}/${imageUrl}">
-			      <div class="caption" style="text-align:center">
-			    
-			        	<span imageId="${articleImage.id}" class="glyphicons glyphicons-chevron-left fs20 pic_left" style="cursor:pointer"></span><span>&nbsp;&nbsp;</span>
-			        	<span imageId="${articleImage.id}" class="glyphicons glyphicons-remove_2 fs20 pic_del" style="cursor:pointer"></span><span>&nbsp;&nbsp;</span>
-			        	<span imageId="${articleImage.id}" class="glyphicons glyphicons-chevron-right fs20 pic_right" style="cursor:pointer"></span>
-			      
-			      </div>
-			    </div>
-			</@articleThumbnail>
-		</#list>
+		<volist name="images" id="image">			
+			<div class="thumbnail" style="width:110px;float:left;margin-right:10px">
+		    	<img src="/git/pcms/upload/thumb_{$image.filename}">
+		        <div class="caption" style="text-align:center">
+		    
+		        	<span imageId="{$image.id}" class="glyphicons glyphicons-chevron-left fs20 pic_left" style="cursor:pointer"></span><span>&nbsp;&nbsp;</span>
+		        	<span imageId="{$image.id}" imageName="{$image.filename}" class="glyphicons glyphicons-remove_2 fs20 pic_del" style="cursor:pointer"></span><span>&nbsp;&nbsp;</span>
+		        	<span imageId="{$image.id}" class="glyphicons glyphicons-chevron-right fs20 pic_right" style="cursor:pointer"></span>
+		      
+		        </div>
+		    </div>			
+		</volist>
 	</div>
-	</#if>
+	</present>
 		    
 </div>
                         
@@ -254,8 +252,8 @@ $(document).ready(function() {
 	$(document).on('click','.pic_del',function(){
 		$.ajax({
 			type : 'POST',
-			url : '${base}/admin/article/image/del',
-			data: {'imageId':$(this).attr("imageId")},
+			url : "{:U('admin/article/image_del')}",
+			data: {'imageId':$(this).attr("imageId"),'imageName':$(this).attr("imageName")},
 			success:function(data){}
 		});
 		$(this).closest('.thumbnail').remove();
@@ -272,7 +270,7 @@ $(document).ready(function() {
 		if(changeId != null){
 			$.ajax({
 				method : 'POST',
-				url : '${base}/admin/article/image/move',
+				url : "{:U('admin/article/image_move')}",
 				data : {'originId':originId,'changeId':changeId},
 				success: function(data){}
 			});
@@ -293,7 +291,7 @@ $(document).ready(function() {
 		if(changeId != null){
 			$.ajax({
 				method : 'POST',
-				url : '${base}/admin/article/image/move',
+				url : "{:U('admin/article/image_move')}",
 				data : {'originId':originId,'changeId':changeId},
 				success: function(data){}
 			});
