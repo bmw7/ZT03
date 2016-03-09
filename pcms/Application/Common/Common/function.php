@@ -20,3 +20,16 @@ function showtags($id){
 	}
 	return $tags;
 }
+
+function showgroups($group_id){
+	$tag_group = M('tag_group');
+	$group_name = $tag_group->where('id ='.$group_id)->getField('name');
+	
+	$tag = M('tag');
+	$tags = $tag->where('group_id ='.$group_id)->select();
+	$tag_name = "";
+	for ($i = 0;$i < count($tags);$i++){
+		$tag_name .= '<input type="checkbox" name="tags" value="'.$tags[$i][id].'">'.$tags[$i][name]."&nbsp;&nbsp;";
+	}
+	return $group_name."：".$tag_name."&nbsp;&nbsp;";
+}

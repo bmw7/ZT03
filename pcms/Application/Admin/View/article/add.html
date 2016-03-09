@@ -124,7 +124,19 @@
 	        </div>
         </div>
         
-
+		<present name="groups">
+	        <div class="form-group">
+	            <label class="col-md-1 col-sm-1 control-label">内容标签</label>
+	            <div class="col-md-11 col-sm-11">
+	                
+	                <volist name="groups" id="group">
+	                	{$group.id|showgroups=###}
+	                </volist>
+	                
+	            </div> 
+	        </div>
+	    </present>
+	        
         <div class="form-group">
             <label class="col-md-1 col-sm-1 control-label">文章内容</label>
             <div class="col-md-11 col-sm-11">

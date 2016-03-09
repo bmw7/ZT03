@@ -12,6 +12,14 @@ class ArticleController extends AuthController{
     public function add(){ 	
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Category'));
+    	
+    	// 标签
+    	$tag_group = M('tag_group');
+    	$group = $tag_group->select();
+    	if (count($group) > 0){
+    		$this->assign("groups",$group);
+    	}
+    	
     	$this->display();
     }
     
@@ -27,7 +35,7 @@ class ArticleController extends AuthController{
 			//$ctrl = new \Org\Util\Date($Article->create_date);
 			//$da = $ctrl->dateAdd (1000,'yyyy');
 			$da = Date('Y-m-d H:i:s');
-			$Article->create_date = Date(mktime($da->$hours,$da->$minutes,$da->$seconds,$da->$month,$da->$day,3000));
+			$Article->create_date = Date(mktime(1,1,1,1,1,3000));
 		}
 		
         if ($Article->add()){
