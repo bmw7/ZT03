@@ -19,7 +19,14 @@ class ArticleController extends AuthController{
     public function save(){
         $Article = M('article');
 		$Article->create();
+		$Article->content = $_POST['content']; //为了防止转义html字符
 		$Article->create_date = Date('Y-m-d H:i:s');
+		
+		//选中置顶，时间加1000年
+		if(I('post.isTop')){
+			
+		}
+		
         if ($Article->add()){
         	// 上传图片session存在
         	if (session('?images')){
@@ -57,11 +64,42 @@ class ArticleController extends AuthController{
     
     /** 文章列表  */
     public function lists(){
+    	
+    	$article = M('article'); // 实例化User对象
+    	$count     = $article->where('category_id = '.I('get.id'))->count();// 查询满足要求的总记录数
+    	$Page      = new \Think\Page($count,8);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$show      = $Page->show();// 分页显示输出
+    	$list      = $article->where('category_id = '.I('get.id'))->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+    	
+    	$this->assign('list',$list);// 赋值数据集
+    	$this->assign('page',$show);// 赋值分页输出
+    	$this->display();
+    	
+    }
+    
+    /** 文章编辑  */
+    public function edit(){
+    	$Article = M('article');
+    	$db = $Article->where('id = '.I('get.id'))->select();
+    	$this->assign("article",$db[0]);
+    	
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Category'));
+    	
     	$this->display();
     }
     
+    /** 文章删除  */
+    public function del(){
+    	$Article = M('article');
+    	$Article->delete(I('get.id'));
+    }
+    
+    /** 文章更新  */
+    public function update(){
+    	$Article = M('article');
+    	$Article->delete(I('get.id'));
+    }
     
     /** 图片上传  */
     public function uploadimages(){

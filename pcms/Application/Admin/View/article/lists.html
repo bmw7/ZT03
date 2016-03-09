@@ -32,30 +32,29 @@
 
         <tbody>
                                      
- 		<#list pagedContent.content as article>
+ 		<volist name="list" id="article">
 			<tr>
-				<td><input type="checkbox" class="item" name="${article.id}"></td>
+				<td><input type="checkbox" class="item" name="{$article.id}"></td>
 				<td>
-				<#assign uptime = article.createDate?string("yyyy")>
-				<#if (uptime?number > 3000)><span class="label label-xs bg-primary">置顶</span></#if>
-				<a href="${base}/admin/article/edit/${article.id}">${article.title}</a>
+				
+				<span class="label label-xs bg-primary">置顶</span>
+				
+				<a href="{:U('admin/article/edit',array('id'=>$article[id]))}">{$article.title}</a>
 				</td>
-				<td><#if (uptime?number > 3000)>${uptime?number-1000}${article.createDate?string("-MM-dd hh:mm:ss")}<#else>${article.createDate}</#if></td>
+				<td>{$article.create_date}</td>
 				<td>
 					<div class="switch switch-primary switch-inline switch-xs">
-	            		<input id="${article.id}" name="${article.id}" class="stick" type="checkbox" <#if (uptime?number > 3000)>checked</#if>>
+	            		<input id="${article.id}" name="${article.id}" class="stick" type="checkbox" checked>
 	            		<label for="${article.id}"></label>
 	        		</div>
 				</td>
-				<td><a href="${base}/admin/article/edit/${article.id}">编辑</a>&nbsp;&nbsp;<a href="#" class="delete" onclick="del('${base}/admin/article/del/${article.id}',this.name)" name="${article.title}">删除</a></td>
+				<td><a href="{:U('admin/article/edit',array('id'=>$article[id]))}">编辑</a>&nbsp;&nbsp;<a href="#" class="delete" onclick="del('{:U('admin/article/del',array('id'=>$article[id]))}',{$article.title})">删除</a></td>
 		   </tr>
-		</#list>
+		</volist>
 		                    
         </tbody>
         <tr class="custom_page"><td colspan="5">
-        <@page pageNumber=pagedContent.pageNumber totalPages=pagedContent.totalPages pageUrl="${base}${pageUrl}">
-        	<#include "/admin/include/pagination.ftl">
-        </@page>
+			{$page}
         </td></tr>
         </table>
       </div>

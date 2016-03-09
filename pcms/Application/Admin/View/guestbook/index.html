@@ -12,7 +12,7 @@
 <div class="custom_main">
 <div class="custom_title">
 	<span class="custom_title_word">留言管理</span>
-	<a href="${base}/admin/guestbook/unlist" id="unreply" class="pull-right" style="margin-left:20px"><span class="glyphicons glyphicons-bin"></span>&nbsp;未回复留言</a> 
+	<a href="{:U('admin/guestbook/unreply')}" id="unreply" class="pull-right" style="margin-left:20px"><span class="glyphicons glyphicons-bin"></span>&nbsp;未回复留言</a> 
 </div>
 <div class="custom_body">
 
@@ -29,41 +29,40 @@
 	
 	<tbody> 
 	    <tr style="display:none"></tr>                     
-		<#list guestbooks.content as guestbook>
-		<tr class="receive" style="cursor:pointer">
+		<volist name="list" id="guestbook">
+		<tr>
 		<td>
-			发布时间：&nbsp;&nbsp;${guestbook.createDate}<br>
-			联系邮件：&nbsp;&nbsp;${(guestbook.email)!""}<br>
-			联系电话：&nbsp;&nbsp;${(guestbook.phone)!""}<br>
-			来源地址：&nbsp;&nbsp;${guestbook.ip}	
+			提交时间：&nbsp;&nbsp;{$guestbook.create_date}<br>
+			联系邮件：&nbsp;&nbsp;{$guestbook.email}<br>
+			联系电话：&nbsp;&nbsp;{$guestbook.phone}<br>
+			来源地址：&nbsp;&nbsp;{$guestbook.address}	
 		</td>
 			
-		<td>${guestbook.message}</td>
+		<td class="receive" style="cursor:pointer">{$guestbook.guest_content}</td>
 		
 		<td align="center">
-			<#if (guestbook.reply)??>
-			<a href="javascript:;" id="${guestbook.id}" class="item"><span style="font-size:16px" class="glyphicons glyphicons-ok_2"></span></a>
-			<#else>
-			<a href="javascript:;" id="${guestbook.id}" class="item">未回复</a>
-			</#if>
+			<if condition="$guestbook.reply_content neq ''">
+			<a href="javascript:;" id="{$guestbook.id}" class="item"><span style="font-size:16px" class="glyphicons glyphicons-ok_2"></span></a>
+			<else/>
+			<a href="javascript:;" id="{$guestbook.id}" class="item">未回复</a>
+			</if>
 		</td>
 		<td align="center">
-			<a href="javascript:;" id="${guestbook.id}" onclick="del('${base}/admin/guestbook/del/'+this.id,'本条留言')"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
+			<a href="javascript:;" onclick="del('{:U('admin/guestbook/del',array('id'=>$guestbook[id]))}','来源于{$guestbook.address}的留言')"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
 		</td>
 		</tr>
 		
 		<tr style="display:none;color:#fc439f;font-size:16px" class="reply">
-			<form action="${base}/admin/guestbook/reply/${guestbook.id}">
-			<td colspan="2"><textarea name="reply" style="width:100%;height:100px;border:solid 1px #e5e5e5">${guestbook.reply!""}</textarea></td>
+			<form action="{:U('admin/guestbook/reply',array('id'=>$guestbook[id]))}" method="post">
+			<td colspan="2"><textarea name="reply_content" style="width:100%;height:100px;border:solid 1px #e5e5e5">{$guestbook.reply_content}</textarea></td>
 			<td colspan="2" align="center"><div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="提  交" style="height:36px;font-size:14px"/></div></td>
 			</form>
 		</tr>
-		</#list>
+		</volist>
     </tbody>
     <tr class="custom_page"><td colspan="4">
-        <@page pageNumber=guestbooks.pageNumber totalPages=guestbooks.totalPages pageUrl="${base}${pageUrl}">
-        	<#include "/admin/include/pagination.ftl">
-        </@page>
+		{$page}
+
     </td></tr>
 </table>
                          
@@ -86,7 +85,7 @@ function reply(id,content){
 $(document).ready(function(){
 
 	$('.receive').click(function(){
-		var $tr = $(this).next();
+		var $tr = $(this).parent().next();
 		if($tr.css('display') == 'none'){
 			parent.setFrameHeight(120);
 			$tr.show();

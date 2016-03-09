@@ -49,6 +49,7 @@ CREATE TABLE `tp_article` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 /** 文章图片 */
 CREATE TABLE `tp_article_image` (
   `id` int NOT NULL auto_increment,
@@ -57,4 +58,18 @@ CREATE TABLE `tp_article_image` (
   `orders` int default NULL,
   `title` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/** 留言本  */
+CREATE TABLE `tp_guestbook` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(50) default NULL,
+  `phone` varchar(50) default NULL,
+  `email` varchar(255) default NULL,
+  `create_date` datetime NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `guest_content` TEXT NOT NULL,
+  `reply_content` TEXT default NULL,
+   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
