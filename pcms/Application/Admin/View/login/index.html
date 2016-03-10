@@ -64,10 +64,8 @@
                         </div>
 
                         <!-- end .form-header section -->
-                        <form method="post" action="${base}/admin/login" id="myform">
+                        <form method="post" action="{:U('admin/login/submit')}" id="myform">
                         
-                            <input type="hidden" id="encryptUsername" name="encryptUsername">  
-                            <input type="hidden" id="encryptPassword" name="encryptPassword">
                             
                             <div class="panel-body bg-light p30">
                                 <div class="row">
@@ -152,11 +150,6 @@
     
     <!-- Vadlidate And RSA Encrypt Service -->
     <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.validate.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/admin/js/rsa/jsbn.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/admin/js/rsa/prng4.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/admin/js/rsa/rng.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/admin/js/rsa/rsa.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/admin/js/rsa/base64.js"></script> 
 
     <!-- Page Javascript -->
     <script type="text/javascript">

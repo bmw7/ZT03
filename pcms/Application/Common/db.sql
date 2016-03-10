@@ -1,3 +1,22 @@
+/** 管理账号  */
+CREATE TABLE `tp_account` (
+  `id` int NOT NULL auto_increment,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) default NULL,
+  `login_address` varchar(255) default NULL,
+  `login_count` int NOT NULL,
+  `create_date` TIMESTAMP default CURRENT_TIMESTAMP,
+  `login_date` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/* ​系统内置账号  password is dever*/
+insert into tp_account(username,password,login_count) values('root','75fbfbda68d64a6a697b0014dd5fbe9b','0');
+insert into tp_account(username,password,login_count) values('admin','2d903119161181303e938b2d335985c3','0');
+
+
 /* ​标签组  */
 CREATE TABLE `tp_tag_group` (
   `id` int NOT NULL auto_increment,
@@ -71,5 +90,16 @@ CREATE TABLE `tp_guestbook` (
   `address` varchar(255) NOT NULL,
   `guest_content` TEXT NOT NULL,
   `reply_content` TEXT default NULL,
+   PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/** 友情链接  */
+CREATE TABLE `tp_friendlinks` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `orders` int default NULL,
+  `filename` varchar(255) NOT NULL,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

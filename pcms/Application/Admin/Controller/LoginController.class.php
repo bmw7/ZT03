@@ -1,11 +1,26 @@
 <?php
 namespace Admin\Controller;
-use Admin\Common\AuthController;
-class LoginController extends AuthController{
+
+class LoginController extends Controller{
     public function index(){
         $this->display();
     }
     
+    /** 登陆  */
+    public function submit(){
+    	$username = I('post.username');
+    	$password = I('post.password');
+    	
+    	$Account = M('Account');
+    	$password_db = $Account->where('username = '.$username)->getField('password');
+    	
+    	$CryptService = A('Crypt','Service');
+    	$password_cr = $CryptService->work($password);
+    	
+    	if ($password_db == $password_cr){
+    		
+    	}
+    }
 
     
     public function verify(){
