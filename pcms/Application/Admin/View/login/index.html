@@ -53,68 +53,69 @@
                     </div>
 
                     <div class="panel panel-info mt10 br-n heading-border custom_tips_overflow">
-
+						<!-- 隐藏域 登陆地址 -->
+						<input type="hidden" id="address" name="address">
                         <!-- 此处可放置提示性文字 -->
                         <div id="custom_tips">
                             <div class="col-sm-11 col-md-11 custom_tips_container">
                                 <div class="alert alert-micro alert-border-left alert-info pastel alert-dismissable">
-                                    <i class="fa fa-info pr10"></i> 提示信息<div id="failure"></div>
+                                    <i class="fa fa-info pr10"></i> 提示信息<div id="failure"><h1>登陆失败</h1></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- end .form-header section -->
-                        <form method="post" action="{:U('admin/login/submit')}" id="myform">
+                        
                         
                             
-                            <div class="panel-body bg-light p30">
-                                <div class="row">
-                                    <div class="col-sm-7 pr30">
-                                        <div class="section">
-                                            <label for="username" class="field-label text-muted fs18 mb10">账 号</label>
-                                            <label for="username" class="field prepend-icon">
-                                                <input type="text" name="username" id="username" class="gui-input" placeholder="账号或邮箱">
-                                                <label for="username" class="field-icon"><i class="fa fa-user"></i>
-                                                </label>
+                        <div class="panel-body bg-light p30">
+                            <div class="row">
+                                <div class="col-sm-7 pr30">
+                                    <div class="section">
+                                        <label for="username" class="field-label text-muted fs18 mb10">账 号</label>
+                                        <label for="username" class="field prepend-icon">
+                                            <input type="text" name="username" id="username" class="gui-input" placeholder="账号或邮箱">
+                                            <label for="username" class="field-icon"><i class="fa fa-user"></i>
                                             </label>
-                                        </div>
-                                        <!-- end section -->
-
-                                        <div class="section">
-                                            <label for="password" class="field-label text-muted fs18 mb10">密 码</label>
-                                            <label for="password" class="field prepend-icon">
-                                                <input type="password" name="pwd" id="pwd" class="gui-input" placeholder="请输入密码">
-                                                <label for="pwd" class="field-icon"><i class="fa fa-lock"></i>
-                                                </label>
-                                            </label>
-                                        </div>
-                                        <!-- end section -->
-
+                                        </label>
                                     </div>
-                                    <div class="col-sm-5 br-l br-grey pl30" style="margin-top:3px">
-                                        <label class="field-label text-muted fs18 mb10"> 请输入验证码</label>
+                                    <!-- end section -->
+
+                                    <div class="section">
+                                        <label for="password" class="field-label text-muted fs18 mb10">密 码</label>
+                                        <label for="password" class="field prepend-icon">
+                                            <input type="password" name="password" id="password" class="gui-input" placeholder="请输入密码">
+                                            <label for="password" class="field-icon"><i class="fa fa-lock"></i>
+                                            </label>
+                                        </label>
+                                    </div>
+                                    <!-- end section -->
+
+                                </div>
+                                <div class="col-sm-5 br-l br-grey pl30" style="margin-top:3px">
+                                    <label class="field-label text-muted fs18 mb10"> 请输入验证码</label>
+                                    
+                                        <img src="{:U('Admin/Login/verify')}" height="69" id="kaptchaImage"/>
                                         
-                                            <img src="{:U('Admin/Login/verify')}" height="69" id="kaptchaImage"/>
-                                            
-                                            <label for="password" class="field prepend-icon" style="margin-top:22px">
-                                                <input type="text" name="kaptcha" id="kaptcha" class="gui-input" placeholder="请输入验证码">
-                                                <label for="kaptcha" class="field-icon"><i class="fa fa-qrcode"></i>
-                                                </label>
+                                        <label for="password" class="field prepend-icon" style="margin-top:22px">
+                                            <input type="text" name="kaptcha" id="kaptcha" class="gui-input" placeholder="请输入验证码">
+                                            <label for="kaptcha" class="field-icon"><i class="fa fa-qrcode"></i>
                                             </label>
-                                    </div>
+                                        </label>
                                 </div>
                             </div>
-                            <!-- end .form-body section -->
-                            <div class="panel-footer clearfix p10 ph15">
-                                <button type="submit" class="button btn-primary mr10 pull-right">登  陆</button>
-                                <label class="switch block switch-primary pull-left input-align mt10">
-                                    <input type="checkbox" name="remember" id="remember" checked>
-                                    <label for="remember" data-on="是" data-off="否"></label>
-                                    <span>记住我</span>
-                                </label>
-                            </div>
-                            <!-- end .form-footer section -->
-                        </form>
+                        </div>
+                        <!-- end .form-body section -->
+                        <div class="panel-footer clearfix p10 ph15">
+                            <button type="submit" id="submit" class="button btn-primary mr10 pull-right">登  陆</button>
+                            <label class="switch block switch-primary pull-left input-align mt10">
+                                <input type="checkbox" name="remember" id="remember" checked>
+                                <label for="remember" data-on="是" data-off="否"></label>
+                                <span>记住我</span>
+                            </label>
+                        </div>
+                        <!-- end .form-footer section -->
+                        
                     </div>
                 </div>
 
@@ -129,6 +130,10 @@
 
     <!-- BEGIN: PAGE SCRIPTS -->
 
+    <!-- 登陆地址 -->
+    <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>     
+    <script>document.getElementById("address").value = remote_ip_info["province"]+remote_ip_info["city"];</script>
+    
     <!-- jQuery -->
     <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
@@ -178,7 +183,7 @@
 			// cookie中有登陆表单值，则填入登陆表单
 			if((usernameCookieValue != '' && usernameCookieValue != null) && (passwordCookieValue != '' && passwordCookieValue != null)){
 				$('#username').val(usernameCookieValue);
-				$('#pwd').val(passwordCookieValue); 
+				$('#password').val(passwordCookieValue); 
 			}
 	    	
 	    	// 点击 是否记住 登陆表单值 checkbox 操作
@@ -194,13 +199,31 @@
 	    	
 	    	
             
-            /* -----------------------------  登陆表单RSA加密操作  ---------------------------- */ 
+            /* -----------------------------  登陆操作  ---------------------------- */ 
+            
+            $('#submit').click(function(){
+            	$.ajax({
+            		method: 'POST',
+            		url: "{:U('admin/login/submit')}",
+            		data: {'username':$('#username').val(),'password':$('#password').val(),'address':$('#address').val()},
+            		success: function(data){
+            			if(data == "failed"){
+            				$("#custom_tips").show(200).delay(2000).hide(200); 
+            			}else{
+            				window.location.href = data;
+            			}			 
+            		}
+            	});	
+            	
+            	
+            });
+            
             
 	    	$('#myform').submit(function(){
 				
 				// cookie保存账号和密码
 				var usernameInputValue = $('#username').val();
-	    	    var passwordInputValue = $('#pwd').val();
+	    	    var passwordInputValue = $('#password').val();
 				
 		    	if($('#remember').prop("checked")==true){
 					if(usernameInputValue != '' && passwordInputValue != ''){
@@ -220,6 +243,7 @@
 	    	
 	    	
 	    	// 登陆表单验证
+	    	/*
 	    	$('#myform').validate({
 	    	rules:{
 	    		username:{required:true},
@@ -236,13 +260,13 @@
 	    		pwd:{required:"密码不能为空！"},
 	    		kaptcha:{required:"验证码不能为空！",remote:jQuery.format("错误的验证码")}}
 	    	});
-	    	
+	    	*/
 
 			// 验证码
 	    	$('#kaptchaImage').click(function () { 
 	    		$.ajax({
 	    			method: 'POST',
-	    			url : "{:U('Admin/Login/verify')}",
+	    			url : "{:U('admin/login/verify')}",
 	    			success: function(data){
 	    				$(this).attr('src', data);
 	    			}

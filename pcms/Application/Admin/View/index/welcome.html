@@ -7,8 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
 </head>
 <body>
-<div id="title">欢迎 <span style="color:#18b4ed">${loginName!"系统管理员"}</span> 登陆后台管理系统</div>
-<div id="title_sm">这是您第 <span style="color:#18b4ed">${loginCount}</span> 次访问后台管理系统。上一次访问是在 <span style="color:#18b4ed">${loginDate?string("yyyy-MM-dd HH:mm:ss")}</span>，访问地址是 <span style="color:#18b4ed">北京</span></div>
+<div id="title">欢迎 <span style="color:#18b4ed">{$username}</span> 登陆后台管理系统</div>
+<div id="title_sm">这是您第 <span style="color:#18b4ed">{$login_count}</span> 次访问后台管理系统。上一次访问是在 <span style="color:#18b4ed">{$login_date}</span>，访问地址是 <span style="color:#18b4ed">{$login_address}</span></div>
 
 <br>
 <br>

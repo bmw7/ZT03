@@ -92,7 +92,7 @@
 
                 <!-- 安全退出 -->
                 <li class="dropdown">
-                    <a class="pl10 pr10 special" href="${base}/admin/logout">
+                    <a class="pl10 pr10 special" href="{:U('admin/login/logout')}">
                         <span class="glyphicons glyphicons-power fs14"></span>
                         <span class="fw600">安全退出</span>
                     </a>
@@ -109,14 +109,14 @@
                     <li class="sidebar-label pt20">欢迎访问</li>
 
                     <li class="active">
-                        <a href="${base}/admin/index" target="iframe">
+                        <a href="{:U('admin/index/welcome')}"" target="iframe">
                             <span class="glyphicons glyphicons-home"></span>
                             <span class="sidebar-title">管理首页</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="${base}/admin/docs" target="iframe">
+                        <a href="{:U('admin/index/docs')}"" target="iframe">
                             <span class="glyphicons glyphicons-book_open"></span>
                             <span class="sidebar-title">帮助文档</span>
                         </a>
@@ -205,7 +205,7 @@
         <!-- Start: Content -->
         <section id="content_wrapper">   
          	<section id="content">
-                 <iframe id="iframe" name="iframe" src="{:U('admin/login/welcome')}" frameborder="0" width="100%" height="auto" scrolling="no" onLoad="iFrameHeight()"></iframe>
+                 <iframe id="iframe" name="iframe" src="{:U('admin/index/welcome')}" frameborder="0" width="100%" height="auto" scrolling="no" onLoad="iFrameHeight()"></iframe>
             </section>
         </section>
 

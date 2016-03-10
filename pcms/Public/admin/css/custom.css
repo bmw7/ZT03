@@ -20,9 +20,9 @@
 #title{ font-size:50px;text-align:center;padding-top:40px;}
 #title_sm{ font-size:20px;text-align:center;color:#999999;}
 
-/** ��½ҳ�� login.ftl */
+/** 登陆页面 login.ftl */
 #custom_tips{ height:110px;background-color:#fafafa;width:830px;display:none;}
-.custom_tips_container{ margin-top:10px;margin-left:20px }
+.custom_tips_container{ margin-top:10px;margin-left:20px; }
 .custom_tips_overflow{ overflow:hidden;padding-top:30px; }
 
 /** ���·���ҳ�� admin/article/add.ftl */
