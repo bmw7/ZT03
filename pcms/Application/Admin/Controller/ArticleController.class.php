@@ -32,10 +32,8 @@ class ArticleController extends AuthController{
 		
 		//选中置顶，时间加1000年
 		if(I('post.isTop')){
-			//$ctrl = new \Org\Util\Date($Article->create_date);
-			//$da = $ctrl->dateAdd (1000,'yyyy');
-			$da = Date('Y-m-d H:i:s');
-			$Article->create_date = Date(mktime(1,1,1,1,1,3000));
+			$year = date('Y')+1000;
+			$Article->create_date = $year.'-'.date('m-d H:i:s');
 		}
 		
         if ($Article->add()){
@@ -77,13 +75,15 @@ class ArticleController extends AuthController{
     public function lists(){
     	
     	$article = M('article'); // 实例化User对象
-    	$count     = $article->where('category_id = '.I('get.id'))->count();// 查询满足要求的总记录数
+    	$category_id = I('get.id');
+    	$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
     	$Page      = new \Think\Page($count,8);// 实例化分页类 传入总记录数和每页显示的记录数(25)
     	$show      = $Page->show();// 分页显示输出
     	$list      = $article->where('category_id = '.I('get.id'))->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
     	
     	$this->assign('list',$list);// 赋值数据集
     	$this->assign('page',$show);// 赋值分页输出
+    	$this->assign('category_id',$category_id);
     	$this->display();
     	
     }
@@ -122,6 +122,12 @@ class ArticleController extends AuthController{
     	$Article = M('article');
     	$Article->create();
     	$Article->content = $_POST['content'];
+    	
+    	if (I('post.isTop')){
+    		$att = explode("-", I('post.create_date'));
+    		$year = $att[0] + 1000;
+    		$Article->create_date = $year.'-'.$att[1].'-'.$att[2];
+    	}
     	
     	if ($Article->save()){
     		// 上传图片session存在
@@ -170,6 +176,18 @@ class ArticleController extends AuthController{
     	
     	$Article_image->orders = $change_orders;
     	$Article_image->where('id ='.$originId)->save();
+    }
+    
+    /** 置顶  */
+    public function stick(){
+    	$Article = M('Article');
+    	$id = I('post.id');
+    	$date = $Article->where('id ='.$id)->getField('create_date');
+    	$att = explode("-", $date);
+    	$year = (I('post.checked') == 'true') ? ($att[0] + 1000) : ($att[0] - 1000);
+    	$Article->create_date = $year.'-'.$att[1].'-'.$att[2];
+    	$Article->where('id ='.$id)->save();
+    	$this->ajaxReturn($year.'-'.$att[1].'-'.$att[2]);
     }
     
     /** 图片上传  */

@@ -33,3 +33,42 @@ function showgroups($group_id){
 	}
 	return $group_name."：".$tag_name."&nbsp;&nbsp;";
 }
+
+/** 超过3000年 则减少1000年,恢复正常时间  */
+function time_top($time){
+	$att = explode("-", $time);
+	if ($att[0]>3000){
+		$year = $att[0] - 1000;
+		return $year.'-'.$att[1].'-'.$att[2];
+	}
+	return $time;
+}
+
+/** 是否显示置顶图标  */
+function time_icon($time){
+	$att = explode("-", $time);
+	if ($att[0]>3000){
+		return '<span class="label label-xs bg-primary">置顶</span>';
+	}
+	
+}
+
+/** 编辑页面置顶图标  */
+function time_edit_icon($time){
+	$att = explode("-", $time);
+	if ($att[0]>3000){
+		return '<span class="label label-xs bg-primary">置顶</span>';
+	}
+
+}
+
+/** 是否显示置顶图标  */
+function time_checked($time){
+	$att = explode("-", $time);
+	if ($att[0]>3000){
+		return 'checked';
+	}
+}
+
+
+

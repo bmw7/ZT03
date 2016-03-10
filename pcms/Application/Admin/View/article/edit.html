@@ -13,13 +13,15 @@
 <body>                       
 <div class="custom_main">
 
+	<form class="form-horizontal" action="{:U('admin/article/update')}" id="inputForm" method="post" role="form">
+	
 	<div class="custom_title">
 		<span class="custom_title_word">文章编辑</span>
 	    
 	    <span class="pull-right">
         <label class="pull-right">&nbsp;&nbsp;设置置顶</label>
 		<div class="switch switch-primary switch-inline switch-xs pull-right">
-            <input id="isTop" name="isTop" type="checkbox" value="true">
+            <input id="isTop" name="isTop" type="checkbox" {$article.create_date|time_checked=###} >
             <label for="isTop"></label>
         </div>
     	</span> 
@@ -55,7 +57,7 @@
 	    </label>  
 	</div>
     
-	<form class="form-horizontal" action="{:U('admin/article/update')}" id="inputForm" method="post" role="form">
+	
 
 	<div class="custom_body">                        
 		<input type="hidden" name="id" value="{$article.id}" >
@@ -82,9 +84,8 @@
 	            </label>	
 	        </div>
 	            
-        	<!--注意，此处name不能为createDate，因为实体中该属性是Date类型，而表单中如果使用name="createDate"，则这里是String类型。类型不匹配-->
             <div class="col-md-2 col-sm-2 ">
-                <input type="text" name="newDate" id="newDate" class="form-control" value="{$article.create_date}">
+                <input type="text" name="create_date" id="create_date" class="form-control" value="{$article.create_date|time_top=###}">
             </div>    
 	            
         	<div class="col-md-2 col-sm-2 ">
