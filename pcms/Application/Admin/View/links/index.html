@@ -14,47 +14,94 @@
 	</div>
     <div class="custom_body">
 	    
+	    <!-- 添加分组 -->
+	    <form action="{:U('admin/links/add_group')}" method='post' class='add_form'>
+			
+			<div class="col-md-2 col-sm-2" style="padding-top:15px">
+				<input type="text" name="name" placeholder="分组名称" class="form-control input-sm" />				
+			</div>
+			
+			<div class="admin-form">
+				<input type="submit" class="btn input-sm" style="padding-top:3px;margin-top:15px" value="添  加"/ ></tr>
+			</div>
+		
+		</form>
 	    
-	    
-	    
-	    <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
-	        <thead>
-	            <tr>
-	                <th width="20%">名称</th>
-	                <th width="20%">网址</th>
-	                <th width="5%"  style="text-align:center">排序</th>
-	                <th width="10%" style="text-align:center">上传图片</th>
-	                <th width="10%" style="text-align:center">图片展示</th>
-	                <th width="10%" style="text-align:center">提交</th>
-	                <th width="5%"  style="text-align:center">删除</th>    
-	            </tr>
-	        </thead>
+	    <!-- 添加链接项 -->
+	    <form action="{:U('admin/links/add')}" method='post' enctype='multipart/form-data' class='add_form'>
+		
+		
+            <div class="admin-form col-md-2">		            	
+                <label class="field select">        
+                <select name="group_id" style="height:30px;padding:0px;font-size:12px">
+                    <option value="0">&nbsp;&nbsp;选择分组</option>
+                    <volist name="groups" id="group">
+                    <option value="{$group.id}">&nbsp;&nbsp;{$group.name}</option>
+                    </volist>
+                </select>           
+				</label>
+            </div>
+			
+			<div class="col-md-3 col-sm-3">
+				<input type="text" name="name" placeholder="标题" class="form-control input-sm" />				
+			</div>
+			
+			<div class="col-md-3 col-sm-3">
+				<input type="text" name="url" placeholder="网址" class="form-control input-sm" />				
+			</div>
+			
+			<div class="col-md-2 col-sm-2">
+				<input type='file' name='logofile' style="width:180px;height:30px">
+			</div>
+			
+			<div class="admin-form col-md-2 col-sm-2">
+				<input type="submit" class="btn input-sm" style="padding-top:3px" value="添  加"/ ></tr>
+			</div>
 
-        <tbody>
- 		<volist name="links" id="link">
-			<tr>
-			    <form action="{:U('admin/links/update',array('id'=>$link[id]))}" method="post" enctype="multipart/form-data">
-				<td><input type="text" class="link_item" value="{$link.name}" name="name"></td>
-				<td><input type="text" class="link_item" value="{$link.url}" name="url"></td>
-				<td align="center"><input type="text" name="orders" class="link_item" value="{$link.orders}" style="text-align:center"></td>
-				<td><input type="file" name="myfile" class="upload_input"></td>
-				<td align="center">{$link.filename|link_logo=###}</td>
-				<td align="center"><div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="提  交" style="height:36px;font-size:14px"/></div></td>
-				<td align="center">
-					<a href="javascript:;" onclick="del('{:U('admin/friendlinks/del',array('id'=>$link[id]))}',{$link.name})"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
-				</td>
-		   		</form>
-		   </tr>
-		</volist>
-		                    
-        </tbody>
-
-        </table>
+		</form>
+		
+		
+	    
+	    <!-- 具体分组 具体项目 -->
+	    <volist name="groups" id="group">
+	        <h3>{$group.name}</h3>
+		    <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
+		        <thead>
+		            <tr>
+		                <th width="20%">标题</th>
+		                <th width="20%">网址</th>
+		                <th width="5%"  style="text-align:center">排序</th>
+		                <th width="10%" style="text-align:center">上传图片</th>
+		                <th width="10%" style="text-align:center">图片展示</th>
+		                <th width="10%" style="text-align:center">提交</th>
+		                <th width="5%"  style="text-align:center">删除</th>    
+		            </tr>
+		        </thead>
+	
+	        <tbody>
+	 		<volist name="$group.id|link_items=###" id="link">
+				<tr>
+				    <form action="{:U('admin/links/update',array('id'=>$link[id]))}" method="post" enctype="multipart/form-data">
+					<td><input type="text" class="link_item" value="{$link.name}" name="name"></td>
+					<td><input type="text" class="link_item" value="{$link.url}" name="url"></td>
+					<td align="center"><input type="text" name="orders" class="link_item" value="{$link.orders}" style="text-align:center"></td>
+					<td><input type="file" name="myfile" class="upload_input"></td>
+					<td align="center">{$link.filename|link_logo=###}</td>
+					<td align="center"><div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="提  交" style="height:36px;font-size:14px"/></div></td>
+					<td align="center">
+						<a href="javascript:;" onclick="del('{:U('admin/friendlinks/del',array('id'=>$link[id]))}',{$link.name})"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
+					</td>
+			   		</form>
+			   </tr>
+			</volist>
+			                    
+	        </tbody>
+	
+	        </table>
         
-        
-        
-        
-        
+	    </volist>
+	    
+     
         
         
       </div>

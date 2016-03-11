@@ -96,3 +96,8 @@ function link_logo($filename){
 	}
 }
 
+
+function link_items($group_id){
+	$links = M('links');
+	return $links->where('group_id = '.$group_id)->select();
+}

@@ -10,8 +10,12 @@ class LinksController extends AuthController {
 	
 	/** 展示  */
     public function index(){
+    	$groups = M('Links_group');
+    	$this->assign('groups',$groups->select());
+    	
     	$links = M('Links');
     	$this->assign("links",$links->order('orders')->select());
+    	
 		$this->display();
     }
     
@@ -46,5 +50,14 @@ class LinksController extends AuthController {
     	$this->success('操作成功',U('admin/links/index'));
     }
     
+    public function add_group(){
+    	$group = M('Links_group');
+    	$group->create();
+    	if ($group->add()){
+    		$this->success('添加分组成功！',U('admin/links/index'));
+    	}else{
+    		$this->error('添加分组失败！',U('admin/links/index'));
+    	}
+    }
 
 }
