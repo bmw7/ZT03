@@ -7,18 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
     <!-- Admin Forms CSS -->
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
-     <script>
-    	if("${success}" != ""){
-    	parent.bootAlert("${success}");
-	    }
-     </script>
 </head>
 <body>
 
 	<div class="custom_main">
 	<div class="custom_title"><span class="custom_title_word">添加账号</span></div>
     <div class="custom_body">
-                                <form class="form-horizontal" action="${base}/admin/account/save" id="inputForm" method="post" role="form">
+                                <form class="form-horizontal" action="{:U('admin/account/save')}" id="inputForm" method="post" role="form">
                                     
                                  
                                     <div class="form-group">
@@ -44,50 +39,13 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <label for="name" class="col-md-1 col-sm-1  control-label">账号别名</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="可输入用户姓名">
-                                        </div>
-                                    </div>
-                                    
-                                   <div class="form-group">
-                                        <label for="department" class="col-md-1 col-sm-1  control-label">所属部门</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            <input type="text" name="department" id="department" class="form-control">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label for="email" class="col-md-1 col-sm-1  control-label">电子邮件</label>
                                         <div class="col-md-5 col-sm-5">
                                             <input type="text" name="email" id="email" class="form-control">
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="role" class="col-md-1 col-sm-1  control-label">管理角色</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            
-                                            <span class="fieldSet">
-												<#list accountRoles as accountRole>
-													<input type="radio" value="${accountRole.id}" name="accountRoleId"/>${accountRole.name}
-												</#list>
-											</span>
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    
-                                    <div class="form-group">
-                                        <label for="email" class="col-md-1 col-sm-1  control-label">账号状态</label>
-                                        <div class="col-md-5 col-sm-5">
-                                           <input type="radio" name="isEnabled" value="true" checked="checked" />可用
-										   <input type="radio" name="isEnabled" value="false">不可用
-                                        </div>
-                                    </div>
-                                    
-                                  
 
                                     <div class="form-group">
                                         <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>

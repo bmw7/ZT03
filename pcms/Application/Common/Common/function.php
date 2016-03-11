@@ -71,4 +71,28 @@ function time_checked($time){
 }
 
 
+/** 账号编辑 设置 */
+function account_edit($sid,$id){
+	if ($sid != $id){
+		if ($sid <= 2){
+			return "编辑";
+		}
+	}else{
+		return "编辑";
+	}
+}
+
+/** 账号删除 设置*/
+function account_del($sid,$id){
+	if ($sid <= 2 && $id != 2){
+		return "删除";
+	}
+}
+
+/** 后台 友情链接logo图标*/
+function link_logo($filename){
+	if ($filename != null){
+		return "<img src='../../upload/".$filename."' height='30' >";
+	}
+}
 

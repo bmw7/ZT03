@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
+</head>
+<body>
+	<div class="custom_main">
+	<div class="custom_title">
+		<span class="custom_title_word">图文链接</span> 
+	</div>
+    <div class="custom_body">
+	    
+	    
+	    
+	    
+	    <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
+	        <thead>
+	            <tr>
+	                <th width="20%">名称</th>
+	                <th width="20%">网址</th>
+	                <th width="5%"  style="text-align:center">排序</th>
+	                <th width="10%" style="text-align:center">上传图片</th>
+	                <th width="10%" style="text-align:center">图片展示</th>
+	                <th width="10%" style="text-align:center">提交</th>
+	                <th width="5%"  style="text-align:center">删除</th>    
+	            </tr>
+	        </thead>
+
+        <tbody>
+ 		<volist name="links" id="link">
+			<tr>
+			    <form action="{:U('admin/links/update',array('id'=>$link[id]))}" method="post" enctype="multipart/form-data">
+				<td><input type="text" class="link_item" value="{$link.name}" name="name"></td>
+				<td><input type="text" class="link_item" value="{$link.url}" name="url"></td>
+				<td align="center"><input type="text" name="orders" class="link_item" value="{$link.orders}" style="text-align:center"></td>
+				<td><input type="file" name="myfile" class="upload_input"></td>
+				<td align="center">{$link.filename|link_logo=###}</td>
+				<td align="center"><div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="提  交" style="height:36px;font-size:14px"/></div></td>
+				<td align="center">
+					<a href="javascript:;" onclick="del('{:U('admin/friendlinks/del',array('id'=>$link[id]))}',{$link.name})"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
+				</td>
+		   		</form>
+		   </tr>
+		</volist>
+		                    
+        </tbody>
+
+        </table>
+        
+        
+        
+        
+        
+        
+        
+      </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+// 删除确认
+function del(url,name){
+	parent.bootConfirm(url,name);
+}
+</script>
+</body>
+</html>

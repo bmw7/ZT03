@@ -28,6 +28,7 @@ class LoginController extends Controller{
     			array_push($info, $att[0]['login_count']+1);
     			array_push($info, $att[0]['login_date']);
     			array_push($info, $att[0]['login_address']);
+    			array_push($info, $att[0]['id']);
     			session('login',$info);
     			
     			$att[0]['login_address'] = I('post.address');

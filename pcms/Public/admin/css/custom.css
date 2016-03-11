@@ -39,7 +39,7 @@
 .custom_input_sm{ height:20px;border:1px solid #dddddd; }
 .custom_input_btn{ margin-top:-3px;line-height:0px; }
 
-.link_item{width:100%;height:32px;line-height:32px;border:solid 1px #e5e5e5;}
+.link_item{width:100%;height:32px;line-height:32px;border:solid 1px #e5e5e5;text-indent:10px;}
 
 /** ��������*/
 .add_form{ width:100%;margin-bottom:20px;}

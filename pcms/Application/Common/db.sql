@@ -32,6 +32,7 @@ CREATE TABLE `tp_tag` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 /* 栏目表  */
 CREATE TABLE `tp_category` (
   `id` int NOT NULL auto_increment,
@@ -65,6 +66,7 @@ CREATE TABLE `tp_article` (
   `seo_keywords` varchar(255) default NULL,
   `seo_description` varchar(255) default NULL,
   `category_id` smallint NOT NULL,
+  `hits` int default 0,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -79,6 +81,14 @@ CREATE TABLE `tp_article_image` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/* 文章标签相关  */
+CREATE TABLE `tp_article_tag` (
+  `id` int NOT NULL auto_increment,
+  `tag_id` int NOT NULL,
+  `article_id` int NOT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /** 留言本  */
 CREATE TABLE `tp_guestbook` (
@@ -94,12 +104,21 @@ CREATE TABLE `tp_guestbook` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-/** 友情链接  */
-CREATE TABLE `tp_friendlinks` (
+/** 图文链接  */
+CREATE TABLE `tp_links` (
   `id` int NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `orders` int default NULL,
   `filename` varchar(255) NOT NULL,
+  `group_id` int default NULL,
+   PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/** 图文链接组  */
+CREATE TABLE `tp_links_group` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `orders` int default NULL,
    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

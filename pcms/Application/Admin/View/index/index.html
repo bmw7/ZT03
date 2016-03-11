@@ -57,34 +57,15 @@
 
                 <!-- 网站首页 -->
                 <li class="dropdown dropdown-item-slide">
-                    <a class="dropdown-toggle pl10 pr10" href="${base}" target="_blank">
+                    <a class="dropdown-toggle pl10 pr10" href="../" target="_blank">
                         <span class="glyphicons glyphicons-home fs14"></span>
                         <span class="fw600">网站首页</span>
                     </a>
                 </li>
 
-                <!-- 语言选择 -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="glyphicons glyphicons-more_items fs14"></span>
-                        <span class="fw600">语言选择</span>
-                    </a>
-                    <ul class="dropdown-menu animated animated-short flipInX" role="menu">
-
-                        <li>
-                            <a href="javascript:void(0);" class="fw600">
-                                <span class="flag-xs flag-tr mr10"></span> <span style="font-size:11px">中文简体</span> </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="fw600">
-                                <span class="flag-xs flag-us mr10"></span> English </a>
-                        </li>
-                    </ul>
-                </li>
-
                 <!-- 管理设置 -->
                 <li class="dropdown dropdown-item-slide">
-                    <a class="dropdown-toggle pl10 pr10" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle pl10 pr10" href="{:U('admin/account/edit',array('id'=>$id))}" target="iframe">
                         <span class="glyphicons glyphicons-cogwheels fs14"></span>
                         <span class="fw600">管理设置</span>
                     </a>
@@ -160,9 +141,9 @@
                     </li>
                     
                     <li>
-                        <a href="{:U('admin/friendlinks/index')}" target="iframe">
+                        <a href="{:U('admin/links/index')}" target="iframe">
                             <span class="glyphicons glyphicons-link"></span>
-                            <span class="sidebar-title">友情链接</span>
+                            <span class="sidebar-title">图文链接</span>
                         </a>
                     </li>
 
@@ -183,7 +164,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${base}/admin/setting/edit" target="iframe">
+                        <a href="{:U('admin/setting/index')}" target="iframe">
                             <span class="glyphicons glyphicons-settings"></span>
                             <span class="sidebar-title">系统设置</span>
                         </a>

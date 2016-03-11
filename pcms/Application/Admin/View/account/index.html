@@ -56,8 +56,8 @@
 				<td>{$account.login_address}</td>
 				<td>{$account.login_count}&nbsp;次</td>
 				<td>
-					<a href="{:U('admin/account/edit',array('id'=>$account[id]))}">编辑</a>&nbsp;&nbsp;
-					<a href="javascript:;" onclick="del('{:U('admin/account/del',array('id'=>$account[id]))}','{$account.username}')">删除</a>
+					<a href="{:U('admin/account/edit',array('id'=>$account[id]))}">{$account.id|account_edit=$sid,###}</a>&nbsp;&nbsp;
+					<a href="javascript:;" onclick="del('{:U('admin/account/del',array('id'=>$account[id]))}','{$account.username}')">{$account.id|account_del=$sid,###}</a>
 				</td>
 			</tr>
 		</volist>

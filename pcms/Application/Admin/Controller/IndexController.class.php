@@ -4,6 +4,8 @@ use Admin\Common\AuthController;
 
 class IndexController extends AuthController {
     public function index(){
+    	$info = session("login");
+    	$this->assign('id',$info[4]);
 		$this->display();
     }
     

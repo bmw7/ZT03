@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-		$pass="world";
+		$pass="aaa";
     	echo md5(crypt($pass,substr($pass,1,2)));
     	 
     	
