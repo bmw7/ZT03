@@ -163,6 +163,7 @@ class ArticleController extends AuthController{
     	$Article = M('article');
     	$Article->create();
     	$Article->content = $_POST['content'];
+    	$article_id = I('post.id');
     	
     	if (I('post.isTop')){
     		$att = explode("-", I('post.create_date'));
@@ -170,27 +171,53 @@ class ArticleController extends AuthController{
     		$Article->create_date = $year.'-'.$att[1].'-'.$att[2];
     	}
     	
-    	if ($Article->save()){
-    		// 上传图片session存在
-    		if (session('?images')){
-    			$article_id = I('post.id');
-    			$article_image = M('article_image');
-    			$images = session('images');
-    			for ($i=0;$i<count($images);$i++){
-    				// 保存图片名称和文章id
-    				$article_image->article_id = $article_id;
-    				$article_image->filename = $images[$i];
-    				$article_image->add();
-    				// 更新orders = id
-    				$id = $article_image->getLastInsID();
-    				$article_image->orders = $id;
-    				$article_image->where('id = '.$id)->save();
-    			}
-    			// 处理完毕，销毁session
-    			session('images',null);
-    		}   		 
-    		$this->success('更新成功！',U('admin/article/add'));
+    	$Article->save();
+    	
+    	// 上传图片session存在
+    	if (session('?images')){
+    		$article_image = M('article_image');
+    		$images = session('images');
+    		for ($i=0;$i<count($images);$i++){
+    			// 保存图片名称和文章id
+    			$article_image->article_id = $article_id;
+    			$article_image->filename = $images[$i];
+    			$article_image->add();
+    			// 更新orders = id
+    			$id = $article_image->getLastInsID();
+    			$article_image->orders = $id;
+    			$article_image->where('id = '.$id)->save();
+    		}
+    		// 处理完毕，销毁session
+    		session('images',null);
     	}
+    	
+    	
+    	// 标签存在
+    	if (count($_POST['tags']) > 0){
+    		$article_tag = M('Article_tag');
+    		$tags = $_POST['tags'];
+    		$tags_origin = M('Article_tag')->where('article_id ='.$article_id)->getField('tag_id',true);
+    		 
+    		// 表单提交上来的新tags组中的元素  在  旧tags组中查不到,则添加
+    		for ($i = 0;$i < count($tags);$i++){
+    			if (!in_array($tags[$i],$tags_origin)){
+    				$article_tag->article_id = $article_id;
+    				$article_tag->title = I('post.title');
+    				$article_tag->tag_id = $tags[$i];
+    				$article_tag->add();
+    			}
+    		}
+    		 
+    		//  旧tags组中的元素，在表单提交上来的新tags组中查不到,则删除
+    		for ($i = 0;$i < count($tags_origin);$i++){
+    			if (!in_array($tags_origin[$i],$tags)){
+    				$article_tag->where("article_id = '%d' and tag_id = '%d'",$article_id,$tags_origin[$i])->delete();
+    			}
+    		}
+    	}
+    			
+    	$this->success('更新成功！',U('admin/article/add'));
+    	
     }
     
     /** 图片删除  */
