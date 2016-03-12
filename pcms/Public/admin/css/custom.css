@@ -55,3 +55,7 @@
 
 #manageImageArea{ display:none; width:100%;margin-top:15px;}
 
+/* 分页样式 */
+.first, .prev, .next, .end, .num, .current{ margin-right:5px;}
+.num{ border:#44beea 1px solid; display:inline-block;width:20px;height:20px;text-align:center;}
+.current{ border:#44beea 1px solid;display:inline-block;color:#ffffff;background-color:#44beea;width:20px;height:20px;text-align:center; }

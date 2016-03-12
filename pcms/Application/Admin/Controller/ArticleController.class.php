@@ -17,6 +17,10 @@ class ArticleController extends AuthController{
     	$tag_group = M('tag_group');
     	$group = $tag_group->select();
     	if (count($group) > 0){
+    		$tag = M('tag');
+    		foreach ($group as $k => $v){
+    			$group[$k]['tags'] = $tag->where('group_id ='.$v['id'])->select();
+    		}
     		$this->assign("groups",$group);
     	}
     	
@@ -36,10 +40,14 @@ class ArticleController extends AuthController{
 			$Article->create_date = $year.'-'.date('m-d H:i:s');
 		}
 		
+		
         if ($Article->add()){
+        	
+        	// 文章id
+        	$article_id = $Article->getLastInsID();
+        	
         	// 上传图片session存在
         	if (session('?images')){
-        		$article_id = $Article->getLastInsID();
         		$article_image = M('article_image');
         		$images = session('images');
         		for ($i=0;$i<count($images);$i++){
@@ -56,10 +64,22 @@ class ArticleController extends AuthController{
         		session('images',null);
         	}
         	
+        	// 标签存在
+        	if (count($_POST['tags']) > 0){
+        		$article_tag = M('Article_tag');
+        		$tags = $_POST['tags'];
+        		for ($i = 0;$i < count($tags);$i++){
+        			$article_tag->article_id = $article_id;
+        			$article_tag->title = I('post.title');
+        			$article_tag->tag_id = $tags[$i];
+        			$article_tag->add();
+        		}
+        	}
+        	
         	$this->success('添加成功！',U('admin/article/add'));
         		
         }else{
-        	$this->redirect(U('admin/article/add'), 3, '操作失败！页面跳转中...');
+        	$this->success('添加失败！',U('admin/article/add'));
         }
         
     }
@@ -77,7 +97,13 @@ class ArticleController extends AuthController{
     	$article = M('article'); // 实例化User对象
     	$category_id = I('get.id');
     	$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
-    	$Page      = new \Think\Page($count,8);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	
+    	$Page      = new \Think\Page($count,11);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$Page->setConfig('next','下一页');
+    	$Page->setConfig('prev','上一页');
+    	$Page->setConfig('first','首页');
+    	$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
+    	
     	$show      = $Page->show();// 分页显示输出
     	$list      = $article->where('category_id = '.I('get.id'))->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
     	
@@ -106,6 +132,21 @@ class ArticleController extends AuthController{
     	$image = $article_image->where('article_id = '.$id)->order('orders asc')->select();
     	if (count($image) > 0){
     		$this->assign("images",$image);
+    	}
+    	
+    	// 标签
+    	$tag_group = M('tag_group');
+    	$group = $tag_group->select();
+    	if (count($group) > 0){
+    		$tag = M('tag');
+    		foreach ($group as $k => $v){
+    			$group[$k]['tags'] = $tag->where('group_id ='.$v['id'])->select();
+    		}
+    		$this->assign("groups",$group);
+    		
+    		$article_tag = M('Article_tag');
+    		$tag_ids = $article_tag->where('article_id ='.$id)->getField('tag_id',true);
+    		$this->assign("tag_ids",$tag_ids);
     	}
     	
     	$this->display();

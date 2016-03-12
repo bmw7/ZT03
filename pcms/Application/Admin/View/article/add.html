@@ -126,11 +126,15 @@
         
 		<present name="groups">
 	        <div class="form-group">
-	            <label class="col-md-1 col-sm-1 control-label">内容标签</label>
+	            <label class="col-md-1 col-sm-1 control-label" style="margin-top:-8px">标签设置</label>
 	            <div class="col-md-11 col-sm-11">
 	                
 	                <volist name="groups" id="group">
-	                	{$group.id|showgroups=###}
+	                	{$group.name}：
+	                	<volist name="group['tags']" id="tag">
+	                	<input type="checkbox" name="tags[]" value="{$tag.id}">&nbsp;{$tag.name}&nbsp;&nbsp;
+						</volist>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                
 	                </volist>
 	                
 	            </div> 
@@ -154,7 +158,7 @@
     
 </form>
 </div>                   
-                        
+<p>&nbsp;</p>                        
 <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.validate.js"></script> 

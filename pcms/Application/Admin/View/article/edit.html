@@ -144,6 +144,24 @@
         	</div>
 	        
 	
+			<present name="groups">
+		        <div class="form-group">
+		            <label class="col-md-1 col-sm-1 control-label" style="margin-top:-8px">标签设置</label>
+		            <div class="col-md-11 col-sm-11">
+		                
+		                <volist name="groups" id="group">
+		                	{$group.name}：
+		                	<volist name="group['tags']" id="tag">
+		                	<input type="checkbox" name="tags[]" value="{$tag.id}" {$tag.id|tag_checked=$tag_ids,###}>&nbsp;{$tag.name}&nbsp;&nbsp;
+							</volist>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                
+		                </volist>
+		                
+		            </div> 
+		        </div>
+		    </present>
+	
+	
 	        <div class="form-group">
 	            <label class="col-md-1 col-sm-1  control-label">文章内容</label>
 	            <div class="col-md-11 col-sm-11">

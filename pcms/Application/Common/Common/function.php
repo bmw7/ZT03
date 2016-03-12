@@ -21,17 +21,20 @@ function showtags($id){
 	return $tags;
 }
 
-function showgroups($group_id){
-	$tag_group = M('tag_group');
-	$group_name = $tag_group->where('id ='.$group_id)->getField('name');
-	
-	$tag = M('tag');
-	$tags = $tag->where('group_id ='.$group_id)->select();
-	$tag_name = "";
-	for ($i = 0;$i < count($tags);$i++){
-		$tag_name .= '<input type="checkbox" name="tags" value="'.$tags[$i][id].'">'.$tags[$i][name]."&nbsp;&nbsp;";
+/**
+ * 文章编辑时 显示选中标签
+ *
+ * @param $tag_ids 标签组id
+ * @param $tag_id  当前标签id
+ *
+ * @return checked
+ * */
+function tag_checked($tag_ids,$tag_id){
+	for ($i = 0;$i < count($tag_ids);$i++){
+		if ($tag_id == $tag_ids[$i]){
+			return "checked";
+		}
 	}
-	return $group_name."：".$tag_name."&nbsp;&nbsp;";
 }
 
 /** 超过3000年 则减少1000年,恢复正常时间  */
