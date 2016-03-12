@@ -79,3 +79,29 @@ $(document).ready(function(){
 </script>
 </body>
 </html>
+
+
+	<!-- 遍历分组 -->
+		<table class="table table-condensed" cellspacing="0" width="100%">
+		<volist name="groups" id="group">
+        	
+			<tr><td>{$group.name}</td><td></td><td></td><td></td><td></td><td></td><td></td></tr> 
+	 		<volist name="group['links']" id="link">
+	 			
+				<tr class="links" group_id="{$link.group_id}">
+				    <form action="{:U('admin/links/update',array('id'=>$link[id]))}" method="post" enctype="multipart/form-data">
+					<td width="20%"><input type="text" class="link_item" value="{$link.name}" name="name"></td>
+					<td width="20%"><input type="text" class="link_item" value="{$link.url}" name="url"></td>
+					<td width="5%" align="center"><input type="text" name="orders" class="link_item" value="{$link.orders}" style="text-align:center"></td>
+					<td width="10%"><input type="file" name="myfile" class="upload_input"></td>
+					<td width="10%" align="center">{$link.filename|link_logo=###}</td>
+					<td width="10%" align="center"><div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="提  交" style="height:36px;font-size:14px"/></div></td>
+					<td width="5%" align="center">
+						<a href="javascript:;" onclick="del('{:U('admin/friendlinks/del',array('id'=>$link[id]))}',{$link.name})"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
+					</td>
+			   		</form>
+			   </tr>
+			</volist>
+			                    
+        </volist>
+        </table>

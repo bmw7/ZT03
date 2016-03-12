@@ -139,13 +139,29 @@
                             <span class="sidebar-title">留言管理</span>
                         </a>
                     </li>
+                                       
                     
                     <li>
-                        <a href="{:U('admin/links/index')}" target="iframe">
+                        <a class="accordion-toggle" href="#">
                             <span class="glyphicons glyphicons-link"></span>
                             <span class="sidebar-title">图文链接</span>
+                            <span class="caret"></span>
                         </a>
+                        <ul class="nav sub-nav">
+                            <li>
+                                <a href="{:U('admin/links/index')}" target="iframe">
+                                    <span class="glyphicons glyphicons-group"></span> 分组管理 </a>
+                            </li>
+                            <li>
+                                <a href="{:U('admin/links/show')}" target="iframe">
+                                    <span class="glyphicons glyphicons-share_alt"></span> 链接管理 </a>
+                            </li>
+                        </ul>
                     </li>
+                    
+                    
+                    
+                    
 
                     <!-- sidebar bullets -->
                     <li class="sidebar-label pt20">系统相关</li>
