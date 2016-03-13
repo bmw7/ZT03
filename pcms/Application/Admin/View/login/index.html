@@ -59,7 +59,7 @@
                         <div id="custom_tips">
                             <div class="col-sm-11 col-md-11 custom_tips_container">
                                 <div class="alert alert-micro alert-border-left alert-info pastel alert-dismissable">
-                                    <i class="fa fa-info pr10"></i> 提示信息<div id="failure"><h1>登陆失败</h1></div>
+                                    <i class="fa fa-info pr10"></i> 提示信息<div id="failure"></div>
                                 </div>
                             </div>
                         </div>
@@ -95,11 +95,11 @@
                                 <div class="col-sm-5 br-l br-grey pl30" style="margin-top:3px">
                                     <label class="field-label text-muted fs18 mb10"> 请输入验证码</label>
                                     
-                                        <img src="{:U('Admin/Login/verify')}" height="69" id="kaptchaImage"/>
+                                        <img src="{:U('admin/login/verify')}" height="69" id="verifyImage"/>
                                         
-                                        <label for="password" class="field prepend-icon" style="margin-top:22px">
-                                            <input type="text" name="kaptcha" id="kaptcha" class="gui-input" placeholder="请输入验证码">
-                                            <label for="kaptcha" class="field-icon"><i class="fa fa-qrcode"></i>
+                                        <label for="verify" class="field prepend-icon" style="margin-top:22px">
+                                            <input type="text" name="verify" id="verify" class="gui-input" placeholder="请输入验证码">
+                                            <label for="verify" class="field-icon"><i class="fa fa-qrcode"></i>
                                             </label>
                                         </label>
                                 </div>
@@ -202,79 +202,79 @@
             /* -----------------------------  登陆操作  ---------------------------- */ 
             
             $('#submit').click(function(){
+				
+            	// 验证用户名密码是否为空
+            	if($('#username').val() == "" || $('#password').val() == ""){
+            		$("#failure").html("<h1>登陆资料不完整</h1>");
+            		$("#custom_tips").show(200).delay(2000).hide(200); 
+            		return;
+            	}
+            	
+            	// 验证码
             	$.ajax({
             		method: 'POST',
-            		url: "{:U('admin/login/submit')}",
-            		data: {'username':$('#username').val(),'password':$('#password').val(),'address':$('#address').val()},
+            		url: "{:U('admin/login/check_verify')}",
+            		data: {'verify':$('#verify').val()},
             		success: function(data){
-            			if(data == "failed"){
-            				$("#custom_tips").show(200).delay(2000).hide(200); 
+            			if(data == "wrong"){
+                    		$("#failure").html("<h1>验证码不正确</h1>");
+                    		$("#custom_tips").show(200).delay(2000).hide(200); 
+                    		return;	
+                  		
             			}else{
-            				window.location.href = data;
-            			}			 
+            				
+            				// -----------验证码校核通过，进行登陆操作--------------- //
+                        	$.ajax({
+                        		method: 'POST',
+                        		url: "{:U('admin/login/submit')}",
+                        		data: {'username':$('#username').val(),'password':$('#password').val(),'address':$('#address').val()},
+                        		success: function(data){
+                        			
+                        			// 登陆失败
+                        			if(data == "failed"){
+                        				$("#failure").html("<h1>登陆失败！</h1>");
+                        				$("#custom_tips").show(200).delay(2000).hide(200);
+                        			
+                        			// 登陆成功	
+                        			}else{
+                        				
+                        				// cookie保存账号和密码
+                        				var usernameInputValue = $('#username').val();
+                        	    	    var passwordInputValue = $('#password').val();
+                        				
+                        		    	if($('#remember').prop("checked")==true){
+                        					if(usernameInputValue != '' && passwordInputValue != ''){
+                        						$.cookie('username',usernameInputValue, {expires:7,path:'/'});
+                        						$.cookie('password',passwordInputValue, {expires:7,path:'/'});
+                        					}
+                        		    	}
+                        		    	
+                        				window.location.href = data;
+                        			}			 
+                        		}
+                        	});	
+            			
+                        	// ----------- 登陆操作 END--------------- //
+            				
+            			}
             		}
-            	});	
-            	
-            	
+            	});
+				//---验证码 END---//
+            	   	
             });
-            
-            
-	    	$('#myform').submit(function(){
-				
-				// cookie保存账号和密码
-				var usernameInputValue = $('#username').val();
-	    	    var passwordInputValue = $('#password').val();
-				
-		    	if($('#remember').prop("checked")==true){
-					if(usernameInputValue != '' && passwordInputValue != ''){
-						$.cookie('username',usernameInputValue, {expires:7,path:'/'});
-						$.cookie('password',passwordInputValue, {expires:7,path:'/'});
-					}
-		    	}
-		    	
-	    	});
-	    	
-	    	// 弹出登陆错误信息
-	    	/*
-	    	if("${failure}"!=""){
-	    	    $('#custom_tips').show();
-	    		$('#failure').html("<h1>${failure}</h1>");
-	    	}*/
-	    	
-	    	
-	    	// 登陆表单验证
-	    	/*
-	    	$('#myform').validate({
-	    	rules:{
-	    		username:{required:true},
-	    		pwd:{required:true},
-	    		kaptcha:{required:true,
-	    		         remote:{
-	    		         	type:"post",
-	    		         	url:"${base}/admin/kaptchaCheck",
-	    		         	data:{ kaptcha:function(){ return $('#kaptcha').val();}}
-	    		         }}
-	    	},
-	    	messages:{
-	    		username:{required:"请输入用户名"},
-	    		pwd:{required:"密码不能为空！"},
-	    		kaptcha:{required:"验证码不能为空！",remote:jQuery.format("错误的验证码")}}
-	    	});
-	    	*/
+                  
 
 			// 验证码
-	    	$('#kaptchaImage').click(function () { 
-	    		$.ajax({
-	    			method: 'POST',
-	    			url : "{:U('admin/login/verify')}",
-	    			success: function(data){
-	    				$(this).attr('src', data);
-	    			}
-	    		});
-	    		
-	    		
-	    	});
-	    	
+	    	var captcha_img = $('#verifyImage'); 
+	    	var verifyimg = captcha_img.attr("src");  
+	    	captcha_img.attr('title', '点击刷新');  
+	    	captcha_img.click(function(){  
+	    	    if( verifyimg.indexOf('?')>0){  
+	    	        $(this).attr("src", verifyimg+'&random='+Math.random());  
+	    	    }else{  
+	    	        $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());  
+	    	    }  
+	    	});  
 
 
         });

@@ -43,7 +43,7 @@ class LoginController extends Controller{
     	$this->ajaxReturn("failed");
     }
 
-    
+    /** 验证码  */
     public function verify(){
         $config =    array(
             'fontSize'    =>    34,    // 验证码字体大小
@@ -54,5 +54,17 @@ class LoginController extends Controller{
         $Verify->entry();
     }
     
+    /** 验证码验证  */
+    public function check_verify(){
+    	$verify = new \Think\Verify();
+    	if (!$verify->check(I('post.verify'))){
+    		$this->ajaxReturn("wrong");
+    	} 
+    }
     
+    /** 退出  */
+    public function logout(){
+    	session("login",null);
+    	$this->success("退出成功",U('./admin/login'));
+    }
 }
