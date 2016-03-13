@@ -16,7 +16,6 @@ CREATE TABLE `tp_account` (
 insert into tp_account(username,password,login_count) values('root','75fbfbda68d64a6a697b0014dd5fbe9b','0');
 insert into tp_account(username,password,login_count) values('admin','2d903119161181303e938b2d335985c3','0');
 
-
 /* ​标签组  */
 CREATE TABLE `tp_tag_group` (
   `id` int NOT NULL auto_increment,
@@ -31,7 +30,6 @@ CREATE TABLE `tp_tag` (
   `group_id` int NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 /* 栏目表  */
 CREATE TABLE `tp_category` (

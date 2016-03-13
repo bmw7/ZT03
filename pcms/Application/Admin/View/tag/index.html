@@ -9,11 +9,6 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
     <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script>
-     // 弹出框提示
- 	 if('${info}' != ""){
- 		//parent.bootAlert('${info}');
- 	 }
-
      // 删除确认框 
      function del(url,name){
         parent.bootConfirm(url,name);
@@ -90,14 +85,17 @@
         <tbody>
                                                                                                                                
    		<volist name="groups" id="group">
-   		
-			<tr>
-			    
+			<tr>   
 				<td>{$group.name}</td>
-
-				<td>{$group.id|showtags=###}</td>
 				<td>
-					<a href="javascript:;" onclick="del('{:U('admin/tag/del_group',array('id'=>$group[id]))}',this.name)" name="{$group.name}">删除本组</a>
+				<volist name="group['tags']" id="tag">
+				<a href="{:U('admin/tag/lists',array('id'=>$tag[id]))}">{$tag.name}</a>&nbsp;&nbsp;
+				<a href="javascript:;" onclick="del('{:U('admin/tag/del',array('id'=>$tag[id]))}','{$tag.name}')"><span style="font-size:14px" class="glyphicons glyphicons-remove_2"></span></a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				</volist>
+				</td>
+				<td>
+					<a href="javascript:;" onclick="del('{:U('admin/tag/del_group',array('id'=>$group[id]))}','{$group.name}')">删除本组</a>
 				</td>
 			</tr>
 		</volist>
