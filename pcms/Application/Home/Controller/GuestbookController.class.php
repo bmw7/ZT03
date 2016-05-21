@@ -20,6 +20,5 @@ class GuestbookController extends Controller {
 		}
 	}
 	
-
 	
 }
