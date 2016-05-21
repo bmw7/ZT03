@@ -16,6 +16,12 @@
 .top15{ padding-top:15px;}
 .custom_control_height{ height:19px;overflow:hidden;}
 
+
+/** 管理首页 */
+#info{ height:280px; width:96%; margin:0px auto; background-color:#f5f5f5; padding-top:58px;}
+.wl_title{ font-size:36px;height:78px;margin-top:-5px;}
+
+
 /** ��ҳindex.ftl */
 #title{ font-size:50px;text-align:center;padding-top:40px;}
 #title_sm{ font-size:20px;text-align:center;color:#999999;}
