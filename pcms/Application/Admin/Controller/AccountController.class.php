@@ -39,6 +39,16 @@ class AccountController extends AuthController {
     	$this->display();
     }
     
+    /** 删除账号  */
+    public function del(){
+    	$Account = M('Account');
+        if ($Account->delete(I('get.id'))){
+    		$this->success('删除账号成功',U('admin/account/index'));
+    	}else {
+    		$this->error('操作失败',U('admin/account/index'));
+    	}
+    }
+    
     /** 更新账号  */
     public function update(){
     	$Account = M('Account');
