@@ -76,10 +76,3 @@ function account_del($sid,$id){
 	}
 }
 
-/** 图文链接 图片显示*/
-function link_logo($filename){
-	if ($filename != null){
-		return "<img src='../../upload/".$filename."' height='30' >";
-	}
-}
-

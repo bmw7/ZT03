@@ -3,7 +3,7 @@ namespace Admin\Controller;
 use Admin\Common\AuthController;
 
 // +--------------------------------------------
-// | Controller - 管理账号
+// | Controller - 后台管理账号
 // +--------------------------------------------
 
 class AccountController extends AuthController {

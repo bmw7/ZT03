@@ -2,9 +2,9 @@
 namespace Admin\Controller;
 use Admin\Common\AuthController;
 
-// +--------------------------------------------
-// | Controller - 导航栏目
-// +--------------------------------------------
+// +--------------------------------------------------------
+// | Controller - 导航栏目 - 为自由定义前台页面 菜单/导航 项目而设置
+// +--------------------------------------------------------
 
 class NavigationController extends AuthController{
 	
@@ -19,7 +19,11 @@ class NavigationController extends AuthController{
     public function save(){
     	$Navigation = M('Navigation');
     	$Navigation->create();
-    	$Navigation->add();
+    	if ($Navigation->add()){
+    		$this->redirect('/admin/navigation');
+    	}else{
+    		$this->error('操作失败',U('/admin/navigation'));
+    	}
     }
     
     /** 编辑  */
@@ -33,13 +37,23 @@ class NavigationController extends AuthController{
     public function update(){
     	$Navigation = M('Navigation');
     	$Navigation->create();
-    	$Navigation->save();
+        if ($Navigation->save()){
+    		$this->redirect('/admin/navigation');
+    	}else{
+    		$this->error('操作失败',U('/admin/navigation'));
+    	}
     }
     
     /** 删除  */
     public function del(){
     	$Navigation = M('Navigation');
-    	$Navigation->delete(I('get.id'));
+    	$id = I('get.id');
+    	
+    	if ($Navigation->delete($id)){
+    		$this->redirect('/admin/navigation');
+    	}else{
+    		$this->error('操作失败',U('/admin/navigation'));
+    	}
     }
     
 

@@ -189,11 +189,11 @@
 				</td>
 
 				<td>
-					<a href="#" class="moveup" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="${navigation.id}" orders="${navigation.orders}" grade="${navigation.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
+					<a href="#" class="moveup" id="{$navigation.id}" orders="{$navigation.orders}" grade="{$navigation.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="{$navigation.id}" orders="{$navigation.orders}" grade="{$navigation.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
 				</td>
 				<td>
 					<a href="{:U('admin/navigation/edit',array('id'=>$navigation[id]))}">编辑</a>&nbsp;&nbsp;
-					<a href="#" onclick="del('{:U('/admin/navigation/del',array('id'=>$navigation[id]))}',this.name)" name="${navigation.name}">删除</a>
+					<a href="#" onclick="del('{:U('/admin/navigation/del',array('id'=>$navigation[id]))}',this.name)" name="{$navigation.name}">删除</a>
 				</td>
 			</tr>
 		</volist>
