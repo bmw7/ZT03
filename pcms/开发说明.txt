@@ -1,0 +1,9 @@
+
+   ************
+   *  开 发 说 明     *
+   *   2016   *
+   ************
+
+1、为缩短网址，开启了针对模块默认路由规则设置  。 在 ThinkPHP/conf/convention.php 中，修改了如下项目
+  'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
+  'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show','docs/:docs' => 'Article/shows'), 
