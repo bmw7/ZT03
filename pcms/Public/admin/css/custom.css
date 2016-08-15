@@ -3,18 +3,12 @@
 .custom_title .custom_title_badge{ line-height:16px;}
 .custom_title .custom_title_word{ font-size:20px;line-height:20px;}
 .custom_body{ width:100%;height:auto;padding-top:15px;}
-.w1920{ width:104%;margin-left:-4%;}
-.w1680{ width:103.5%;margin-left:-3.5%;}
-.w1600{ width:103%;margin-left:-3%;}
-.w1440{ width:102.5%;margin-left:-2.5%;}
-.w1400{ width:102.2%;margin-left:-2.2%;}
-.w1366{ width:102%;margin-left:-2%;}
-.w1360{ width:101.8%;margin-left:-1.8%;}
-.w1280{ width:101.5%;margin-left:-1.5%;}
-.w1152{ width:100.5%;margin-left:-0.5%;}
-.w1024{ width:100.3%;margin-left:-0.3%;}
 .top15{ padding-top:15px;}
 .custom_control_height{ height:19px;overflow:hidden;}
+.left-title{ width:80px;}
+
+/** 出现滚动条不至于影响页面宽度 */
+body{ overflow-x: hidden; } 
 
 
 /** 管理首页 */
@@ -31,8 +25,11 @@
 .custom_tips_container{ margin-top:10px;margin-left:20px; }
 .custom_tips_overflow{ overflow:hidden;padding-top:30px; }
 
-/** ���·���ҳ�� admin/article/add.ftl */
-.custom_seo{ display:none; }
+/** 文章发布 admin/article/add.ftl */
+.custom_more{ height:0px;overflow:hidden; }
+.custom_more .container-fluid{ height:460px;border:1px solid #dddddd;padding-top:30px;padding-left:-50px; }
+.custom_more .switch{ margin-top:10px;left:-50px;position:absolute;left:10px;}
+#posTop{ position:relative;}
 .custom_images{ height:0px;overflow:hidden; }
 .custom_select{ height:39px;width:100%;border:1px solid #dddddd;}
 .custom_option_title{ font-size:10px;padding-left:10px;}
@@ -51,7 +48,7 @@
 .add_form{ width:100%;margin-bottom:20px;}
 
 
-/** ��������*/
+/** 上传区域 */
 .upload_input{ height:32px;}
 .item_logo{ height:32px;}
 

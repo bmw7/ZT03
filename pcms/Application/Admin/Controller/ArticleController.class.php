@@ -12,7 +12,7 @@ class ArticleController extends AuthController{
     public function add(){ 	
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Category'));
-    	
+    	$this->assign("length",9);
     	// 标签
     	$tag_group = M('tag_group');
     	$group = $tag_group->select();
@@ -22,6 +22,7 @@ class ArticleController extends AuthController{
     			$group[$k]['tags'] = $tag->where('group_id ='.$v['id'])->select();
     		}
     		$this->assign("groups",$group);
+    		$this->assign("length",7);
     	}
     	
     	$this->display();
@@ -34,12 +35,21 @@ class ArticleController extends AuthController{
 		$Article->content = $_POST['content']; //为了防止转义html字符
 		$Article->create_date = Date('Y-m-d H:i:s');
 		
-		//选中置顶，时间加1000年
+		$year = date('Y');
+		
+		// 外链不为空，时间加1000年
+		if(trim($_POST['outer_link']) != ''){
+			$year = $year + 1000;
+			$Article->seo_keywords = trim($_POST['outer_link']); // 借用seo_keywords字段,存储外链值
+		};
+		
+		// 选中置顶，时间加3000年
 		if(I('post.isTop')){
-			$year = date('Y')+1000;
-			$Article->create_date = $year.'-'.date('m-d H:i:s');
+			$year = $year + 3000;	
 		}
 		
+		// 设置时间
+		$Article->create_date = $year.'-'.date('m-d H:i:s');
 		
         if ($Article->add()){
         	
