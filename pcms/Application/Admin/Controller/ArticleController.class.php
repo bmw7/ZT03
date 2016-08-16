@@ -34,22 +34,20 @@ class ArticleController extends AuthController{
 		$Article->create();
 		$Article->content = $_POST['content']; //为了防止转义html字符
 		$Article->create_date = Date('Y-m-d H:i:s');
-		
-		$year = date('Y');
-		
-		// 外链不为空，时间加1000年
-		if(trim($_POST['outer_link']) != ''){
-			$year = $year + 1000;
-			$Article->seo_keywords = trim($_POST['outer_link']); // 借用seo_keywords字段,存储外链值
-		};
-		
-		// 选中置顶，时间加3000年
+		 
+		/**
+		 * 选中置顶，当前年份加1000年
+		 * 故前台判断顶置的条件是数据表中时间 >3000年
+		 * */
 		if(I('post.isTop')){
-			$year = $year + 3000;	
+			$year = date('Y') + 1000;
+			$Article->create_date = $year.'-'.date('m-d H:i:s');
 		}
 		
-		// 设置时间
-		$Article->create_date = $year.'-'.date('m-d H:i:s');
+		// 存在外链，设置link值供前台调用
+		if(trim($_POST['outer_link']) != ''){
+			$this->assign('link',trim($_POST['outer_link']));
+		}
 		
         if ($Article->add()){
         	
@@ -86,10 +84,9 @@ class ArticleController extends AuthController{
         		}
         	}
         	
-        	$this->success('添加成功！',U('admin/article/add'));
-        		
+        	$this->success('操作成功！',U('admin/article/add'));		
         }else{
-        	$this->success('添加失败！',U('admin/article/add'));
+        	$this->success('操作失败！',U('admin/article/add'));
         }
         
     }

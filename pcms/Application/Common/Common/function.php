@@ -16,7 +16,7 @@
 function tag_checked($tag_ids,$tag_id){
 	for ($i = 0;$i < count($tag_ids);$i++){
 		if ($tag_id == $tag_ids[$i]){
-			return "checked";
+			return "selected='selected'";
 		}
 	}
 }

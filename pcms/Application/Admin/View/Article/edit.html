@@ -8,29 +8,20 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
-
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/bootstrap-multiselect.css"> 
 </head>
 <body>                       
 <div class="custom_main">
-
-	<form class="form-horizontal" action="{:U('admin/article/update')}" id="inputForm" method="post" role="form">
 	
 	<div class="custom_title">
 		<span class="custom_title_word">文章编辑</span>
 	    
-	    <span class="pull-right">
-        <label class="pull-right">&nbsp;&nbsp;设置置顶</label>
-		<div class="switch switch-primary switch-inline switch-xs pull-right">
-            <input id="isTop" name="isTop" type="checkbox" {$article.create_date|time_checked=###} >
-            <label for="isTop"></label>
-        </div>
-    	</span> 
     	
 	    <span class="pull-right">
-    	<label class="pull-right">&nbsp;&nbsp;搜索优化&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>  
+    	<label class="pull-right">&nbsp;&nbsp;更多操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>  
         <div class="switch switch-primary switch-inline switch-xs pull-right">
-            <input id="seo" type="checkbox">
-            <label for="seo"></label>
+            <input id="more" type="checkbox">
+            <label for="more"></label>
         </div>
         </span>
         
@@ -43,13 +34,13 @@
     	</span>   
     	
     	<present name="images">
-    	<span class="pull-right">
-        <label class="pull-right">&nbsp;&nbsp;图片管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<div class="switch switch-primary switch-inline switch-xs pull-right">
-            <input id="manageImage" name="manageImage" type="checkbox" value="true">
-            <label for="manageImage"></label>
-        </div>
-    	</span>
+	    	<span class="pull-right">
+	        <label class="pull-right">&nbsp;&nbsp;图片管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<div class="switch switch-primary switch-inline switch-xs pull-right">
+	            <input id="manageImage" name="manageImage" type="checkbox" value="true">
+	            <label for="manageImage"></label>
+	        </div>
+	    	</span>
     	</present>
     	
     	<label class="pull-right">  
@@ -57,64 +48,60 @@
 	    </label>  
 	</div>
     
-	
+	<form class="form-horizontal" action="{:U('admin/article/update')}" id="inputForm" method="post" role="form">
 
-	<div class="custom_body">                        
+	<div class="custom_body" id="cal_main">                        
 		<input type="hidden" name="id" value="{$article.id}" >
 		
+		<!-- 第一行 -->
 	    <div class="form-group">
 	
-	        <label for="inputStandard" class="col-md-1 col-sm-1  control-label">文章标题</label>
-	        <div class="col-md-5 col-sm-5">
+	        <label for="inputStandard" class="col-md-1 col-sm-1  control-label left-title">文章标题</label>
+	        <div class="col-md-5 col-sm-5" id="cal_title">
 	            <input type="text" name="title" id="inputStandard" class="form-control" value="{$article.title}">
 	        </div>
-	        
-	        
-	        <div class="col-md-2 col-sm-2  admin-form">   
-	            <label class="field select">
-	                <select name="category_id" id="category_id">
-	                    <option><span class="custom_option_title">请选择分类</span></option>
-                    	<volist name="tree" id="category">
-                    	<option value="{$category.id}" <if condition="$category[id] eq $article[category_id]">selected="selected"</if>>
-    						<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>&nbsp;&nbsp;{$category.name}	
-    					</option>
-                    	</volist>
-	                </select>
-	                <i class="arrow"></i>
-	            </label>	
-	        </div>
-	            
-            <div class="col-md-2 col-sm-2 ">
-                <input type="text" name="create_date" id="create_date" class="form-control" value="{$article.create_date|time_top=###}">
-            </div>    
-	            
-        	<div class="col-md-2 col-sm-2 ">
-                <input type="text" class="form-control" name="source" value="{$article.source}" placeholder="未设置文章来源">
-            </div>    
 	           
+	        <!-- 选择分类 -->
+            <div class="col-md-2 col-sm-2" id="cal_category">
+            	
+            	<select name="category_id" id="choose-category" size="2">
+					<volist name="tree" id="category">
+				    
+				    	<if condition="$category.type eq 0">
+				    	 	<optgroup label="<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</for>{$category.name}"></optgroup>
+				    	<else />
+				    		<option value="{$category.id}" <if condition="$category[id] eq $article[category_id]">selected="selected"</if> >
+				    			<for start="2" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>{$category.name}
+				    		</option>
+				    	</if>
+  
+					</volist>
+				</select>	
+            </div>
+	        
+	        <!-- 设置标签 -->
+			<present name="groups">
+			<div class="col-md-2 col-sm-2" id="cal_tags">
+				<select id="choose-tags" name="tags[]" multiple="multiple">
+					<volist name="groups" id="group">
+				    <optgroup label="{$group.name}">
+				    	<volist name="group['tags']" id="tag">
+				        <option value="{$tag.id}" {$tag.id|tag_checked=$tag_ids,###}>{$tag.name}</option>
+				        </volist>
+				    </optgroup>
+					</volist>
+				</select>
+			</div>
+			</present>  
+	            
 		</div>
 
-	        
-	       
-	        <div class="form-group custom_seo">	
-	            <label class="col-md-1 col-sm-1  control-label">关键词语</label>
-	            <div class="col-md-11 col-sm-11">
-	                <input type="text" name="seoKeywords" id="seoKeywords" class="form-control" value="{$article.seo_keywords}">
-	            </div>	             
-	        </div>
-	
-	        <div class="form-group custom_seo">
-	            <label class="col-md-1 col-sm-1  control-label">页面描述</label>
-	            <div class="col-md-11 col-sm-11">
-	                <input type="text" name="seoDescription" class="form-control" value="{$article.seo_description}">
-	            </div>  
-	        </div>
-	        
-	        
+	           
+	        <!-- 图片管理 -->
 	        <div class="custom_images">
 		        <div class="form-group">
-		        	<label class="col-md-1 col-sm-1 control-label">图片上传</label>
-		            <div class="col-md-11 col-sm-11">
+		        	<label class="col-md-1 col-sm-1 control-label left-title">图片上传</label>
+		            <div class="col-md-11 col-sm-11" id="cal_images">
 	
 						<div id="wrapper">
 					        <div id="container">
@@ -144,43 +131,90 @@
         	</div>
 	        
 	
-			<present name="groups">
+			<!-- 更多操作 -->
+	        <div class="custom_more">
 		        <div class="form-group">
-		            <label class="col-md-1 col-sm-1 control-label" style="margin-top:-8px">标签设置</label>
-		            <div class="col-md-11 col-sm-11">
-		                
-		                <volist name="groups" id="group">
-		                	{$group.name}：
-		                	<volist name="group['tags']" id="tag">
-		                	<input type="checkbox" name="tags[]" value="{$tag.id}" {$tag.id|tag_checked=$tag_ids,###}>&nbsp;{$tag.name}&nbsp;&nbsp;
-							</volist>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                
-		                </volist>
-		                
-		            </div> 
+			        <label class="col-md-1 col-sm-1 control-label left-title">更多操作</label>
+		            <div class="col-md-11 col-sm-11" id="cal_more">
+		            	<div class="container-fluid">
+		            	
+		            	     <div class="form-group">
+		            	     	<label class="col-md-1 col-sm-1 control-label">发布时间</label>
+			        		 	<div class="col-md-3 col-sm-3">	
+		            		    	<input type="text" name="create_date" class="form-control" value="{$article.create_date|time_top=###}">
+		            		 	</div>
+		            	     
+			        		 	<label class="col-md-1 col-sm-1 control-label">设置置顶</label>
+			        		 	<div class="col-md-1 col-sm-1" id="posTop">
+	
+	        						<div class="switch switch-primary switch-inline switch-xs pull-right">
+	           							<input id="isTop" name="isTop" type="checkbox" {$article.create_date|time_checked=###}>
+	            						<label for="isTop"></label>
+	        						</div>
+		            		 	</div>
+
+		            		 </div>	            	
+		            	
+		            	     <div class="form-group">
+			        		 	<label class="col-md-1 col-sm-1 control-label">设关键词</label>
+			        		 	<div class="col-md-11 col-sm-11">
+		            		    	<input type="text" name="seo_keywords" class="form-control" value="{$article.seo_keywords}" placeholder="未设置页面关键词">
+		            		 	</div>
+		            		 </div>
+		            		 <div class="form-group">
+			        		 	<label class="col-md-1 col-sm-1 control-label">页面描述</label>
+			        		 	<div class="col-md-11 col-sm-11">
+		            		    	<input type="text" name="seo_description" class="form-control" value="{$article.seo_description}" placeholder="未设置页面描述">
+		            		 	</div>
+		            		 </div>
+		            		
+		            		<div class="form-group">
+			        		 	<label class="col-md-1 col-sm-1 control-label">文章来源</label>
+			        		 	<div class="col-md-11 col-sm-11">
+		            		    	<input type="text" name="source" class="form-control" value="{$article.source}" placeholder="未设置文章来源">
+		            		 	</div>
+		            		 </div>
+		            		
+		            		 <div class="form-group">
+			        		 	<label class="col-md-1 col-sm-1 control-label">设置外链</label>
+			        		 	<div class="col-md-11 col-sm-11">
+		            		    	<input type="text" name="outer_link" class="form-control" value="{$article.outer_link}" placeholder="未设置外链网址">
+		            		 	</div>
+		            		 </div>
+		            		            	            		 
+		            		 <div class="form-group">
+			        		 	<label class="col-md-1 col-sm-1 control-label">简要描述</label>
+			        		 	<div class="col-md-11 col-sm-11">
+		            		    	<textarea name="short_intro" rows="6" class="form-control" value="{$article.short_intro}" placeholder="未设置文章简要描述"></textarea>
+		            		 	</div>
+		            		 </div>
+		            		 
+		            	</div>
+		            </div>     
 		        </div>
-		    </present>
-	
-	
+
+	        </div>
+	        
+	        
 	        <div class="form-group">
-	            <label class="col-md-1 col-sm-1  control-label">文章内容</label>
+	            <label class="col-md-1 col-sm-1  control-label left-title">文章内容</label>
 	            <div class="col-md-11 col-sm-11">
 	                <script id="editor" name="content" type="text/plain">{$article.content}</script>
 	            </div>
 	        </div>
 	
 	        <div class="form-group">
-	            <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>
+	            <label class="col-md-1 col-sm-1  control-label left-title" for="textArea2"></label>
 	            <div class="admin-form col-md-11 col-sm-11">
 	                <button type="submit" class="button btn-primary mr10">发 布</button>
 	            </div>
 	        </div>
-	        
+	           
 	    
 	</div>
 	</form>
 	
-	<!-- 图片管理区域 -->
+    <!-- 图片管理区域 -->
 	<present name="images">
 	<div id="manageImageArea">
 		<volist name="images" id="image">			
@@ -197,7 +231,8 @@
 		</volist>
 	</div>
 	</present>
-		    
+	
+    
 </div>
                         
 <p>&nbsp;</p>                        
@@ -206,13 +241,12 @@
 <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.validate.js"></script> 
 <script type="text/javascript" src="__PUBLIC__/admin/assets/js/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/plugin/webuploader/require.js" data-main="__PUBLIC__/admin/js/article.app.js"></script>
-
+<script type="text/javascript" src="__PUBLIC__/admin/js/bootstrap-multiselect.js"></script>
 
 <!--Ueditor 编辑器-->
 <script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.all.min.js"> </script>  
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/admin/js/article.js"></script>   
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>  
 <script type="text/javascript">
 
 if("${info}" != ""){
@@ -224,6 +258,13 @@ $(document).ready(function() {
     var ue = UE.getEditor('editor');
 	var $inputForm = $("#inputForm");
 	
+	// 出现滚动条不至于影响页面宽度
+	$("body").css("width", $(window).width()); 
+	
+	// 根据网页可视区域高度调整编辑器高度
+	var editorHeight = parseInt(parent.clientHeight() - 420);
+	$('#editor').css('height',editorHeight);
+	
 	// 表单验证
 	$inputForm.validate({
 		rules: {
@@ -232,12 +273,14 @@ $(document).ready(function() {
 		}
 	});
 	
-	// seo 显示/隐藏
-	$('#seo').click(function(){
-		if($(this).prop('checked')){
-			$('.custom_seo').show(300);
+	// 更多操作 显示/隐藏
+	$('#more').click(function(){
+		if($(this).prop('checked')){   
+			$('.custom_more').animate({height:"480px"},300);;
+			parent.setFrameHeight(480);
 		}else{
-		    $('.custom_seo').hide(300);
+		    $('.custom_more').animate({height:"0px"},300);;
+		    parent.setFrameHeight(-480);
 		}
 	});
 	
@@ -319,6 +362,34 @@ $(document).ready(function() {
 		$thisParent.insertAfter($backParent);
 	});
 	
+	
+	// 设置checkbox
+	$('#choose-category').multiselect({ 
+		nonSelectedText: '请选择分类',
+		buttonWidth: '100%'
+	});
+	
+	$('#choose-tags').multiselect({ 
+		nonSelectedText: '请设置标签',
+		buttonWidth: '100%'
+	});
+
+	// 设置边距问题
+	var main = $('#cal_main').width();
+	var wid = main - 61;   // 差值
+	 
+	$('#editor').css('width',wid+"px");
+	$('#cal_images').css('width',$('#editor').width()+"px");
+	$('#cal_more').css('width',$('#editor').width()+"px");
+	$('#editor').css('width',$('#cal_images').width()+"px");
+	
+	if($('#cal_tags').width() == null){
+		var wid_title =  $('#cal_images').width() - $('#cal_category').width();
+	}else{
+		var wid_title =  $('#cal_images').width() - $('#cal_category').width() - $('#cal_tags').width() -21;
+	}
+	
+	$('#cal_title').css('width',wid_title+"px");
 	
 });
 	
