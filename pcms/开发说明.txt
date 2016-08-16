@@ -9,6 +9,11 @@
 1、  为缩短网址，本系统开启了针对模块默认路由规则设置  。 在 ThinkPHP/conf/convention.php 中，修改了如下项目
 	'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
 	'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show','docs/:docs' => 'Article/shows'), 
+	
+	说明：前台网址勿用article开头，因后台已经使用
+	doc/1.html 用于单篇文章展示 - 例如 公司简介
+	docs/1.html 用于多篇类文章展示 - 例如 新闻栏目 的一篇文章
+	list/1.html 用于某类文章条目列表 - 例如某类新闻栏目的所有文章列表
   
 2、  发布项目前，关于上传图片的修改如下
         

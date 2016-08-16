@@ -1,10 +1,13 @@
+<!-- 多篇类文章展示 - 标准页面 -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="keywords" content="{$article.seo_keywords}">
+    <meta name="description" content="{$article.seo_description}">
     
-    <title>多篇类文章展示 - 标准页面</title>
+    <title>{$article.title}</title>
     
     <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
     <script src=""></script>
@@ -24,34 +27,24 @@
 <!-- 展示方式一  -->
 <div class="row">
 
-	<h2>展示所有分组、每个分组下的所有项目</h2>	
-	<volist name="groups" id="group">
+	<hr><h2>普通文章展示</h2><hr>
 		
-        <hr>组名：{$group.name}<hr>	
-		<volist name="group['links']" id="link">
-
-			项目名称：{$link.name}                   <br>
-			项目链接：{$link.url}                    <br>
-			项目排序：{$link.orders}                 <br>	
-			项目图片：<img src="__PUBLIC__/upload/{$link.filename}" height=30 ><br><br>				
-	   		    
-		</volist>	
-			                    
-     </volist>
-        
+	文章题目：{$article.title}<br>
+	置顶标签：{$article.create_date|time_icon=###}<br>
+        发布时间：{$article.create_date|time_top=###}<br>
+        点击次数：{$article.hits}<br>
+        文章来源：{$article.source}<br> 
+        简短描述：{$article.short_intro}<br>   
+        文章内容：{$article.content}<br>
+                
 </div>
 
 
 <!-- 展示方式二 -->
 <div class="row">
 
-	<h2>展示某一分组下的所有项目，以组 group_id = 1 为例</h2>
-	<volist name="links" id="link">
-			项目名称：{$link.name}                   <br>
-			项目链接：{$link.url}                    <br>
-			项目排序：{$link.orders}                 <br>	
-			项目图片：<img src="__PUBLIC__/upload/{$link.filename}" height=30 ><br><br>	
-	</volist>
+	<h2>附带额外图片文章展示</h2>
+
 		
 </div>
 

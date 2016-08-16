@@ -26,9 +26,9 @@ function time_top($time){
 	$att = explode("-", $time);
 	if ($att[0]>3000){
 		$year = $att[0] - 1000;
-		return $year.'-'.$att[1].'-'.$att[2];
+		return date('Y-m-d',strtotime($year.'-'.$att[1].'-'.$att[2]));
 	}
-	return $time;
+	return date('Y-m-d',strtotime($time));
 }
 
 /** 是否显示置顶图标  */

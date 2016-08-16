@@ -149,7 +149,7 @@ return  array(
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
     'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show',
     								  'docs/:docs' => 'Article/shows',
-    		                          'list/:list' => 'Article/list'), // 默认路由规则 针对模块
+    		                          'list/:list' => 'Article/showList'), // 默认路由规则 针对模块
     								  
     'URL_MAP_RULES'         =>  array(), // URL映射定义规则
 
