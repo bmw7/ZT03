@@ -147,9 +147,11 @@ return  array(
     'URL_PARAMS_FILTER_TYPE'=>  '', // URL变量绑定过滤方法 如果为空 调用DEFAULT_FILTER
     
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
-    'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show',
-    								  'docs/:docs' => 'Article/shows',
-    		                          'list/:list' => 'Article/showList'), // 默认路由规则 针对模块
+	 // 默认路由规则 针对模块
+    'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show',        // 单篇类文章展示
+    								  'docs/:docs' => 'Article/shows',     // 多篇类文章展示
+    								  'pics/:pics' => 'Article/showPics',  // 多篇类带图文章展示
+    		                          'list/:list' => 'Article/showList'), // 多篇类文章列表
     								  
     'URL_MAP_RULES'         =>  array(), // URL映射定义规则
 

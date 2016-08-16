@@ -13,21 +13,22 @@
 
 	<div class="custom_title"> 
 		<span class="custom_title_word">添加分类</span>
-		<label class="pull-right"><span class="glyphicons glyphicons-rewind"></span>&nbsp;&nbsp;<a href="${base}/admin/article/category/list" class="custom_href">返回分类</a></label> 
+		<label class="pull-right"><span class="glyphicons glyphicons-rewind"></span>&nbsp;&nbsp;<a href="/admin/article/manage.html" class="custom_href">返回分类</a></label> 
 	</div>
 	
 	<div class="custom_body"> 
         <form class="form-horizontal" action="{:U('admin/category/save')}" id="inputForm" method="post" role="form">  
+        
         <div class="form-group">
-            <label for="name" class="col-md-1 col-sm-1  control-label">分类名称</label>
-            <div class="col-md-5 col-sm-5">
+            <label for="name" class="col-md-1 col-sm-1  control-label left-title">分类名称</label>
+            <div class="col-md-3 col-sm-3">
                 <input type="text" name="name" id="name" class="form-control" placeholder="请输入分类名称">
             </div>         
         </div>    
             
         <div class="form-group">
-         	<label for="inputStandard" class="col-md-1 col-sm-1  control-label">上级分类</label>
-            <div class="col-md-2 col-sm-2  admin-form">
+         	<label for="inputStandard" class="col-md-1 col-sm-1  control-label left-title">上级分类</label>
+            <div class="col-md-3 col-sm-3  admin-form">
 	            <label class="field select">
 	                <select name="parent_id" id="category">
 	                    <option value="0" id="option0" name="1" >请选择上级分类</option>
@@ -41,21 +42,20 @@
 	                <input type="hidden" name="grade" id="grade" value="1" />
 	            </label>
             </div>
-
-
-            <label for="author" class="col-md-1 col-sm-1 control-label">分类类型</label>
-            <div class="col-md-2 col-sm-2  admin-form"> 
+		</div>
+		<div class="form-group">
+            <label for="author" class="col-md-1 col-sm-1 control-label left-title">分类类型</label>
+            <div class="col-md-3 col-sm-3  admin-form"> 
 	            <label class="field select">
 				<select name="type" id="category">
+				    <option value="1">内容</option>
 					<option value="0">标题</option>	
-					<option value="1">单篇</option>
-					<option value="2">多篇</option>
 					</select></label>
             </div>
 		</div>
  
         <div class="form-group">
-            <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>
+            <label class="col-md-1 col-sm-1  control-label left-title" for="textArea2" ></label>
             <div class="admin-form col-md-5 col-sm-5">
                 <button type="submit" class="button btn-primary mr10">添  加</button>
             </div>

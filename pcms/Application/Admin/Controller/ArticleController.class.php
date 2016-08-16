@@ -115,10 +115,9 @@ class ArticleController extends AuthController{
     	$show      = $Page->show();// 分页显示输出
     	$list      = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
     	
-    	$this->assign('cid',$category_id);// 文章列id
-    	$this->assign('list',$list);// 赋值数据集
-    	$this->assign('page',$show);// 赋值分页输出
-    	$this->assign('category_id',$category_id);
+    	$this->assign('list',$list);               // 赋值数据集
+    	$this->assign('page',$show);               // 赋值分页输出
+    	$this->assign('category_id',$category_id); // 文章列id
     	$this->display();
     	
     }
@@ -163,11 +162,28 @@ class ArticleController extends AuthController{
     
     /** 文章删除  */
     public function del(){
+    	$id = I('get.id'); 	
     	$Article = M('article');
-    	if($Article->delete(I('get.id'))){
-    		$this->redirect('admin/article/lists/id/'.I('get.cid'));
+    	$Article_image = M('article_image');
+    		
+    	if($Article->delete($id)){
+    		// 获取该文章所属的上传图片
+    		$images = $Article_image->where('article_id = '.$id)->select();
+    		// 若有上传图片，则删除
+    		if (count($images) > 0){
+    			
+    			for($i = 0;$i < count($images);$i++){
+    				if ($Article_image->delete($images[$i]['id'])){
+    					unlink("upload" . DIRECTORY_SEPARATOR . $images[$i]['filename']);
+    					unlink("upload" . DIRECTORY_SEPARATOR . 'thumb_' . $images[$i]['filename']);
+    				}
+    			}
+    			
+    		}
+    		
+    		$this->redirect('admin/article/lists/id/'.I('get.category_id'));
     	}else{
-    		$this->error('操作失败！',U('admin/article/lists/id/'.I('get.cid')));
+    		$this->error('操作失败！',U('admin/article/lists/id/'.I('get.category_id')));
     	}
     }
     

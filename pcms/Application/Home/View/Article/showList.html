@@ -1,3 +1,4 @@
+<!-- 多篇类文章列表条目 - 标准页面 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +22,15 @@
 
 <div class="container">
 
-	<!-- 展示方式一  -->
+	<!-- 展示方式一 ：普通标题列表-->
 	<div class="row">
 	
-		<h2>展示所有分组、每个分组下的所有项目</h2>	
+		<h2>展示方式一 ：普通标题列表</h2>	
 
 
-		<table class="table table-hover" cellspacing="0" width="100%">                                
+		<table class="table-hover table-striped" cellspacing="0" width="100%">                                
 	 		<volist name="list" id="article">
-				<tr>
+				<tr style="height:40px">
 				
 				<td>图标</td>
 				
@@ -39,13 +40,38 @@
 				</td>
 				
 				<!-- 时间 -->
-				<td>{$article.create_date|time_top=###}</td>
+				<td>{$article.create_date|time_top=###}</td>	
 				
 		   		</tr>
 			</volist>
         </table>
         
         <div class="custom_page">{$page}</div>
+	        
+	</div>
+	
+	<br>
+	<br>
+	<br>
+
+	<!-- 展示方式二：图片列表方式  -->
+	<div class="row">
+	
+		<h2>展示方式二：图片列表方式 </h2>	
+
+
+		    <div class="row">                           
+	 		<volist name="list" id="article">
+				
+				<div class="col-md-4">
+				<img src="/git/pcms/upload/thumb_{$article.image}"><br>
+				{$article.create_date|time_icon=###}<a href="{:U('././',array('pics'=>$article[id]))}">{$article.title}</a>
+				</div>
+   		
+			</volist>
+            </div>
+        <div class="custom_page">{$page}</div>
+        
 	        
 	</div>
 

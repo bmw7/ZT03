@@ -45,7 +45,7 @@
 	            		<label for="{$article.id}"></label>
 	        		</div>
 				</td>
-				<td><a href="{:U('admin/article/edit',array('id'=>$article[id]))}">编辑</a>&nbsp;&nbsp;<a href="javascript:;" class="delete" onclick="del('{:U('admin/article/del',array('id'=>$article[id],'cid'=>$cid))}','{$article.title}')">删除</a></td>
+				<td><a href="{:U('admin/article/edit',array('id'=>$article[id]))}">编辑</a>&nbsp;&nbsp;<a href="javascript:;" class="delete" onclick="del('{:U('admin/article/del',array('id'=>$article[id],'category_id'=>$category_id))}','{$article.title}')">删除</a></td>
 		   </tr>
 		</volist>
 		                    

@@ -7,6 +7,10 @@
 .custom_control_height{ height:19px;overflow:hidden;}
 .left-title{ width:80px;}
 
+.custom_main a{ color:#666666;}
+.custom_main a:hover{ color:#18b4ed;}
+.custom_main th{ font-weight:bold;}
+
 /** 出现滚动条不至于影响页面宽度 */
 body{ overflow-x: hidden; } 
 

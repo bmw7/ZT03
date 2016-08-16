@@ -26,7 +26,11 @@ class CategoryController extends AuthController{
 	public function save(){
 		$category = M('category');
 		$category->create();
-		$category->add();
+		if ($category->add()){
+			$this->redirect('/admin/article/manage');
+		}else{
+			$this->error('操作失败！',U('admin/article/manage'));
+		}
 	}
 	
 	/** 编辑  */

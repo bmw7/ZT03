@@ -1,0 +1,55 @@
+<!-- 多篇类带图片文章展示 - 标准页面 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="keywords" content="{$article.seo_keywords}">
+    <meta name="description" content="{$article.seo_description}">
+    
+    <title>{$article.title}</title>
+    
+    <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
+    <script src=""></script>
+    
+	<!--[if lt IE 9]>
+	<script src="__PUBLIC__/lib/js/html5shiv.min.js"></script>
+	<script src="__PUBLIC__/lib/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+<body>
+
+
+
+<div class="container">
+
+	
+	<div class="row">
+	
+		<hr><h2>带图文章展示</h2><hr>
+		
+		<volist name="article_images" id="article_image">
+			<img src="/git/pcms/upload/{$article_image}"><br>
+		</volist>
+			
+		文章题目：{$article.title}<br>
+		置顶标签：{$article.create_date|time_icon=###}<br>
+	        发布时间：{$article.create_date|time_top=###}<br>
+	        点击次数：{$article.hits}<br>
+	        文章来源：{$article.source}<br> 
+	        简短描述：{$article.short_intro}<br>   
+	        文章内容：{$article.content}<br>
+	                
+	</div>
+
+
+
+</div>
+
+
+
+<script type="javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
+<script type="javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

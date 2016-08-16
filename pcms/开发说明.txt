@@ -24,7 +24,7 @@
 	76行 - server: '/admin/article/uploadimages',
  
        修改缩略图尺寸在  在 admin/article/uploadimages方法内 
-    443行 - $image->thumb(150, 150)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
+    459行 - $image->thumb(150, 150)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
        
        图片管理管理区域，Application/Admin/View/article/edit.html 修改至如下   
     222行 - <img src="/upload/thumb_{$image.filename}">

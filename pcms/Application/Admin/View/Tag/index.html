@@ -21,7 +21,7 @@
 	<span class="custom_title_word">标签管理</span>
 </div>
 <div class="custom_body">
-<table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
+<table class="table" id="datatable3" cellspacing="0" width="100%">
     <thead>
         
 <tr>
@@ -30,7 +30,7 @@
 	<form id="inputForm" class="form-horizontal" action="{:U('admin/tag/add_group')}" method="post">
 		<div class="form-group">
 		
-		<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加组名:</label>	
+		<label class="control-label pull-left" style="padding-top:20px;padding-left:6px;width:80px">添加组名:</label>	
 		<div class="col-md-2 col-sm-2" style="padding-top:15px">
 			<input type="text" name="name" placeholder="标签组名称" class="form-control input-sm" />				
 		</div>
@@ -45,7 +45,7 @@
 	<form id="inputForm" class="form-horizontal" action="{:U('admin/tag/add_tag')}" method="post">
 		<div class="form-group">
 		
-		<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加标签:</label>
+		<label class="control-label pull-left" style="padding-top:20px;padding-left:6px;width:80px">添加标签:</label>
 	
 		<div class="col-md-2 col-sm-2  admin-form">
 			<label class="field select">
@@ -73,11 +73,10 @@
 	
 </tr> 
 
-            <tr>
-              
-                <th width="20%">标签组名</th>
-                <th width="70%">标签内容</th>
-                <th width="10%">管理操作</th>
+            <tr> 
+                <th width="10%"><label>标签组名</label></th>
+                <th width="80%"><label>标签内容</label></th>
+                <th width="10%" style="text-align:center"><label>删除本组</label></th>
             </tr>
             
         </thead>
@@ -89,13 +88,13 @@
 				<td>{$group.name}</td>
 				<td>
 				<volist name="group['tags']" id="tag">
-				<a href="{:U('admin/tag/lists',array('id'=>$tag[id]))}">{$tag.name}</a>&nbsp;&nbsp;
-				<a href="javascript:;" onclick="del('{:U('admin/tag/del',array('id'=>$tag[id]))}','{$tag.name}')"><span style="font-size:14px" class="glyphicons glyphicons-remove_2"></span></a>
+				<a href="{:U('admin/tag/lists',array('id'=>$tag[id]))}"><span class="label label-primary">{$tag.name}</span></a>&nbsp;&nbsp;
+				<a href="javascript:;" onclick="del('{:U('admin/tag/del',array('id'=>$tag[id]))}','{$tag.name}')"><span class="fa fa-remove text-danger-light"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				</volist>
 				</td>
-				<td>
-					<a href="javascript:;" onclick="del('{:U('admin/tag/del_group',array('id'=>$group[id]))}','{$group.name}')">删除本组</a>
+				<td align="center">
+					<a href="javascript:;" onclick="del('{:U('admin/tag/del_group',array('id'=>$group[id]))}','{$group.name}')"><span class="fa fa-remove text-danger-light fs20"></span></a>
 				</td>
 			</tr>
 		</volist>

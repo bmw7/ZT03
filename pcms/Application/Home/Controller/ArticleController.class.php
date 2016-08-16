@@ -63,6 +63,39 @@ class ArticleController extends Controller {
 	
 	
 	/**
+	 * 展示 多篇类 带图 文章
+	 * 前台访问网址为 pics/id.html 例如 pics/22.html
+	 * 使用了url默认路由设置，其真实对应的完整模块地址为 article/showPics/pics/id.html
+	 *  */
+	public function showPics(){
+		$id = I('get.pics'); // 这里用pics来指代id
+		$db = M('Article');
+		$arr = $db->where('id = '.$id)->select();
+		$article = $arr[0];
+	
+		// 点击次数+1 并更新数据库
+		$article['hits'] = $article['hits'] + 1;
+		$db->where('id = '.$id)->setField('hits',$article['hits']);
+	
+		// 未设置文章来源，则以“本站”代替
+		if ($article['source'] == ''){  $article['source'] = '本站';  }
+		// 未设置关键词，则以标题代替
+		if ($article['seo_keywords'] == ''){ $article['seo_keywords'] = $article['title']; }
+		// 未设置内容描述，则以正文内容截取前255字代替。msubstr为自定义函数
+		if ($article['seo_description'] == ''){ $article['seo_description'] = msubstr($article['content'],0,255,'utf-8',false); }
+	
+		
+		/** 获取文章对象所附属图像 */
+		$article_image = M('article_image');
+		$article_images = $article_image->where('article_id ='.$id)->order('orders asc')->getField('filename',true);
+
+		
+		$this->assign('article',$article);
+		$this->assign('article_images',$article_images);
+		$this->display();
+	}
+	
+	/**
 	 * 列表展示 多篇类 文章条目
 	 * 前台访问网址为 list/id.html 例如 docs/2.html
 	 * 使用了url默认路由设置，其真实对应的完整模块地址为 article/showList/list/id.html
@@ -82,9 +115,22 @@ class ArticleController extends Controller {
     	$show      = $Page->show();// 分页显示输出
     	$list      = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
     	
+    	
+    	/**
+    	 *【可选】- 应用于图片列表方式
+    	 * 
+    	 * 对$list中每个文章对象，附加上其第一幅图像
+    	 *【注意】 该代码片段非必须。但在图片排列时候，该代码必须附加。
+    	 * */
+    	$article_image = M('article_image');
+    	foreach ($list as $k => $v){
+    		// 添加新成员 image
+    		$list[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
+    	}
+    	
+    	
     	$this->assign('list',$list);// 赋值数据集
     	$this->assign('page',$show);// 赋值分页输出
-    	$this->assign('category_id',$category_id); // 文章列id
     	$this->display();
 	}
 	
