@@ -6,13 +6,184 @@
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script>
+    
+	// 删除确认框 
+	function del(url,name){
+		parent.bootConfirm(url,name);
+	}
+	
+	$(document).ready(function(){
+		
+		/*--------  上移     --------*/
+		
+		// 自定义递归函数 - 返回同级别的上一个tr元素
+		function findPrev($div,$prev){
+			
+			var originGrade = $div.attr("grade");
+			var prevGrade   = $prev.attr("grade");
+		
+			var $obj = $prev;
+		
+			// 到了本层级最顶层
+			if(originGrade > prevGrade || prevGrade == null){
+				return "top";
+			}
+			
+			if(originGrade != prevGrade){
+				return findPrev($div,$prev.prev());		
+			}else{
+				return $obj;
+			}
+		}
+		
+		// 找到$div下所属的最后一个子元素 
+		function findLast($div,$grade){
+			$next = $div.next();
+			if($next.attr('grade') > $grade){
+				return findLast($next,$grade);
+			}else{
+				return $div;
+			}
+		}
+		
+		/**
+		* 不断上移，直到指定的origin
+		* $origin 原本要移动的项目
+		* $baseItem 要移动到这个元素之上，即$moveItem移动到该元素之上
+		* $moveItem 要移动的元素
+		*/ 
+		function moveUp($origin,$baseItem,$moveItem){
+			var $reference = $baseItem;
+			if($moveItem.attr('id') != $origin.attr('id')){
+				$reference = $moveItem.prev();
+				$moveItem.insertBefore($baseItem);
+				moveUp($origin,$moveItem,$reference);
+			}else{
+				$origin.insertBefore($reference);
+			}
+		}
+	
+		// 上移项目
+		$(document).on('click','.moveUp',function(){
+			
+			var $this = $(this).closest('.moveTr');
+			var $prev = findPrev($this,$this.prev());
+			
+			var originId     = $this.attr("id");
+			var originOrders = $this.attr("orders");
+		
+			var changeId     = $prev.attr("id");
+			var changeOrders = $prev.attr("orders");
+
+			
+			if($prev == "top"){
+				parent.bootToast("已达到本级最顶层，不能再移动！");
+			}else{
+
+				// 后台数据库操作
+				$.ajax({
+					method : 'POST',
+					url : "{:U('admin/category/category_move')}",
+					data : {'originId':originId,
+						    'originOrders':originOrders,
+						    'changeId':changeId,
+						    'changeOrders':changeOrders},
+					success: function(data){}
+				});
+				
+				// 前台元素移动
+				moveUp($this,$prev,findLast($this,$this.attr('grade')));
+			}
+
+		});
+		
+
+		/*--------  下移     --------*/
+		
+		// 自定义递归函数 - 返回同级别的下一个tr元素
+		function findNext($div,$next){
+			
+			var originGrade = $div.attr("grade");
+			var nextGrade   = $next.attr("grade");
+
+			var $obj = $next;
+		
+			// 到了本层级最底层
+			if(originGrade > nextGrade || nextGrade == null){
+				return "bottom";
+			}
+			
+			if(originGrade != nextGrade){
+				return findNext($div,$next.next());		
+			}else{
+				return $obj;
+			}
+		}
+		
+		
+		/**
+		* 不断下移，直到指定的origin
+		* $origin 原本要移动的项目
+		* $baseItem 要移动到这个元素之上，即$moveItem移动到该元素之上
+		* $moveItem 要移动的元素
+		*/ 
+		function moveDown($this,$refence,$bottom){
+
+			if($this.next().attr('grade') != $bottom.attr('grade')){
+				$this.insertAfter($refence);
+				moveDown($this.next(),$this,$bottom);
+			}
+		}
+		
+		
+		// 下移项目
+		$(document).on('click','.moveDown',function(){ 
+			
+			
+			var $this = $(this).closest('.moveTr');
+			var $next = findNext($this,$this.next());
+			
+			var originId     = $this.attr("id");
+			var originOrders = $this.attr("orders");
+		
+			var changeId     = $next.attr("id");
+			var changeOrders = $next.attr("orders");
+			
+			if($next == "bottom"){
+				parent.bootToast("已达到本级最底层，不能再移动！");
+			}else{
+
+				/* 后台数据库操作
+				$.ajax({
+					method : 'POST',
+					url : "{:U('admin/category/category_move')}",
+					data : {'originId':originId,
+						    'originOrders':originOrders,
+						    'changeId':changeId,
+						    'changeOrders':changeOrders},
+					success: function(data){}
+				});*/
+				
+				// 前台元素移动
+				moveDown($this,$next,$next);
+			}		
+			
+		});
+		
+	
+	});
+	</script>
 </head>
 <body>
 
 <div class="custom_main">
 <div class="custom_title">
 	<span class="custom_title_word">文章管理</span>
-	<div class="widget-menu pull-right mr10"><a href="{:U('admin/category/add')}"><i class="fa fa-plus-square"></i> &nbsp;添加分类</a></div>	
+	<label class="pull-right">  
+    	<span class="fa fa-plus-square text-primary"></span>&nbsp;&nbsp;<a href="{:U('admin/category/add')}" class="custom_href">添加分类</a>
+    </label>
 </div>
 <div class="custom_body">
 
@@ -21,16 +192,16 @@
 	<thead>
 	    <tr>
 	        
-	        <th width="55%"><label>文章分类</label></th>	        
-	        <th width="15%" style="text-align:center"><label>管理文章</label></th>
-	        <th width="15%" style="text-align:center"><label>排序调整</label></th>
-	        <th width="15%" style="text-align:center"><label>管理分类</label></th>    
+	        <th width="60%"><label>文章分类</label></th>	        
+	        <th width="20%" style="text-align:center"><label>管理文章</label></th>
+	        <th width="10%" style="text-align:center"><label>排序调整</label></th>
+	        <th width="10%" style="text-align:center"><label>管理分类</label></th>    
 	    </tr>
 	</thead>
 	
 	<tbody>                      
 		<volist name="tree" id="category">
-		<tr>
+		<tr id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}" class="moveTr">
 		
 		<td><span style="margin-left: {$category[grade] * 20 - 20}px"><if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"></if>{$category.name}<if condition="$category[type] neq 0"></a></if></span></td>	
 		
@@ -39,7 +210,7 @@
 		</td>
 		
 		<td align="center">
-			<a href="#" class="moveup" id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}"><span class="glyphicons glyphicons-up_arrow text-success fs18"></span></a>&nbsp;&nbsp;&nbsp;<a href="#" class="movedown" id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}"><span class="glyphicons glyphicons-down_arrow text-warning fs18"></span></a>
+			<a href="javascript:;" class="moveUp"><span class="glyphicons glyphicons-up_arrow text-success fs18"></span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="moveDown"><span class="glyphicons glyphicons-down_arrow text-warning fs18"></span></a>
 		</td>
 		
 	

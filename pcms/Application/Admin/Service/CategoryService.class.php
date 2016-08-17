@@ -13,7 +13,7 @@ class CategoryService{
     public function getTree($table){
     	$tree = array();
         $instance = M($table);
-        $results = $instance->select();
+        $results = $instance->order('orders asc')->select();
         foreach ($results as $item){
             if ($item[grade] == 1){	
             	array_push($tree,$item);

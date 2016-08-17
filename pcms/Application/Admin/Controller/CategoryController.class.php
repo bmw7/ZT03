@@ -27,6 +27,11 @@ class CategoryController extends AuthController{
 		$category = M('category');
 		$category->create();
 		if ($category->add()){
+			
+			$id = $category->getLastInsID();
+			$category->orders = $id;
+			$category->where('id = '.$id)->save();
+			
 			$this->redirect('/admin/article/manage');
 		}else{
 			$this->error('操作失败！',U('admin/article/manage'));
@@ -45,16 +50,48 @@ class CategoryController extends AuthController{
 		$category = M('category');
 		$category->create();
 		if($category->save()){
-			$this->redirect('/admin/category');
+			$this->redirect('/admin/article/manage');
 		}else{
-			$this->error('操作失败！',U('/admin/category'));
+			$this->error('操作失败！',U('/admin/article/manage'));
 		}
 	}
 	
 	/** 删除  */
 	public function del(){
 		$category = M('category');
-		$category->delete(I('get.id'));
+		$id = I('get.id');
+		$att = $category->where('parent_id = '.$id)->select();
+		
+		// 判断有子项目则不能删除。否则删除
+		if (count($att) > 0){
+			$this->error('操作失败！该分类下尚有子分类！',U('/admin/article/manage'));
+		}else{
+			if($category->delete($id)){
+				$this->redirect('/admin/article/manage');
+			}else{
+				$this->error('操作失败！',U('/admin/article/manage'));
+			}
+		}
+
 	}
+	
+	
+	/** 分类移动  */
+	public function category_move(){
+		$category = M('category');
+		 
+		$originId = I('post.originId');
+		$originOrders = I('post.originOrders');
+	
+		$changeId = I('post.changeId');
+		$changeOrders = I('post.changeOrders');
+
+		$category->orders = $originOrders;
+		$category->where('id ='.$changeId)->save();
+		 
+		$category->orders = $changeOrders;
+		$category->where('id ='.$originId)->save();
+	}
+	
 	
 }

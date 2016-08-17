@@ -187,6 +187,36 @@ class ArticleController extends AuthController{
     	}
     }
     
+    
+    /** 文章批量删除  */
+    public function del_batch(){
+    	$ids = split("#", I('post.ids'));
+
+    	$Article = M('article');
+    	$Article_image = M('article_image');
+    
+    	for ($i = 0;$i < count($ids);$i++){
+    		
+    		if($Article->delete($ids[$i])){
+    			// 获取该文章所属的上传图片
+    			$images = $Article_image->where('article_id = '.$ids[$i])->select();
+    			// 若有上传图片，则删除
+    			if (count($images) > 0){
+    		
+    				for($t = 0;$t < count($images);$t++){
+    					if ($Article_image->delete($images[$t]['id'])){
+    						unlink("upload" . DIRECTORY_SEPARATOR . $images[$t]['filename']);
+    						unlink("upload" . DIRECTORY_SEPARATOR . 'thumb_' . $images[$t]['filename']);
+    					}
+    				}
+    		
+    			}
+    		
+    		}
+    	}
+
+    }
+    
     /** 文章更新  */
     public function update(){
     	$Article = M('article');
