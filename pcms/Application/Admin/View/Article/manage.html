@@ -73,15 +73,15 @@
 			
 			var originId     = $this.attr("id");
 			var originOrders = $this.attr("orders");
-		
-			var changeId     = $prev.attr("id");
-			var changeOrders = $prev.attr("orders");
-
+	
 			
 			if($prev == "top"){
 				parent.bootToast("已达到本级最顶层，不能再移动！");
 			}else{
 
+				var changeId     = $prev.attr("id");
+				var changeOrders = $prev.attr("orders");
+				
 				// 后台数据库操作
 				$.ajax({
 					method : 'POST',
@@ -129,33 +129,41 @@
 		* $baseItem 要移动到这个元素之上，即$moveItem移动到该元素之上
 		* $moveItem 要移动的元素
 		*/ 
-		function moveDown($this,$refence,$bottom){
-
-			if($this.next().attr('grade') != $bottom.attr('grade')){
-				$this.insertAfter($refence);
-				moveDown($this.next(),$this,$bottom);
+		function moveDown($next,$baseItem,$moveItem){
+			
+			if($moveItem.next().attr('grade') != $next.attr('grade')){
+				
+				var $nextBase = $moveItem;
+				var $nextMove = $moveItem.next();
+				
+				$moveItem.insertAfter($baseItem);
+				moveDown($next,$nextBase,$nextMove);
+				
+			}else{
+				
+				$moveItem.insertAfter($baseItem);
 			}
 		}
 		
 		
 		// 下移项目
 		$(document).on('click','.moveDown',function(){ 
-			
-			
+				
 			var $this = $(this).closest('.moveTr');
 			var $next = findNext($this,$this.next());
 			
 			var originId     = $this.attr("id");
 			var originOrders = $this.attr("orders");
-		
-			var changeId     = $next.attr("id");
-			var changeOrders = $next.attr("orders");
+
 			
 			if($next == "bottom"){
 				parent.bootToast("已达到本级最底层，不能再移动！");
 			}else{
-
-				/* 后台数据库操作
+				
+				var changeId     = $next.attr("id");
+				var changeOrders = $next.attr("orders");
+				
+				// 后台数据库操作
 				$.ajax({
 					method : 'POST',
 					url : "{:U('admin/category/category_move')}",
@@ -164,10 +172,10 @@
 						    'changeId':changeId,
 						    'changeOrders':changeOrders},
 					success: function(data){}
-				});*/
+				});
 				
 				// 前台元素移动
-				moveDown($this,$next,$next);
+				moveDown($next,findLast($next,$next.attr('grade')),$this);
 			}		
 			
 		});
@@ -203,23 +211,23 @@
 		<volist name="tree" id="category">
 		<tr id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}" class="moveTr">
 		
-		<td><span style="margin-left: {$category[grade] * 20 - 20}px"><if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"></if>{$category.name}<if condition="$category[type] neq 0"></a></if></span></td>	
+			<td>
+				<span style="margin-left: {$category[grade] * 20 - 20}px"><if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"></if>{$category.name}<if condition="$category[type] neq 0"></a></if></span>
+			</td>	
+			
+			<td align="center">
+				<if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"><span class="fa fa-edit text-primary fs18"></span></a></if>
+			</td>
+			
+			<td align="center">
+				<a href="javascript:;" class="moveUp"><span class="glyphicons glyphicons-up_arrow text-success fs18"></span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="moveDown"><span class="glyphicons glyphicons-down_arrow text-warning fs18"></span></a>
+			</td>
+			
 		
-		<td align="center">
-		<if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"><span class="fa fa-edit text-primary fs18"></span></a></if>
-		</td>
-		
-		<td align="center">
-			<a href="javascript:;" class="moveUp"><span class="glyphicons glyphicons-up_arrow text-success fs18"></span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="moveDown"><span class="glyphicons glyphicons-down_arrow text-warning fs18"></span></a>
-		</td>
-		
-	
- 		<td align="center">
-		<a href="{:U('admin/category/edit',array('id'=>$category[id]))}"><span class="fa fa-pencil text-muted fs18"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="javascript:;" onclick="del('{:U('/admin/category/del',array('id'=>$category[id]))}',this.name)" name="{$category.name}"><span class="fa fa-remove text-danger-light fs20"></span></a>						
-		</td>
-
-	  
+	 		<td align="center">
+				<a href="{:U('admin/category/edit',array('id'=>$category[id]))}"><span class="fa fa-pencil text-muted fs18"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="javascript:;" onclick="del('{:U('/admin/category/del',array('id'=>$category[id]))}',this.name)" name="{$category.name}"><span class="fa fa-remove text-danger-light fs20"></span></a>						
+			</td>
 
 		</tr>
 		</volist>

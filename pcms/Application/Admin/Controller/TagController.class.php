@@ -27,7 +27,7 @@ class TagController extends AuthController{
 		$db = M('tag_group');
 		$db->create();
 		if ($db->add()) {
-			$this->success("添加成功!",U('admin/tag/index'));
+			$this->redirect('/admin/tag');
 		}else {
 			$this->error("添加失败",U('admin/tag/index'));
 		}
@@ -38,7 +38,7 @@ class TagController extends AuthController{
 		$db = M('tag');
 		$db->create();
 		if ($db->add()) {
-			$this->success("添加成功!",U('admin/tag/index'));
+			$this->redirect('/admin/tag');
 		}else {
 			$this->error("添加失败",U('admin/tag/index'));
 		}
@@ -56,7 +56,7 @@ class TagController extends AuthController{
 		
 		$tag = M('tag');
 		if($tag->delete($id)){
-			$this->success("操作成功!",U('admin/tag/index'));
+			$this->redirect('/admin/tag');
 		}else{
 			$this->error("操作失败！",U('admin/tag/index'));
 		}
@@ -70,7 +70,7 @@ class TagController extends AuthController{
 		$group->delete($group_id);
 		$tag->where("group_id = ".$group_id)->delete();
 		
-		$this->success("操作成功!",U('admin/tag/index'));		
+		$this->redirect('/admin/tag');		
 	}
 	
 	/** 列表标签文章  */
@@ -96,11 +96,18 @@ class TagController extends AuthController{
 	
 	/** 文章标签对应组 删除 */
 	public function article_tag_del(){
+		$article_id = I('get.article_id');
+		$tag_id = I('get.tag_id');
+		
 		$article_tag = M('article_tag');
-		if ($article_tag->delete(I('get.id'))){
-			$this->success("操作成功!",U('admin/tag/index'));
-		}else{
-			
+		
+		$condition=array(
+			'article_id'=>$article_id,
+			'tag_id'=>$tag_id
+		);
+		
+		if ($article_tag->where($condition)->delete()){
+			$this->redirect('/admin/article/tag_articles/tag_id/'.$tag_id);
 		}
 	}
 	

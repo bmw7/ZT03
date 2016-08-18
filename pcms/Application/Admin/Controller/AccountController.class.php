@@ -25,7 +25,7 @@ class AccountController extends AuthController {
     	$Account->password = $CryptService->work(I('post.password')); // 前台传递密码加密
     	
     	if ($Account->add()){
-    		$this->success('添加成功',U('admin/account/index'));
+    		$this->redirect('/admin/account');
     	}else {
     		$this->error('添加失败',U('admin/account/index'));
     	}
@@ -43,7 +43,7 @@ class AccountController extends AuthController {
     public function del(){
     	$Account = M('Account');
         if ($Account->delete(I('get.id'))){
-    		$this->success('删除账号成功',U('admin/account/index'));
+    		$this->redirect('/admin/account');
     	}else {
     		$this->error('操作失败',U('admin/account/index'));
     	}

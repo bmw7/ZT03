@@ -9,11 +9,6 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
     <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script>
-     // 弹出框提示
- 	 if('${info}' != ""){
- 		//parent.bootAlert('${info}');
- 	 }
-
      // 删除确认框 
      function del(url,name){
         parent.bootConfirm(url,name);
@@ -32,91 +27,181 @@
 			$('#grade').val(optionName);
 		});
 		
-     	// 获取与点击<a>元素有相同grade的上一层的 <a>元素的父级<tr>元素   -- @param $self 为<a>元素; @param $prev为$self的父级<tr>元素的上级<tr>元素
-     	function samePrev($self,$prev){
-     	    // 若不是常规的列表中的tr,则跳出
-     		if($prev.find('.movedown').attr('grade') == null){ return null; }
-     		
-	        var selfGrade = $self.attr('grade');
-	    	var prevGrade = $prev.find('.moveup').attr('grade')
-	    	if(selfGrade == prevGrade){
-	    		return $prev;
-	    	}else{
-	    		var $pp = $prev.prev();
-	    		return samePrev($self,$pp);
-	    	}
-	    }
-	    
-	    
-	    // 获取与点击<a>元素有相同grade的下一层的 <a>元素的父级<tr>元素   -- @param $self 为<a>元素; @param $next为$self的父级<tr>元素的下级<tr>元素
-     	function sameNext($self,$next){
-     		// 若不是常规的列表中的tr,则跳出
-     		if($next.find('.movedown').attr('grade') == null){ return null; }
-     		
-	        var selfGrade = $self.attr('grade');
-	    	var nextGrade = $next.find('.movedown').attr('grade')
-	    	if(selfGrade == nextGrade){
-	    		return $next;
-	    	}else{
-	    		var $nn = $next.next();
-	    		return sameNext($self,$nn);
-	    	}
-	    }
-     	
-     	// 上移
-     	$('.moveup').click(function(){    	    
-     		var myGrade = $(this).attr('grade');
-     		var rpGrade = $(this).parent().parent().prev().find('.moveup').attr('grade');    // 第一个parent()到<td> 第二个parent()到 <tr> prev() 到上一个<tr>
-     		
-     		if(myGrade > rpGrade){ 
-     			parent.bootAlert('已经移动到本层级最顶端，无法再往上移动！'); 
-     		}else{
-     			var $self = $(this);
-     			var $prev = samePrev($self,$self.parent().parent().prev());
-     			
-     		    var myId = $self.attr('id');
-     	    	var rpId = $prev.find('.moveup').attr('id');
+		
+		
+		
+		/*--------  上移     --------*/
+		
+		// 自定义递归函数 - 返回同级别的上一个tr元素
+		function findPrev($div,$prev){
+			
+			var originGrade = $div.attr("grade");
+			var prevGrade   = $prev.attr("grade");
+		
+			var $obj = $prev;
+		
+			// 到了本层级最顶层
+			if(originGrade > prevGrade || prevGrade == null){
+				return "top";
+			}
+			
+			if(originGrade != prevGrade){
+				return findPrev($div,$prev.prev());		
+			}else{
+				return $obj;
+			}
+		}
+		
+		// 找到$div下所属的最后一个子元素 
+		function findLast($div,$grade){
+			$next = $div.next();
+			if($next.attr('grade') > $grade){
+				return findLast($next,$grade);
+			}else{
+				return $div;
+			}
+		}
+		
+		/**
+		* 不断上移，直到指定的origin
+		* $origin 原本要移动的项目
+		* $baseItem 要移动到这个元素之上，即$moveItem移动到该元素之上
+		* $moveItem 要移动的元素
+		*/ 
+		function moveUp($origin,$baseItem,$moveItem){
+			var $reference = $baseItem;
+			if($moveItem.attr('id') != $origin.attr('id')){
+				$reference = $moveItem.prev();
+				$moveItem.insertBefore($baseItem);
+				moveUp($origin,$moveItem,$reference);
+			}else{
+				$origin.insertBefore($reference);
+			}
+		}
 	
-     	    	var myOrders = $self.attr('orders');
-     	    	var rpOrders = $prev.find('.moveup').attr('orders');
-     	    	
-     	    	$.ajax({
-			    	type: 'POST',
-			    	url:  '/admin/setting/navigation/move' ,
-			    	data: {'myId':myId,'rpId':rpId,'myOrders':myOrders,'rpOrders':rpOrders},
-			    	success: function(data){ parent.bootAlert(data); }
-				});	
-     		}
-     	});  
-     	
-     	// 下移
-     	$('.movedown').click(function(){
-     		var myGrade = $(this).attr('grade');
-     		var rpGrade = $(this).parent().parent().next().find('.movedown').attr('grade');
-     		if(myGrade > rpGrade){ 
-     			parent.bootAlert('已经移动到本层级最末端，无法再往下移动！'); 
-     		}else{
-     		    var $self = $(this);
-     			var $next = sameNext($self,$self.parent().parent().next());
-     			
-     		    var myId = $self.attr('id');
-     	    	var rpId = $next.find('.movedown').attr('id');
-     	    	
-     	    	var myOrders = $self.attr('orders');
-     	    	var rpOrders = $next.find('.movedown').attr('orders');
-     	    	
-     	    	$.ajax({
-			    	type: 'POST',
-			    	url:  '/admin/setting/navigation/move' ,
-			    	data: {'myId':myId,'rpId':rpId,'myOrders':myOrders,'rpOrders':rpOrders},
-			    	success: function(data){ parent.bootAlert(data); }
-				});	
-     		}
-     	});
-	    
-	     
-	    
-	 });
+		// 上移项目
+		$(document).on('click','.moveUp',function(){
+			
+			var $this = $(this).closest('.moveTr');
+			var $prev = findPrev($this,$this.prev());
+			
+			var originId     = $this.attr("id");
+			var originOrders = $this.attr("orders");
+	
+			
+			if($prev == "top"){
+				parent.bootToast("已达到本级最顶层，不能再移动！");
+			}else{
+
+				var changeId     = $prev.attr("id");
+				var changeOrders = $prev.attr("orders");
+				
+				// 后台数据库操作
+				$.ajax({
+					method : 'POST',
+					url : "{:U('admin/navigation/category_move')}",
+					data : {'originId':originId,
+						    'originOrders':originOrders,
+						    'changeId':changeId,
+						    'changeOrders':changeOrders},
+					success: function(data){}
+				});
+				
+				// 前台元素移动
+				moveUp($this,$prev,findLast($this,$this.attr('grade')));
+			}
+
+		});
+		
+
+		/*--------  下移     --------*/
+		
+		// 自定义递归函数 - 返回同级别的下一个tr元素
+		function findNext($div,$next){
+			
+			var originGrade = $div.attr("grade");
+			var nextGrade   = $next.attr("grade");
+
+			var $obj = $next;
+		
+			// 到了本层级最底层
+			if(originGrade > nextGrade || nextGrade == null){
+				return "bottom";
+			}
+			
+			if(originGrade != nextGrade){
+				return findNext($div,$next.next());		
+			}else{
+				return $obj;
+			}
+		}
+		
+		
+		/**
+		* 不断下移，直到指定的origin
+		* $origin 原本要移动的项目
+		* $baseItem 要移动到这个元素之上，即$moveItem移动到该元素之上
+		* $moveItem 要移动的元素
+		*/ 
+		function moveDown($next,$baseItem,$moveItem){
+			
+			if($moveItem.next().attr('grade') != $next.attr('grade')){
+				
+				var $nextBase = $moveItem;
+				var $nextMove = $moveItem.next();
+				
+				$moveItem.insertAfter($baseItem);
+				moveDown($next,$nextBase,$nextMove);
+				
+			}else{
+				
+				$moveItem.insertAfter($baseItem);
+			}
+		}
+		
+		
+		// 下移项目
+		$(document).on('click','.moveDown',function(){ 
+				
+			var $this = $(this).closest('.moveTr');
+			var $next = findNext($this,$this.next());
+			
+			var originId     = $this.attr("id");
+			var originOrders = $this.attr("orders");
+
+			
+			if($next == "bottom"){
+				parent.bootToast("已达到本级最底层，不能再移动！");
+			}else{
+				
+				var changeId     = $next.attr("id");
+				var changeOrders = $next.attr("orders");
+				
+				// 后台数据库操作
+				$.ajax({
+					method : 'POST',
+					url : "{:U('admin/navigation/category_move')}",
+					data : {'originId':originId,
+						    'originOrders':originOrders,
+						    'changeId':changeId,
+						    'changeOrders':changeOrders},
+					success: function(data){}
+				});
+				
+				// 前台元素移动
+				moveDown($next,findLast($next,$next.attr('grade')),$this);
+			}		
+			
+		});
+		
+		
+		
+		
+		
+		
+	 });	
+		
+ 
      </script>
 </head>
 <body>
@@ -127,73 +212,76 @@
 <div class="custom_body">
 <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
     <thead>
-        
-<tr><!-- 添加栏目 -->
-	
-	<form id="inputForm" class="form-horizontal" action="{:U('admin/navigation/save')}" method="post">
-	<div class="form-group">
-	
-	<label class="control-label pull-left" style="padding-top:20px;padding-left:42px;width:130px">添加栏目:</label>
-
-	<div class="col-md-2 col-sm-2  admin-form">
-		<label class="field select">
-			<select name="parent_id" id="category" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
-				<option value="0">&nbsp;&nbsp;请选择上级分类</option>
-				<volist name="tree" id="category">
-					<option value="{$category.id}" id="option{$category.id}" name="{$category['grade']+1}">
-						<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>&nbsp;&nbsp;{$category.name}	
-					</option>
-				</volist>
-			</select>
-		    <!-- grade -->
-		    <input type="hidden" name="grade" id="grade" value="1" />
-	    </label>
-	</div>
-	
-	<div class="col-md-2 col-sm-2" style="padding-top:15px">
-		<input type="text" name="name" placeholder="栏目名称" class="form-control input-sm" />				
-	</div>
-	
-	<div class="col-md-4 col-sm-4" style="padding-top:15px">
-		<input type="text" name="url" placeholder="栏目网址" class="form-control input-sm" />				
-	</div>
-	<div class="admin-form">
-	<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
-	</div>
-	</div>
-	</form>
-	
-	
-</tr> 
+            
+            <!-- 添加栏目 -->
+			<tr height=18>
+				
+				<form id="inputForm" class="form-horizontal" action="{:U('admin/navigation/save')}" method="post">
+				<div class="form-group">
+				
+				<label class="control-label pull-left" style="padding-top:20px;padding-left:9px;width:80px">添加栏目:</label>
+			
+				<div class="col-md-3 col-sm-3  admin-form">
+					<label class="field select">
+						
+						<select name="parent_id" id="category" style="height:30px;padding:0px;font-size:12px;margin-top:15px">
+							<option value="0" id="option0" name="1">&nbsp;&nbsp;请选择上级分类</option>
+							<volist name="tree" id="category">
+								<option value="{$category.id}" id="option{$category.id}" name="{$category['grade']+1}">
+									<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>&nbsp;&nbsp;{$category.name}	
+								</option>
+							</volist>
+						</select>
+					    
+					    <!-- grade -->
+					    <input type="hidden" name="grade" id="grade" value="1" />
+				    </label>
+				</div>
+				
+				<div class="col-md-3 col-sm-3" style="padding-top:15px">
+					<input type="text" name="name" placeholder="栏目（菜单）名称" class="form-control input-sm" />				
+				</div>
+				
+				<div class="col-md-4 col-sm-4" style="padding-top:15px">
+					<input type="text" name="url" placeholder="栏目（菜单）网址" class="form-control input-sm" />				
+				</div>
+				<div class="admin-form">
+				<input type="submit" class="btn input-sm" style="padding-top:5px;margin-top:15px" value="添  加"/ ></tr>
+				</div>
+				</div>
+				</form>
+				
+				
+			</tr> 
          
          
             <tr>
-                <th><input type="checkbox" id="all"></th>
-                <th width="60%">导航栏目</th>
-                <th width="20%">排序调整</th>
-                <th width="20%">管理操作</th>
+                <th width="40%"><label>导航栏目（前台菜单）</label></th>
+                <th width="30%"><label>前台网址</label></th>
+                <th width="15%" style="text-align:center"><label>排序调整</label></th>
+                <th width="15%" style="text-align:center"><label>管理操作</label></th>
             </tr>
             
         </thead>
 
         <tbody>
                                                                                                                                
-   		<volist name="tree" id="navigation">
+   		<volist name="tree" id="category">
    		
-			<tr>
-			    <td><input type="checkbox" class="item" name="{$navigation.id}"></td>
+			<tr id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}" class="moveTr">
 				<td>
-					<span style="margin-left: {$navigation['grade'] * 20 - 20}px">
-						{$navigation.name}
-					</span>
+					<span style="margin-left: {$category['grade'] * 20 - 20}px">{$category.name}</span>
 				</td>
-
-				<td>
-					<a href="#" class="moveup" id="{$navigation.id}" orders="{$navigation.orders}" grade="{$navigation.grade}"><span class="glyphicons glyphicons-up_arrow"></span>上</a>&nbsp;&nbsp;<a href="#" class="movedown" id="{$navigation.id}" orders="{$navigation.orders}" grade="{$navigation.grade}"><span class="glyphicons glyphicons-down_arrow"></span>下</a>
+				
+				<td>{$category.url}</td>
+				
+				<td align="center">
+					<a href="javascript:;" class="moveUp"><span class="glyphicons glyphicons-up_arrow text-success fs18"></span></a>&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="moveDown"><span class="glyphicons glyphicons-down_arrow text-warning fs18"></span></a>
 				</td>
-				<td>
-					<a href="{:U('admin/navigation/edit',array('id'=>$navigation[id]))}">编辑</a>&nbsp;&nbsp;
-					<a href="#" onclick="del('{:U('/admin/navigation/del',array('id'=>$navigation[id]))}',this.name)" name="{$navigation.name}">删除</a>
+				
+				<td align="center">
+					<a href="{:U('admin/navigation/edit',array('id'=>$category[id]))}"><span class="fa fa-pencil text-muted fs18"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="javascript:;" onclick="del('{:U('/admin/navigation/del',array('id'=>$category[id]))}',this.name)" name="{$category.name}"><span class="fa fa-remove text-danger-light fs20"></span></a>						
 				</td>
 			</tr>
 		</volist>

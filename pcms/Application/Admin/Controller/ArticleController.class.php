@@ -112,8 +112,26 @@ class ArticleController extends AuthController{
     	$Page->setConfig('last','尾页');
     	$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
     	
-    	$show      = $Page->show();// 分页显示输出
-    	$list      = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+    	$show  = $Page->show();// 分页显示输出
+    	$list  = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+    	
+    	// 附加标签
+    	$tag         = M('tag');
+    	$article_tag = M('article_tag');
+    	
+    	foreach ($list as $k=>$v){
+    		$tag_ids = $article_tag->where('article_id = '.$v['id'])->getField('tag_id',true);
+    		$tags = array();
+    		if (count($tag_ids) > 0){
+    			for ($t = 0;$t < count($tag_ids);$t++){
+    				$tags[$t]['tag_id']   = $tag_ids[$t];
+    				$tags[$t]['tag_name'] = $tag->where('id = '.$tag_ids[$t])->getField('name');
+    			}
+    			$list[$k]['tags'] = $tags;
+    		}else{
+    			$list[$k]['tags'] = 'noTags';
+    		}
+    	}
     	
     	$this->assign('list',$list);               // 赋值数据集
     	$this->assign('page',$show);               // 赋值分页输出
@@ -121,6 +139,42 @@ class ArticleController extends AuthController{
     	$this->display();
     	
     }
+    
+    
+    /** 根据tag,获取文章列表  */
+    public function tag_articles(){
+    	$tag = M('tag');
+    	$article = M('article'); 
+    	$article_tag = M('article_tag');
+    	
+    	$tag_id = I('get.tag_id');
+    	$count = $article_tag->where('tag_id = '.$tag_id)->count();
+    	   
+    	$Page      = new \Think\Page($count,12);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$Page->setConfig('next','下一页');
+    	$Page->setConfig('prev','上一页');
+    	$Page->setConfig('first','首页');
+    	$Page->setConfig('last','尾页');
+    	$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
+    	 
+    	$show  = $Page->show();// 分页显示输出
+    	
+    	$article_ids = M('article_tag')->where('tag_id = '.$tag_id)->getField('article_id',true);
+    	
+    	if (count($article_ids) > 0){
+    		$list  = $article->where(array('id'=>array('IN',$article_ids)))->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+    	}else{
+    		$list = array();
+    	}
+    	 	 
+    	$this->assign('list',$list);               // 赋值数据集
+    	$this->assign('page',$show);               // 赋值分页输出
+    	$this->assign('tagId',$tag_id);
+    	$this->assign('tagName',$tag->where('id = '.$tag_id)->getField('name'));               
+    	$this->display();
+    	 
+    }
+    
     
     /** 文章编辑  */
     public function edit(){
@@ -165,6 +219,7 @@ class ArticleController extends AuthController{
     	$id = I('get.id'); 	
     	$Article = M('article');
     	$Article_image = M('article_image');
+    	$Article_tag = M('article_tag');
     		
     	if($Article->delete($id)){
     		// 获取该文章所属的上传图片
@@ -181,6 +236,9 @@ class ArticleController extends AuthController{
     			
     		}
     		
+    		// 删除该文章所有的标签
+    		$Article_tag->where('article_id = '.$id)->delete();
+    		
     		$this->redirect('admin/article/lists/id/'.I('get.category_id'));
     	}else{
     		$this->error('操作失败！',U('admin/article/lists/id/'.I('get.category_id')));
@@ -194,6 +252,7 @@ class ArticleController extends AuthController{
 
     	$Article = M('article');
     	$Article_image = M('article_image');
+    	$Article_tag = M('article_tag');
     
     	for ($i = 0;$i < count($ids);$i++){
     		
@@ -209,8 +268,10 @@ class ArticleController extends AuthController{
     						unlink("upload" . DIRECTORY_SEPARATOR . 'thumb_' . $images[$t]['filename']);
     					}
     				}
-    		
     			}
+    			
+    			// 删除该文章所有的标签
+    			$Article_tag->where('article_id = '.$ids[$i])->delete();
     		
     		}
     	}

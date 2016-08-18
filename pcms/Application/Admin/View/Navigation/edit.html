@@ -11,13 +11,20 @@
 <body>
 
 <div class="custom_main">
-	<div class="custom_title"><span class="custom_title_word">编辑栏目</span></div>
+
+	<div class="custom_title">
+		<span class="custom_title_word">编辑栏目</span>
+		<label class="pull-right">  
+	    	<span class="glyphicons glyphicons-chevron-left text-info"></span>&nbsp;&nbsp;<a href="javascript:;" class="custom_href" onclick="window.history.back()">返回上一步</a>
+	    </label>
+	</div>
+	
     <div class="custom_body">
         <form class="form-horizontal" action="{:U('admin/navigation/update')}" id="inputForm" method="post" role="form">
-            <input type="hidden" name="id" value="{$current.id}">           
+            <input type="hidden" name="id" value="{$current.id}">         
             <div class="form-group">
 
-                <label for="name" class="col-md-1 col-sm-1  control-label">分类名称</label>
+                <label for="name" class="col-md-1 col-sm-1  control-label left-title">分类名称</label>
                 <div class="col-md-5 col-sm-5">
                     <input type="text" name="name" id="name" class="form-control" value="{$current.name}">
                 </div>
@@ -26,16 +33,16 @@
             
             <div class="form-group">
 
-                <label for="seoTitle" class="col-md-1 col-sm-1  control-label">栏目网址</label>
+                <label for="seoTitle" class="col-md-1 col-sm-1  control-label left-title">栏目网址</label>
                 <div class="col-md-5 col-sm-5">
-                    <input type="text" name="url" id="url" class="form-control" value="{$current.url}">
+                    <input type="text" name="url" id="url" class="form-control" value="{$current.url}" placeholder="请于文章管理处复制网址（非本站网址需输入完整网址，以 http://开头）">
                 </div>
                  
             </div>
             
           
             <div class="form-group">
-                <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>
+                <label class="col-md-1 col-sm-1  control-label left-title" for="textArea2"></label>
                 <div class="admin-form col-md-5 col-sm-5">
                     <button type="submit" class="button btn-primary mr10">更   新</button>
                 </div>

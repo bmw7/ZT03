@@ -88,7 +88,7 @@
 				<td>{$group.name}</td>
 				<td>
 				<volist name="group['tags']" id="tag">
-				<a href="{:U('admin/tag/lists',array('id'=>$tag[id]))}"><span class="label label-primary">{$tag.name}</span></a>&nbsp;&nbsp;
+				<a href="{:U('admin/article/tag_articles',array('tag_id'=>$tag[id]))}"><span class="label label-primary">{$tag.name}</span></a>&nbsp;&nbsp;
 				<a href="javascript:;" onclick="del('{:U('admin/tag/del',array('id'=>$tag[id]))}','{$tag.name}')"><span class="fa fa-remove text-danger-light"></span></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				</volist>

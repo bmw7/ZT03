@@ -20,6 +20,11 @@ class NavigationController extends AuthController{
     	$Navigation = M('Navigation');
     	$Navigation->create();
     	if ($Navigation->add()){
+    		
+    		$id = $Navigation->getLastInsID();
+    		$Navigation->orders = $id;
+    		$Navigation->where('id = '.$id)->save();
+    		
     		$this->redirect('/admin/navigation');
     	}else{
     		$this->error('操作失败',U('/admin/navigation'));
@@ -48,13 +53,41 @@ class NavigationController extends AuthController{
     public function del(){
     	$Navigation = M('Navigation');
     	$id = I('get.id');
+    	$att = $Navigation->where('parent_id = '.$id)->select();
     	
-    	if ($Navigation->delete($id)){
-    		$this->redirect('/admin/navigation');
+    	
+    	// 判断有子项目则不能删除。否则删除
+    	if (count($att) > 0){
+    		$this->error('操作失败！该分类下尚有子分类！',U('/admin/article/manage'));
     	}else{
-    		$this->error('操作失败',U('/admin/navigation'));
+    		if($Navigation->delete($id)){
+    			$this->redirect('/admin/navigation');
+    		}else{
+    			$this->error('操作失败！',U('/admin/navigation'));
+    		}
     	}
+
     }
+    
+    
+    /** 分类移动  */
+    public function category_move(){
+    	$category = M('navigation');
+    		
+    	$originId = I('post.originId');
+    	$originOrders = I('post.originOrders');
+    
+    	$changeId = I('post.changeId');
+    	$changeOrders = I('post.changeOrders');
+    
+    	$category->orders = $originOrders;
+    	$category->where('id ='.$changeId)->save();
+    		
+    	$category->orders = $changeOrders;
+    	$category->where('id ='.$originId)->save();
+    }
+    
+    
     
 
 }

@@ -10,53 +10,54 @@
 </head>
 <body>
 
-	<div class="custom_main">
-	<div class="custom_title"><span class="custom_title_word">添加账号</span></div>
+<div class="custom_main">
+	<div class="custom_title">
+		<span class="custom_title_word">添加账号</span>
+		<label class="pull-right">  
+	    	<span class="glyphicons glyphicons-chevron-left text-info"></span>&nbsp;&nbsp;<a href="javascript:;" class="custom_href" onclick="window.history.back()">返回上一步</a>
+	    </label>
+	</div>
     <div class="custom_body">
-                                <form class="form-horizontal" action="{:U('admin/account/save')}" id="inputForm" method="post" role="form">
-                                    
-                                 
-                                    <div class="form-group">
-                                        <label for="username" class="col-md-1 col-sm-1  control-label">管理账号</label>
-                                        <div class="col-md-5 col-sm-5">
-                                              <input type="text" name="username" id="username" class="form-control" placeholder="只允许使用数字、字母或下划线">  
-                                        </div> 
-                                    </div>
-                                    
-                                    
-                                
-                                    <div class="form-group">
-                                        <label for="password" class="col-md-1 col-sm-1  control-label">设置密码</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            <input type="password" name="password" id="password" class="form-control">
-                                        </div>  
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="rePassword" class="col-md-1 col-sm-1  control-label">确认密码</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            <input type="password" name="rePassword" id="rePassword" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                    <div class="form-group">
-                                        <label for="email" class="col-md-1 col-sm-1  control-label">电子邮件</label>
-                                        <div class="col-md-5 col-sm-5">
-                                            <input type="text" name="email" id="email" class="form-control">
-                                        </div>
-                                    </div>
+        <form class="form-horizontal" action="{:U('admin/account/save')}" id="inputForm" method="post" role="form">
 
-                                    <div class="form-group">
-                                        <label class="col-md-1 col-sm-1  control-label" for="textArea2"></label>
-                                        <div class="admin-form col-md-5 col-sm-5">
-                                            <button type="submit" class="button btn-primary mr10">提   交</button>
-                                        </div>
-                                    </div>
-                                    
-                                </form>
-                            </div>
-                        </div>
+            <div class="form-group">
+                <label for="username" class="col-md-1 col-sm-1  control-label left-title">管理账号</label>
+                <div class="col-md-5 col-sm-5">
+                      <input type="text" name="username" id="username" class="form-control" placeholder="只允许使用数字、字母或下划线">  
+                </div> 
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="col-md-1 col-sm-1  control-label left-title">设置密码</label>
+                <div class="col-md-5 col-sm-5">
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>  
+            </div>
+            
+            <div class="form-group">
+                <label for="rePassword" class="col-md-1 col-sm-1  control-label left-title">确认密码</label>
+                <div class="col-md-5 col-sm-5">
+                    <input type="password" name="rePassword" id="rePassword" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="col-md-1 col-sm-1  control-label left-title">电子邮件</label>
+                <div class="col-md-5 col-sm-5">
+                    <input type="text" name="email" id="email" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 col-sm-1  control-label left-title" for="textArea2"></label>
+                <div class="admin-form col-md-5 col-sm-5">
+                    <button type="submit" class="button btn-primary mr10">提   交</button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
                         
                         
 <script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>

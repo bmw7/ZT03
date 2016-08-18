@@ -10,9 +10,12 @@
 .custom_main a{ color:#666666;}
 .custom_main a:hover{ color:#18b4ed;}
 .custom_main th{ font-weight:bold;}
+#tags a{ color:#fff; }
+
 
 /** 出现滚动条不至于影响页面宽度 */
 body{ overflow-x: hidden; } 
+
 
 
 /** 管理首页 */

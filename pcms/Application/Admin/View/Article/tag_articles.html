@@ -11,7 +11,7 @@
 
 	<div class="custom_main">
 	<div class="custom_title">
-		<span class="custom_title_word">文章管理</span>
+		<span class="custom_title_word">{$tagName}</span>
 		
 		<label class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp; 
 			<span class="fa fa-remove text-danger-light fs15"></span>&nbsp;&nbsp;<a href="#" id="batchDel">批量删除</a> 
@@ -29,9 +29,9 @@
 	                <th><input type="checkbox" id="all"></th>
 	                <th width="50%"><label>文章题目</label></th>
 	                <th width="10%" style="text-align:center"><label>发布时间</label></th>	          
-	                <th width="20%" style="text-align:center"><label>所属标签</label></th>
-	                <th width="5%" style="text-align:center"><label>网址</label></th>
-	                <th width="5%" style="text-align:center"><label>置顶</label></th>
+	                <th width="10%" style="text-align:center"><label>删除标签</label></th>
+	                <th width="10%" style="text-align:center"><label>网址</label></th>
+	                <th width="10%" style="text-align:center"><label>置顶</label></th>
 	                <th width="10%" style="text-align:center"><label>管理操作</label></th>    
 	            </tr>
 	        </thead>
@@ -48,13 +48,7 @@
 				<td align="center">{$article.create_date|time_top=###}</td>
 				
 				<td align="center">
-					<if condition="$article.tags neq 'noTags'">
-						<volist name="article.tags" id="tags">
-							<a href="{:U('admin/article/tag_articles',array('tag_id'=>$tags[tag_id]))}"><span class="label label-primary">{$tags.tag_name}</span></a>&nbsp;&nbsp;
-						</volist>
-					<else/>
-						<span class="fa fa-ban text-warning fs18"></span>
-					</if>
+					<a href="javascript:;" class="delete" onclick="del('{:U('admin/tag/article_tag_del',array('article_id'=>$article[id],'tag_id'=>$tagId))}','{$article.title} 的  {$tagName} 标签')"><span class="fa fa-times-circle text-danger-light fs18"></span></a>
 				</td>
 				
 				<td align="center" class="click_link" url="/docs/{$article.id}.html"><span class="fa fa-chain-broken text-success fs18" style="cursor:pointer"></span></td>
@@ -96,7 +90,7 @@ $(document).ready(function(){
 			    type: 'POST',
 			    url:  "{:U('admin/article/stick')}" ,
 			    data: {'id':id,'checked':'true'},
-			    success: function(data){ window.location.href="{:U('admin/article/lists',array('id'=>$category_id))}"; }
+			    success: function(data){ window.location.href="{:U('admin/article/tag_articles',array('tag_id'=>$tagId))}"; }
 			});
 		
 		}else{                       // 非选中
@@ -105,7 +99,7 @@ $(document).ready(function(){
 			    type: 'POST',
 			    url:  "{:U('admin/article/stick')}" ,
 			    data: {'id':id,'checked':'false'},
-			    success: function(data){ window.location.href="{:U('admin/article/lists',array('id'=>$category_id))}";  }
+			    success: function(data){ window.location.href="{:U('admin/article/tag_articles',array('tag_id'=>$tagId))}"; }
 			});
 		}
 	});
@@ -149,7 +143,7 @@ $(document).ready(function(){
 		    parent.bootToast("已复制该篇文章前台网址！"); 
 		 
 		}else{  
-			parent.bootToast("您的浏览器不支持自动复制功能。请手动复制该网址："+$(this).attr('url'));
+			 parent.bootToast("您的浏览器不支持自动复制功能。请手动复制该网址："+$(this).attr('url'));
 		 }  
 		
 	});

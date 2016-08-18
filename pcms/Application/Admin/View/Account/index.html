@@ -16,55 +16,50 @@
 </head>
 <body>
                   
-    <div class="custom_main">
-	<div class="custom_title"><span class="custom_title_word">管理账号</span>
-	<div class="widget-menu pull-right mr10">
-     	<a href="{:U('admin/account/add')}"><i class="fa fa-plus-square"></i> &nbsp;添加管理账号</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-    </div>
-	
+<div class="custom_main">
+
+	<div class="custom_title">
+		<span class="custom_title_word">管理账号</span>
+		<label class="pull-right">  
+	    	<span class="fa fa-plus-square text-primary"></span>&nbsp;&nbsp;<a href="{:U('admin/account/add')}" class="custom_href">添加管理账号</a>
+	    </label>
 	</div>
+	
     <div class="custom_body">                     
                            
-                                <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                    
-                                            <th width="10%">管理账号</th>
-                                            <th width="24%">电子邮件</th>
-                                            <th width="18%">创建时间</th>
-                                            <th width="18%">上次登陆时间</th>
-                                            <th width="10%">上次登陆地点</th>
-                                            <th width="10%">登陆次数</th>
-                                            <th width="10%">管理编辑</th>
-                                        </tr>
-                                    </thead>
-                        
-                                    <tbody>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-         <volist name="accounts" id="account">
-			<tr>
-			    
-				<td>{$account.username}</td>
-				<td>{$account.email}</td>
-				<td>{$account.create_date}</td>
-				<td>{$account.login_date}</td>
-				<td>{$account.login_address}</td>
-				<td>{$account.login_count}&nbsp;次</td>
-				<td>
-					<a href="{:U('admin/account/edit',array('id'=>$account[id]))}">{$account.id|account_edit=$sid,###}</a>&nbsp;&nbsp;
-					<a href="javascript:;" onclick="del('{:U('admin/account/del',array('id'=>$account[id]))}','{$account.username}')">{$account.id|account_del=$sid,###}</a>
-				</td>
-			</tr>
-		</volist>
+	    <table class="table table-hover" id="datatable3" cellspacing="0" width="100%">
+	        <thead>
+	            <tr>
+	                <th width="10%"><label>管理账号</label></th>
+	                <th width="24%"><label>电子邮件</label></th>
+	                <th width="18%"><label>创建时间</label></th>
+	                <th width="18%"><label>上次登陆时间</label></th>
+	                <th width="10%"><label>上次登陆地点</label></th>
+	                <th width="10%"><label>登陆次数</label></th>
+	                <th width="10%"><label>管理编辑</label></th>
+	            </tr>
+	        </thead>
+	
+	        <tbody>
+                             
+		         <volist name="accounts" id="account">
+					<tr>
+						<td>{$account.username}</td>
+						<td>{$account.email}</td>
+						<td>{$account.create_date}</td>
+						<td>{$account.login_date}</td>
+						<td>{$account.login_address}</td>
+						<td>{$account.login_count}&nbsp;次</td>
+						<td>
+							<a href="{:U('admin/account/edit',array('id'=>$account[id]))}">{$account.id|account_edit=$sid,###}</a>&nbsp;&nbsp;
+							<a href="javascript:;" onclick="del('{:U('admin/account/del',array('id'=>$account[id]))}','{$account.username}')">{$account.id|account_del=$sid,###}</a>
+						</td>
+					</tr>
+				 </volist>
                                                                           
-        </tbody>
-    </table>
-</div>
+        	</tbody>
+    	</table>
+	</div>
 </div>
 
 </body>

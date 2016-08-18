@@ -62,17 +62,17 @@ function time_checked($time){
 function account_edit($sid,$id){
 	if ($sid != $id){
 		if ($sid <= 2){
-			return "编辑";
+			return '<span class="fa fa-pencil text-muted fs18"></span>';
 		}
 	}else{
-		return "编辑";
+		return '<span class="fa fa-pencil text-muted fs18"></span>';
 	}
 }
 
 /** 账号删除 设置*/
 function account_del($sid,$id){
 	if ($sid <= 2 && $id != 2){
-		return "删除";
+		return '<span class="fa fa-remove text-danger-light fs20"></span>';
 	}
 }
 
