@@ -113,12 +113,28 @@
                         </a>
                     </li>
                     
+                    
                     <li>
-                        <a href="{:U('admin/tag/index')}" target="iframe">
-                            <span class="glyphicons glyphicons-tag"></span>
-                            <span class="sidebar-title">标签管理</span>
+                        <a class="accordion-toggle" href="#">
+                            <span class="glyphicons glyphicons-cogwheel"></span>
+                            <span class="sidebar-title">文章设置</span>
+                            <span class="caret"></span>
                         </a>
+                        <ul class="nav sub-nav">
+                            <li>
+                                <a href="{:U('admin/tag/index')}" target="iframe">
+                                    <span class="glyphicons glyphicons-tag"></span> 标签设置 </a>
+                            </li>
+                            <li>
+                                <a href="{:U('admin/category/type')}" target="iframe">
+                                    <span class="glyphicons glyphicons-sampler"></span> 类型设置 </a>
+                            </li>
+                        </ul>
                     </li>
+                    
+                    
+                    
+                    
                     
                     <li>
                         <a href="{:U('admin/guestbook/index')}" target="iframe">

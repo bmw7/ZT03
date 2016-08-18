@@ -51,9 +51,10 @@
             <div class="col-md-3 col-sm-3  admin-form"> 
 	            <label class="field select">
 				<select name="type" id="category">
-				    <option value="1">内容</option>
-					<option value="0">标题</option>	
-					</select></label>
+					<volist name="category_types" id="category_type">
+				    	<option value="{$category_type.id}">{$category_type.name}</option>
+					</volist>	
+				</select>
             </div>
 		</div>
  

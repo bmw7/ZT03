@@ -28,6 +28,9 @@
        
        图片管理管理区域，Application/Admin/View/article/edit.html 修改至如下   
     222行 - <img src="/upload/thumb_{$image.filename}">
+    
+3、 Ueditor 编辑框处理,修改 ueditor.config.js,放开此行注释并修改为true 避免浏览器自动长高问题
+   284行 - ,scaleEnabled:true
  
  
  
@@ -84,6 +87,18 @@ CREATE TABLE `tp_category` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+/* 栏目类型 表 */
+CREATE TABLE `tp_category_type` (
+  `id` int NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `url` varchar(255) default NULL,
+  `type` tinyint NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/* ​系统内置栏目类型*/
+insert into tp_category_type(name,url,type) values('标题类型','',0),('多篇内容','docs',1),('单篇内容','doc',2),('图文类型','pics',3),('保留类型','res',4);
 
 /** 栏目导航  -- 顶级栏目parent_id为0  */
 CREATE TABLE `tp_navigation` (

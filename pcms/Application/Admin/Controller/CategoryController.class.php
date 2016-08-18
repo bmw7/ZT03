@@ -19,6 +19,8 @@ class CategoryController extends AuthController{
 	public function add() {
 		$categoryService = A('Category','Service');
 		$this->assign("tree",$categoryService->getTree('Category'));
+		$category_type = M('category_type');
+		$this->assign("category_types",$category_type->select());
 		$this->display();
 	}
 	
@@ -91,6 +93,43 @@ class CategoryController extends AuthController{
 		 
 		$category->orders = $changeOrders;
 		$category->where('id ='.$originId)->save();
+	}
+	
+	
+	
+	
+	
+	/** 分类类型 设置*/
+	public function type(){
+		$category_type = M('category_type');
+		$this->assign('types',$category_type->select());
+		$this->display();
+	}
+	
+	/** 添加分类类型 */
+	public function type_add(){
+		$category_type = M('category_type');
+		$category_type->create();
+		if ($category_type->add()){
+			$this->redirect('/admin/category/type');
+		}
+	}
+	
+	/** 更新分类类型 */
+	public function type_update(){
+		$category_type = M('category_type');
+		$category_type->create();
+		if ($category_type->save()){
+			$this->redirect('/admin/category/type');
+		}
+	}
+	
+	/** 删除分类类型 */
+	public function type_del(){
+		$category_type = M('category_type');
+		if ($category_type->delete(I('get.id'))){
+			$this->redirect('/admin/category/type');
+		}
 	}
 	
 	

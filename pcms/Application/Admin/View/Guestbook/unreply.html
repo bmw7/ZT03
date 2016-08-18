@@ -11,8 +11,10 @@
 
 <div class="custom_main">
 <div class="custom_title">
-	<span class="custom_title_word">留言管理</span>
-	<a href="{:U('admin/guestbook/unreply')}" id="unreply" class="pull-right" style="margin-left:20px"><span class="glyphicons glyphicons-bin"></span>&nbsp;未回复留言</a> 
+	<span class="custom_title_word">未回复留言</span>
+	<label class="pull-right">  
+    	<span class="glyphicons glyphicons-chevron-left text-info"></span>&nbsp;&nbsp;<a href="javascript:;" class="custom_href" onclick="window.history.back()">返回上一步</a>
+    </label>
 </div>
 <div class="custom_body">
 
@@ -42,13 +44,13 @@
 		
 		<td align="center">
 			<if condition="$guestbook.reply_content neq ''">
-			<a href="javascript:;" id="{$guestbook.id}" class="item"><span style="font-size:16px" class="glyphicons glyphicons-ok_2"></span></a>
+			<a href="javascript:;" id="{$guestbook.id}" class="item"><span style="font-size:16px" class="glyphicons glyphicons-ok_2 text-success"></span></a>
 			<else/>
-			<a href="javascript:;" id="{$guestbook.id}" class="item">未回复</a>
+			<a href="javascript:;" id="{$guestbook.id}" class="item"><span class="fa fa-ban text-warning fs18"></span></a>
 			</if>
 		</td>
 		<td align="center">
-			<a href="javascript:;" onclick="del('{:U('admin/guestbook/del',array('id'=>$guestbook[id]))}','来源于{$guestbook.address}的留言')"><span style="font-size:16px" class="glyphicons glyphicons-remove_2"></span></a>
+			<a href="javascript:;" onclick="del('{:U('admin/guestbook/del',array('id'=>$guestbook[id]))}','来源于{$guestbook.address}的留言')"><span style="font-size:16px" class="glyphicons glyphicons-remove_2 text-danger-light"></span></a>
 		</td>
 		</tr>
 		

@@ -98,7 +98,7 @@
                                         <img src="{:U('admin/login/verify')}" height="69" id="verifyImage"/>
                                         
                                         <label for="verify" class="field prepend-icon" style="margin-top:22px">
-                                            <input type="text" name="verify" id="verify" class="gui-input" placeholder="请输入验证码">
+                                            <input type="text" name="verify" id="verify" class="gui-input" placeholder="验证码 （点上图可刷新）">
                                             <label for="verify" class="field-icon"><i class="fa fa-qrcode"></i>
                                             </label>
                                         </label>
@@ -248,8 +248,7 @@
                         						$.cookie('password',passwordInputValue, {expires:7,path:'/'});
                         					}
                         		    	}
-                        		    	
-                        				window.location.href = data;
+                        				window.location.href = "{:U('/admin/index')}";
                         			}			 
                         		}
                         	});	

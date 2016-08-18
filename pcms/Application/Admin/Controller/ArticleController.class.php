@@ -133,9 +133,17 @@ class ArticleController extends AuthController{
     		}
     	}
     	
+    	// 前台网址
+    	$category = M('category');
+    	$type = $category->where('id = '.$category_id)->getField('type'); 	
+    	$category_type = M('category_type');
+    	$category_url = $category_type->where('id = '.$type)->getField('url');
+    	
+    	
     	$this->assign('list',$list);               // 赋值数据集
     	$this->assign('page',$show);               // 赋值分页输出
     	$this->assign('category_id',$category_id); // 文章列id
+    	$this->assign('url',$category_url);
     	$this->display();
     	
     }
