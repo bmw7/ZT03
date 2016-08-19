@@ -212,11 +212,11 @@
 		<tr id="{$category.id}" orders="{$category.orders}" grade="{$category.grade}" class="moveTr">
 		
 			<td>
-				<span style="margin-left: {$category[grade] * 20 - 20}px"><if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"></if>{$category.name}<if condition="$category[type] neq 0"></a></if></span>
+				<span style="margin-left: {$category[grade] * 20 - 20}px"><if condition="$category[type_id] neq 1"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"></if>{$category.name}<if condition="$category[type] neq 0"></a></if></span>
 			</td>	
 			
 			<td align="center">
-				<if condition="$category[type] neq 0"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"><span class="fa fa-edit text-primary fs18"></span></a></if>
+				<if condition="$category[type_id] neq 1"><a href="{:U('admin/article/lists',array('id'=>$category[id]))}"><span class="fa fa-edit text-primary fs18"></span></a></if>
 			</td>
 			
 			<td align="center">

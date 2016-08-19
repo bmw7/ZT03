@@ -120,7 +120,9 @@ class CategoryController extends AuthController{
 		$category_type = M('category_type');
 		$category_type->create();
 		if ($category_type->save()){
-			$this->redirect('/admin/category/type');
+			$this->success('更新成功！',U('admin/category/type'));
+		}else{
+			$this->error('无更新',U('admin/category/type'));
 		}
 	}
 	

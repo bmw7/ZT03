@@ -67,10 +67,28 @@ class TagController extends AuthController{
 		$group_id = I('get.id');
 		$group = M('tag_group');
 		$tag = M('tag');
-		$group->delete($group_id);
-		$tag->where("group_id = ".$group_id)->delete();
 		
-		$this->redirect('/admin/tag');		
+		$tags = $tag->where("group_id = ".$group_id)->select();
+		
+		$article_tag = M('article_tag');
+		$k = 0;
+		
+		for ($i = 0;$i < count($tags);$i++){	
+			$att = $article_tag->where('tag_id = '.$tags[$i]['id'])->select();
+			if (count($att) > 0){
+				$k++;
+			}	
+		}
+		
+		if ($k > 0){
+			$this->error('该标签组内标签下尚有文章，不能删除！',U('/admin/tag'));
+		}else{
+			
+			$group->delete($group_id);
+			$tag->where("group_id = ".$group_id)->delete();
+			$this->redirect('/admin/tag');
+		}
+		
 	}
 	
 	/** 列表标签文章  */

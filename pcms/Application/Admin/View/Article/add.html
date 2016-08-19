@@ -53,7 +53,7 @@
             	<select name="category_id" id="choose-category" size="2">
 					<volist name="tree" id="category">
 				    
-				    	<if condition="$category.type eq 0">
+				    	<if condition="$category[type_id] eq 1">
 				    	 	<optgroup label="<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</for>{$category.name}"></optgroup>
 				    	<else />
 				    		<option value="{$category.id}"><for start="2" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;</for>{$category.name}</option>

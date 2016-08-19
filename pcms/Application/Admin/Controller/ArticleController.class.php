@@ -34,7 +34,14 @@ class ArticleController extends AuthController{
 		$Article->create();
 		$Article->content = $_POST['content']; //为了防止转义html字符
 		$Article->create_date = Date('Y-m-d H:i:s');
-		 
+		
+		// 获取该栏目对应基础网址
+		$category = M('category');
+		$category_type = M('category_type');
+		
+		$type_id = $category->where('id = '.I('post.category_id'))->getField('type_id');
+		$Article->category_url = $category_type->where('id = '.$type_id)->getField('url'); 
+		
 		/**
 		 * 选中置顶，当前年份加1000年
 		 * 故前台判断顶置的条件是数据表中时间 >3000年
@@ -133,17 +140,19 @@ class ArticleController extends AuthController{
     		}
     	}
     	
-    	// 前台网址
+    	// 前台网址,类别名称
     	$category = M('category');
-    	$type = $category->where('id = '.$category_id)->getField('type'); 	
+    	$type_id = $category->where('id = '.$category_id)->getField('type_id'); 	
     	$category_type = M('category_type');
-    	$category_url = $category_type->where('id = '.$type)->getField('url');
-    	
+    	$category_url = $category_type->where('id = '.$type_id)->getField('url');
+    	$category_type_name = $category_type->where('id = '.$type_id)->getField('name');;
     	
     	$this->assign('list',$list);               // 赋值数据集
     	$this->assign('page',$show);               // 赋值分页输出
     	$this->assign('category_id',$category_id); // 文章列id
+    	$this->assign('category_name',$category->where('id = '.$category_id)->getField('name')); // 文章列名
     	$this->assign('url',$category_url);
+    	$this->assign('type_name',$category_type_name);
     	$this->display();
     	
     }

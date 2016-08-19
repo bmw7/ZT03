@@ -44,7 +44,7 @@ class LoginController extends Controller{
     			$user[0]['login_date'] = date('Y-m-d H:i:s');
     			  			
     			$Account->save($user[0]);
-    			$this->ajaxReturn("");
+    			$this->ajaxReturn("index");
     		}
     	}
 

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/skin/default_skin/css/theme_inner.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/assets/admin-tools/admin-forms/css/admin-forms.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/custom.css">
+</head>
+<body>
+<div class="custom_main">
+	<div class="custom_title">
+		<span class="custom_title_word">类型设置</span> 
+		<span class="custom_title_info"><label class="label label-danger">本栏目仅供开发人员操作</label></span>
+	</div>
+    <div class="custom_body">
+
+ 		<!-- 添加类型 -->
+	    <form action="{:U('admin/category/type_add')}" method='post' enctype='multipart/form-data' class='add_form'>
+		<div class="row" style="margin-top:15px">
+		
+			<div class="col-md-2 col-sm-2">
+				<input type="text" name="name" placeholder="请输入类型名称" class="form-control input-sm" />				
+			</div>
+			
+			<div class="col-md-2 col-sm-2">
+				<input type="text" name="url" placeholder="请输入类型基础网址" class="form-control input-sm" />				
+			</div>
+			
+		<div class="col-md-1 col-sm-1">
+					<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="添  加" style="height:36px;font-size:14px"/></div>			
+			</div>
+		</div>
+		</form>
+
+
+	<div class="custom_title" style="margin-top:-32px"></div><br>
+
+		<!-- 遍历分组 -->
+		
+		<volist name="types" id="type">
+        	
+	 		<div class="row" style="margin-bottom:5px">	
+			
+			    <form action="{:U('admin/category/type_update')}" method="post" enctype="multipart/form-data">
+				
+				<input type="hidden" name="id" value="{$type.id}">
+				<input type="hidden" name="url" value="{$type.url}">
+				
+				<div class="col-md-2 col-sm-2">
+					<input type="text" class="link_item" value="{$type.name}" name="name">
+				</div>
+				
+				<div class="col-md-2 col-sm-2" style="line-height:30px">
+					<b>对应基础网址：</b>{$type.url}
+				</div>
+				
+				<div class="col-md-1 col-sm-1">
+					<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="更  新" style="height:36px;font-size:14px"/></div>			
+				</div>
+				
+				<if condition="$type.id gt 5">
+					<div class="col-md-1 col-sm-1" style="margin-top:8px">
+						<a href="javascript:;" onclick="del('{:U('admin/category/type_del',array('id'=>$type[id]))}','{$type.name}')"><span style="font-size:16px" class="glyphicons glyphicons-remove_2 text-danger"></span></a>			
+					</div>
+				</if>
+									   		
+		   		</form>	
+		   	   		
+			</div>
+		</volist>			                    
+
+   		<p>&nbsp;</p>        
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+// 删除确认
+function del(url,name){
+	parent.bootConfirm(url,name);
+}
+</script>
+</body>
+</html>
