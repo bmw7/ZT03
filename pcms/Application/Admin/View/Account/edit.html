@@ -95,7 +95,9 @@ $(document).ready(function() {
 		},
 		messages: {
 			password: {
-				pattern: "${message("admin.validate.illegal")}"
+				pattern: "两次密码输入不一致",
+				minlength:"密码最少为4位数",
+				maxlength:"密码不能超过20位数"
 			}
 		}
 	});

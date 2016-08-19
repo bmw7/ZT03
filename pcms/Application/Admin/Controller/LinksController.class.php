@@ -22,6 +22,11 @@ class LinksController extends AuthController {
 	
 	/** 添加分组  */
 	public function group_add(){
+	if (trim(I('post.name')) == ''){
+		$this->error('表单填写不完整，请重新填写！',U('admin/links'));
+	}else{
+		
+		
 		$group = M('Links_group');
 		$group->create();
 		if ($group->add()){
@@ -32,6 +37,8 @@ class LinksController extends AuthController {
 		}else{
 			$this->error('添加分组失败！',U('/admin/links'));
 		}
+		
+	}
 	}
 	
 	/** 更新分组  */

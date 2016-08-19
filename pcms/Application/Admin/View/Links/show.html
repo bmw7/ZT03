@@ -19,7 +19,7 @@
 		<div class="row" style="margin-top:15px">
             <div class="admin-form col-md-2">		            	
                 <label class="field select">        
-                <select name="group_id" style="height:30px;padding:0px;font-size:12px">
+                <select name="group_id" style="height:30px;padding:0px;font-size:12px" required>
                     <option value="0">&nbsp;&nbsp;选择分组</option>
                     <volist name="groups" id="group">
                     <option value="{$group.id}">&nbsp;&nbsp;{$group.name}</option>
@@ -29,7 +29,7 @@
             </div>
 			
 			<div class="col-md-3 col-sm-3">
-				<input type="text" name="name" placeholder="标题" class="form-control input-sm" />				
+				<input type="text" name="name" placeholder="标题" class="form-control input-sm" required/>				
 			</div>
 			
 			<div class="col-md-3 col-sm-3">

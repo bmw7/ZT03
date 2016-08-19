@@ -24,17 +24,33 @@ class TagController extends AuthController{
 	
 	/** 添加标签组  */
 	public function add_group(){
+	
+	if (trim(I('post.name')) == ''){
+		$this->error('表单填写不完整，请重新填写！',U('tag/index'));
+	}else{
+			
+	
 		$db = M('tag_group');
 		$db->create();
+		
 		if ($db->add()) {
 			$this->redirect('/admin/tag');
 		}else {
 			$this->error("添加失败",U('admin/tag/index'));
 		}
+		
+	}
 	}
 	
 	/** 添加标签  */
 	public function add_tag(){
+		
+	if (trim(I('post.name')) == ''){
+		$this->error('表单填写不完整，请重新填写！',U('admin/tag'));
+	}else{
+		
+		
+		
 		$db = M('tag');
 		$db->create();
 		if ($db->add()) {
@@ -42,6 +58,9 @@ class TagController extends AuthController{
 		}else {
 			$this->error("添加失败",U('admin/tag/index'));
 		}
+		
+		
+	}
 	}
 	
 	/** 删除标签  */

@@ -58,16 +58,16 @@
 	
 	        <label for="inputStandard" class="col-md-1 col-sm-1  control-label left-title">文章标题</label>
 	        <div class="col-md-5 col-sm-5" id="cal_title">
-	            <input type="text" name="title" id="inputStandard" class="form-control" value="{$article.title}">
+	            <input type="text" name="title" id="inputStandard" class="form-control" value="{$article.title}" required>
 	        </div>
 	           
 	        <!-- 选择分类 -->
             <div class="col-md-2 col-sm-2" id="cal_category">
             	
-            	<select name="category_id" id="choose-category" size="2">
+            	<select name="category_id" id="choose-category" size="2" required>
 					<volist name="tree" id="category">
 				    
-				    	<if condition="$category.type eq 0">
+				    	<if condition="$category[type_id] eq 1">
 				    	 	<optgroup label="<for start="1" end="$category.grade">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</for>{$category.name}"></optgroup>
 				    	<else />
 				    		<option value="{$category.id}" <if condition="$category[id] eq $article[category_id]">selected="selected"</if> >
@@ -264,14 +264,6 @@ $(document).ready(function() {
 	// 根据网页可视区域高度调整编辑器高度
 	var editorHeight = parseInt(parent.clientHeight() - 420);
 	$('#editor').css('height',editorHeight);
-	
-	// 表单验证
-	$inputForm.validate({
-		rules: {
-			title: "required",
-			articleCategoryId: "required"
-		}
-	});
 	
 	// 更多操作 显示/隐藏
 	$('#more').click(function(){

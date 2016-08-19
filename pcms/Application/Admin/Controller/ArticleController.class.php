@@ -30,6 +30,13 @@ class ArticleController extends AuthController{
     
     /** 添加-保存  */
     public function save(){
+    	
+    if (trim(I('post.title')) == '' || trim(I('post.category_id')) == ''){
+    	$this->error('表单填写不完整，请重新填写！',U('admin/article/add'));	
+    }else{
+    	
+    	
+    	
         $Article = M('article');
 		$Article->create();
 		$Article->content = $_POST['content']; //为了防止转义html字符
@@ -95,6 +102,10 @@ class ArticleController extends AuthController{
         }else{
         	$this->success('操作失败！',U('admin/article/add'));
         }
+        
+             
+        
+    }
         
     }
     
@@ -297,6 +308,13 @@ class ArticleController extends AuthController{
     
     /** 文章更新  */
     public function update(){
+    
+    if (trim(I('post.title')) == '' || trim(I('post.category_id')) == ''){
+    	$this->error('表单填写不完整，无法更新！',U('admin/article/edit',array('id'=>I('post.id'))));
+    }else{	
+    	
+    	
+    	
     	$Article = M('article');
     	$Article->create();
     	$Article->content = $_POST['content'];
@@ -354,6 +372,10 @@ class ArticleController extends AuthController{
     	}
     			
     	$this->success('更新成功！',U('admin/article/add'));
+    
+    
+    
+    }
     	
     }
     
