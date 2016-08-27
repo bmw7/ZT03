@@ -43,7 +43,9 @@ class CategoryController extends AuthController{
 	/** 编辑  */
 	public function edit() {
 		$category = M('category');
+		$category_type = M('category_type');
 		$this->assign("current",$category->find(I('get.id')));
+		$this->assign("category_types",$category_type->select());
 		$this->display();
 	}
 	

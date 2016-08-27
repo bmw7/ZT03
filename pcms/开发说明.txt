@@ -17,7 +17,7 @@
   
 2、  发布项目前，关于上传图片的修改如下
         
-        请修改图片上传设置 Public/js/article.app.js 修改至相对于域名访问的相对地址
+        请修改图片上传设置 Public/admin/js/article.app.js 修改至相对于域名访问的相对地址
 	02行 - baseUrl: '/Public/plugin/webuploader/dist',
 	04行 - jquery: '/Public/plugin/webuploader/image-upload/jquery'
 	72行 - swf: '/Public/plugin/webuploader/dist/Uploader.swf',

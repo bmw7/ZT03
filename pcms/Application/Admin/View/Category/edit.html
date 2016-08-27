@@ -30,10 +30,15 @@
 			<label for="author" class="col-md-1 col-sm-1 control-label left-title">分类类型</label>
 	        <div class="col-md-3 col-sm-3  admin-form">
 	        	<label class="field select">
-	            <select name="type" id="category">
-				<option value="0" <if condition="$current.type == 0"> selected="selected" </if> >标题</option>	
-				<option value="1" <if condition="$current.type == 1"> selected="selected" </if> >内容</option>
+	        	
+	        					
+				<select name="type_id" id="category">
+					<volist name="category_types" id="category_type">
+				    	<option value="{$category_type.id}" <if condition="$current.type_id eq $category_type.id"> selected="selected" </if> >{$category_type.name}</option>
+					</volist>	
 				</select>
+				
+				
 				</label>
 	        </div>
 		</div>
