@@ -31,6 +31,8 @@
     
 3、 Ueditor 编辑框处理,修改 ueditor.config.js,放开此行注释并修改为true 避免浏览器自动长高问题
    284行 - ,scaleEnabled:true
+   
+4、 初始登陆账号和密码为admin
  
  
  
