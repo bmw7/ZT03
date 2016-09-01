@@ -4,6 +4,7 @@ use Admin\Common\AuthController;
 
 // +--------------------------------------------
 // | Controller - 文章发布/文章管理
+// | @author 沧海软件（北京）有限公司
 // +--------------------------------------------
 
 class ArticleController extends AuthController{

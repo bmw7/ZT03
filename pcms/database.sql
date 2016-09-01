@@ -1,3 +1,5 @@
+THIS IS BEGINING ----------;
+
 ﻿CREATE TABLE `tp_account` (
   `id` int NOT NULL auto_increment,
   `username` varchar(100) NOT NULL,
@@ -113,5 +115,5 @@ CREATE TABLE `tp_links_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into tp_account(username,password,login_count) values('root','75fbfbda68d64a6a697b0014dd5fbe9b','0');
-insert into tp_account(username,password,login_count) values('admin','2d903119161181303e938b2d335985c3','0');
+insert into tp_account(username,password,login_count) values('admin','5f62ce26f075c046ea9423222935ac7b','0');
 insert into tp_category_type(name,url) values('标题类型','title'),('多篇内容','docs'),('单篇内容','doc'),('图文类型','pics'),('保留类型','res');
