@@ -6,7 +6,7 @@ class IndexController extends Controller {
     	$this->display();
     }
     
-    public function show(){
+    public function index_show(){
     	$this->display();
     }
     
