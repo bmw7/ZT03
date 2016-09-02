@@ -1,0 +1,14 @@
+@charset "utf-8";
+body{ padding: 0px; margin: 0px; }
+.container{ width:1152px;}
+
+/* 左侧侧边栏 */
+#left-side{ padding:0px; width:294px;}
+#left-top{ position:fixed; top:0px;  height:auto;  }
+
+/* 右侧顶部边栏 */
+#right-side{ padding:0px; width:858px;}
+#right-top{ position:fixed; top:0px; width:858px; height:86px;}
+
+/* 右侧ajax动态加载内容显示区域 */
+#ajax-show{ margin-top:136px;width:858px;}
