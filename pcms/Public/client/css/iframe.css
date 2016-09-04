@@ -12,7 +12,7 @@ body a:focus{outline:none;}
 
 /* 右侧顶部边栏 */
 #right-side{ padding:0px; width:858px;}
-#right-top{ position:fixed; top:0px; width:858px; height:86px;}
+#right-top{ position:fixed; top:0px; width:858px; height:86px; background-color: #000000; }
 
 /* 右侧ajax动态加载内容显示区域 */
 #ajax-show{ margin-top:136px;width:858px;}

@@ -9,8 +9,8 @@
     
     <title>{$article.title}</title>
     <style>
-        #inner_content{}
-        #sub_title{ margin-top: 10px; margin-bottom: 10px; text-align: center; }
+        #inner_content{ font-size:16px; line-height: 30px;}
+        #sub_title{ margin-top: 10px; margin-bottom: 20px; text-align: center; }
     </style>
 	
 </head>
@@ -21,11 +21,11 @@
 <div id="inner_content">
 
 		
-	<h2>{$article.title}</h2>>
+	<h2>{$article.title}</h2>
 
     <div id="sub_title">发布时间：{$article.create_date|time_top=###}&nbsp;&nbsp;&nbsp;&nbsp;点击次数：{$article.hits}&nbsp;&nbsp;&nbsp;&nbsp;文章来源：{$article.source} </div>
 
-    <p>{$article.content}</p>>
+    <p>{$article.content}</p>
                 
 </div>
 

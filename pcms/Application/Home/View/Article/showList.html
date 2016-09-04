@@ -6,40 +6,23 @@
     
     <title>文章列表 - 标准页面</title>
     
-    <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
-    
-	<!--[if lt IE 9]>
-	<script src="__PUBLIC__/lib/js/html5shiv.min.js"></script>
-	<script src="__PUBLIC__/lib/js/respond.min.js"></script>
-	<![endif]-->
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/lib/css/bootstrap.min.css">
+
 	
 </head>
 <body>
 
 
-
-<div class="container">
-
-
-	<div class="row">
-	
-		<h2>展示方式一 ：普通标题列表</h2>	
-
+	<div id="inner_content">
 
 		<table class="table-hover table-striped" cellspacing="0" width="100%">                                
 	 		<volist name="list" id="article">
-				<tr style="height:40px">
-				
-				<td>图标</td>
-				
-				<!-- 标题 -->
+				<tr class="title_item">
+
 				<td>
-					{$article.create_date|time_icon=###}<a href="{:U('././',array($article[category_url]=>$article[id]))}">{$article.title}</a>
+					<span>{$article.create_date|time_icon=###}<a href="{:U('././',array($article[category_url]=>$article[id]))}">{$article.title}</a></span><span class="pull-right">{$article.create_date|time_top=###}</span>
 				</td>
-				
-				<!-- 时间 -->
-				<td>{$article.create_date|time_top=###}</td>	
-				
+
 		   		</tr>
 			</volist>
         </table>
@@ -48,12 +31,5 @@
 	        
 	</div>
 
-
-</div>
-
-
-
-<script type="text/javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
 </body>
 </html>
