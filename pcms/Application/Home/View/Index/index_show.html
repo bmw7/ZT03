@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/client/css/swiper-3.2.7.min.css" >
 </head>
 <body>
-<h1>this is index - show</h1>
+<div class="swiper-container">
+    <!-- 滑动区 -->
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="__PUBLIC__/client/img/4.png"></div>
+        <div class="swiper-slide"><img src="__PUBLIC__/client/img/1.jpg"></div>
+        <div class="swiper-slide"><img src="__PUBLIC__/client/img/2.jpg"></div>
+        <div class="swiper-slide"><img src="__PUBLIC__/client/img/3.jpg"></div>
+    </div>
+    <!-- 分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 左右键 -->
+    <div class="swiper-button-prev swiper-button-white"></div>
+    <div class="swiper-button-next swiper-button-white"></div>
+
+    <script type="text/javascript" src="__PUBLIC__/client/js/swiper-3.2.7.jquery.min.js"></script>
+    <script type="text/javascript">
+        var mySwiper = new Swiper ('.swiper-container', {
+            loop: true,
+            paginationClickable :true,
+            effect : 'fade',
+            fade: {
+                crossFade: false,
+            },
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+
+            // 如果需要前进后退按钮
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            centeredSlides: true,
+            autoplay: 2000,
+            speed:1000,
+            autoplayDisableOnInteraction: false
+        });
+
+        $(document).ready(function(){
+            $(document).on("click",".sub_item",function(){
+                var href = $(this).find("a").prop("href");
+                $.cookie("href",href);
+            });
+        });
+
+    </script>
+</div>
 </body>
 </html>

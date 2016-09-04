@@ -29,8 +29,28 @@
         <div class="col-md-2" id="left-side">
             <!-- 左侧边栏漂浮导航 -->
             <div id="left-top">
+                <!-- logo -->
                 <div id="logo"><a href="index/index_show.html" class="outer-link"><img src="__PUBLIC__/client/img/logo.png" border="0"></a></div>
+                <!-- 导航菜单 -->
+                <div id="menu_left">
 
+                    <volist name="menu" id="item">
+
+                        <div class="menu_left_item">
+                            <a href="<empty name='item.url'>javascript:;<else />{$item.url}</empty>"  <notempty name="item.url">class="outer-link"</notempty> >{$item.name}</a>
+                        </div>
+
+                        <present name="item['subs']">
+                            <div class="menu_left_item_sub">
+                            <volist name="item['subs']" id="sub">
+                                <div class="sub_item"><a href="{$sub.url}" class="outer-link">{$sub.name}</a></div>
+                            </volist>
+                            </div>
+                        </present>
+
+                    </volist>
+
+                </div>
             </div>
 
         </div>
@@ -59,6 +79,6 @@
 <script type="text/javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="__PUBLIC__/client/js/iframe.js"></script>
-
+<script type="text/javascript" src="__PUBLIC__/client/js/left_menu.js"></script>
 </body>
 </html>

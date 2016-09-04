@@ -2,7 +2,19 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-    public function index(){     
+    public function index(){
+    	// 获取一级二级导航菜单
+    	$Navigation = M('Navigation');
+    	$menu = $Navigation->where('grade = 1')->order('orders asc')->select();
+    	foreach ($menu as $k => $v){
+    		// 添加subs二级导航菜单变量
+    		$subs = $Navigation->where('parent_id = '.$menu[$k]['id'])->order('orders asc')->select();
+    		if (count($subs) > 0){
+    			$menu[$k]['subs'] = $subs;
+    		}	
+    	}
+    	
+    	$this->assign('menu',$menu);
     	$this->display();
     }
     
