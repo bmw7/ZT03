@@ -20,7 +20,7 @@
 <div class="custom_title"><span class="custom_title_word">系统设置</span></div>
 <div class="custom_body">
                         
-	<form class="form-horizontal" action="${base}/admin/setting/update" id="inputForm" method="post" role="form">
+	<form class="form" action="admin/setting/update" id="inputForm" method="post" role="form">
 	    
 	    <ul class="nav nav-pills mb20">
 	        <li class="active"><a href="#tab18_1" data-toggle="tab">页面设置</a></li>
@@ -34,117 +34,90 @@
 	    <div class="tab-content br-n pn">
 	        <div id="tab18_1" class="tab-pane active">
 	            <div class="row">
-	               
-	             <div class="col-md-12">                     
-			            
-                                          
-                </div>
-                
-            </div>
-        </div>
+
+
+					<form action="{:U('admin/setting/index_update',array('word'=>'title'))}" method='post' enctype='multipart/form-data'>
+						<div class="row">
+							<div class="col-md-2 col-sm-2 left-title" style="margin-left:15px;line-height: 30px">
+								首页标题
+							</div>
+							<div class="col-md-9 col-sm-9">
+								<input type="text" name="title" class="link_item" value="" placeholder="请输入网站首页的页面标题">
+							</div>
+							<div class="col-md-1 col-sm-1">
+								<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="更  新" style="height:36px;font-size:14px"/></div>
+							</div>
+						</div>
+					</form>
+
+<br>
+
+					<form action="{:U('admin/links/group_update',array('word'=>'keywords'))}" method='post' enctype='multipart/form-data'>
+						<div class="row">
+							<div class="col-md-2 col-sm-2 left-title" style="margin-left:15px;line-height: 30px">
+								关键词语
+							</div>
+							<div class="col-md-9 col-sm-9">
+								<input type="text" name="keywords" class="link_item" value="" placeholder="请输入网站首页的关键词">
+							</div>
+							<div class="col-md-1 col-sm-1">
+								<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="更  新" style="height:36px;font-size:14px"/></div>
+							</div>
+						</div>
+					</form>
+
+					<br>
+					<form action="{:U('admin/links/group_update',array('word'=>'description'))}" method='post' enctype='multipart/form-data'>
+						<div class="row">
+							<div class="col-md-2 col-sm-2 left-title" style="margin-left:15px;line-height: 30px">
+								首页描述
+							</div>
+							<div class="col-md-9 col-sm-9">
+								<input type="text" name="description" class="link_item" value="" placeholder="请输入网站首页的页面描述">
+							</div>
+							<div class="col-md-1 col-sm-1">
+								<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="更  新" style="height:36px;font-size:14px"/></div>
+							</div>
+						</div>
+					</form>
+
+					<br>
+
+					<form action="{:U('admin/links/group_update',array('word'=>'footer'))}" method='post' enctype='multipart/form-data'>
+						<div class="row">
+							<div class="col-md-2 col-sm-2 left-title" style="margin-left:15px;line-height: 30px">
+								网站落款
+							</div>
+							<div class="col-md-9 col-sm-9">
+								<input type="text" name="footer" class="link_item" value="" placeholder="请输入网站底部落款">
+							</div>
+							<div class="col-md-1 col-sm-1">
+								<div class="admin-form"><input type="submit" class="custom_button button btn-primary mr10" value="更  新" style="height:36px;font-size:14px"/></div>
+							</div>
+						</div>
+					</form>
+
+				</div>
+        	</div>
                                 
-        <!-- 邮件设置 -->                      
+        <!-- 邮件设置 -->
         <div id="tab18_2" class="tab-pane">
             <div class="row">
                 <div class="col-md-12">
  		            
- 		            <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">发件邮箱</label>
-			            <div class="col-md-5 col-sm-5">
-			                <input type="text" name="smtpFromMail" id="smtpFromMail" class="form-control" value="${setting.smtpFromMail}">
-			            </div>
-			        </div>
-			        
-			        <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">邮箱密码</label>
-			            <div class="col-md-5 col-sm-5">
-			                <input type="text" name="smtpPassword" id="smtpPassword" class="form-control" value="${setting.smtpPassword}">
-			            </div>
-			        </div>  
-			        
-			        <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">SMTP地址</label>
-			            <div class="col-md-5 col-sm-5">
-			                <input type="text" name="smtpHost" id="smtpHost" class="form-control" value="${setting.smtpHost}">
-			            </div>
-			        </div>
-			        
-			        <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">SMTP端口</label>
-			            <div class="col-md-5 col-sm-5">
-			                <input type="text" name="smtpPort" id="smtpPort" class="form-control" value="${setting.smtpPort}">
-			            </div>
-			        </div>               
-			        
-			        <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">发件人名称</label>
-			            <div class="col-md-5 col-sm-5">
-			                <input type="text" name="smtpUsername" id="smtpUsername" class="form-control" value="${setting.smtpUsername}">
-			            </div>
-			        </div>   
-			        
- 
-			        
-			        <div class="form-group">
-			            <label class="col-md-1 col-sm-1  control-label">邮件测试</label>
-			            <div class="col-md-5 col-sm-5">
-			            <div class="input-group">
-			                <input type="text" name="toMail" id="toMail" class="form-control" placeholder="请输入测试邮箱">
-			                <span class="input-group-addon" id="testMail" style="cursor:pointer">测试</span>
-			             </div>   
-			            </div>
-			        </div> 
+
 			                                                                                                          
 	            </div>
 	        </div>
 	    </div>
-             
-	</form>   
+       </div>
+	</form>
 
 </div>
 </div>
-              
-<script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/admin/vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.validate.js"></script> 
+
 <script type="text/javascript" src="__PUBLIC__/admin/assets/js/bootstrap/bootstrap.min.js"></script>
 
-<!--Ueditor 编辑器-->
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/ueditor.all.min.js"> </script>  
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
-   
-<script type="text/javascript">
-$(document).ready(function() {
-
-    var $inputForm = $("#inputForm");
-
-	// 表单验证
-	$inputForm.validate({
-		rules: {
-			name: "required"
-		}
-	});
-	
-	// 邮件测试
-	$('#testMail').click(function(){
-		var smtpFromMail = $('#smtpFromMail').val();
-		var smtpPort = $('#smtpPort').val();
-		var smtpHost = $('#smtpHost').val();
-		var smtpUsername = $('#smtpUsername').val();
-		var smtpPassword = $('#smtpPassword').val();
-		var toMail = $('#toMail').val();
-		
-		$.ajax({
-			type: 'POST',
-			url: '${base}/admin/setting/mailTest',
-			data: {'smtpFromMail':smtpFromMail,'smtpPort':smtpPort,'smtpHost':smtpHost,'smtpUsername':smtpUsername,'smtpPassword':smtpPassword,'toMail':toMail},
-			success: function(data){ parent.bootAlert(data); }
-		});
-	});
-	
-});
-</script>
 
 </body>
 </html>

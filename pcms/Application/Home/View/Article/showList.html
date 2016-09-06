@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     
-    <title>文章列表 - 标准页面</title>
-    
-    <link type="text/css" rel="stylesheet" href="__PUBLIC__/lib/css/bootstrap.min.css">
-
-	
+    <title></title>
+	<style>
+		.title_item{ height: 40px; }
+		.title_item a{  color: #666363; }
+		.title_item a:hover{  color: #022a65;}
+		.custom_page{ text-align: right; margin-right: 16px; margin-top:10px; color: #b3b3b3;}
+		.pull-right{ color: #b3b3b3;}
+	</style>
 </head>
 <body>
 
@@ -20,7 +23,7 @@
 				<tr class="title_item">
 
 				<td>
-					<span>{$article.create_date|time_icon=###}<a href="{:U('././',array($article[category_url]=>$article[id]))}">{$article.title}</a></span><span class="pull-right">{$article.create_date|time_top=###}</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;{$article.create_date|time_icon=###}<a class="inner-link" href="{:U('././',array($article[category_url]=>$article[id]))}">{$article.title}</a></span><span class="pull-right">{$article.create_date|time_top=###}&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</td>
 
 		   		</tr>

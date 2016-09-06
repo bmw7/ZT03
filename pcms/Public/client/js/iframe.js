@@ -24,7 +24,7 @@ $(document).ready(function() {
 	});
 
 	/** 内部动态生成页面 */
-	$('div').on('click','.inner-link',function(){
+	$(document).on('click','.inner-link',function(){
 		event.preventDefault();
 		var url = $(this).attr('href');
 		$.ajax({

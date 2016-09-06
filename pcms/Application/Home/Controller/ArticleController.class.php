@@ -101,7 +101,7 @@ class ArticleController extends Controller {
 	 * 使用了url默认路由设置，其真实对应的完整模块地址为 article/showList/list/id.html
 	 *  */
 	public function showList(){
-		$article = M('article'); // 实例化User对象
+		$article = M('article');      // 实例化User对象
     	$category_id = I('get.list'); // 这里用list来指代id
     	$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
     	
@@ -135,7 +135,53 @@ class ArticleController extends Controller {
 	}
 	
 	
-	
+	/**
+	 * 图片列表展示 多篇类 文章条目
+	 * 前台访问网址为 tags/id.html 例如 tags/2.html
+	 * 使用了url默认路由设置，其真实对应的完整模块地址为 article/showTags/tags/id.html
+	 *  */
+	public function showTags(){
+		$tag = M('tag');
+    	$article = M('article'); 
+    	$article_tag = M('article_tag');
+    	
+    	$tag_id = I('get.tags');
+    	$count = $article_tag->where('tag_id = '.$tag_id)->count();
+    	   
+    	$Page      = new \Think\Page($count,12);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$Page->setConfig('next','下一页');
+    	$Page->setConfig('prev','上一页');
+    	$Page->setConfig('first','首页');
+    	$Page->setConfig('last','尾页');
+    	$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
+    	 
+    	$show  = $Page->show();// 分页显示输出
+    	
+    	$article_ids = M('article_tag')->where('tag_id = '.$tag_id)->getField('article_id',true);
+    	
+    	if (count($article_ids) > 0){
+    		$list  = $article->where(array('id'=>array('IN',$article_ids)))->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+    	 
+	    	 /**
+	    	 * 对$list中每个文章对象，附加上其第一幅图像
+	    	 *【注意】 该代码片段非必须。但在图片排列时候，该代码必须附加。
+	    	 * */
+	    	$article_image = M('article_image');
+	    	foreach ($list as $k => $v){
+	    		// 添加新成员 image
+	    		$list[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
+	    	}
+    	
+    	}else{
+    		$list = array();
+    	}
+    	 	 
+    	$this->assign('list',$list);               // 赋值数据集
+    	$this->assign('page',$show);               // 赋值分页输出
+    	$this->assign('tagId',$tag_id);
+    	$this->assign('tagName',$tag->where('id = '.$tag_id)->getField('name'));               
+    	$this->display();
+	}	
 	
 	
 }
