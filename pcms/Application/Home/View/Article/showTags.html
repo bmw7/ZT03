@@ -1,4 +1,4 @@
-<!-- 多篇类带图片文章展示 - 标准页面 -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,36 +9,33 @@
     
     <title>{$article.title}</title>
    
-	
+	<style>
+        #inner_content{ width:858px;overflow:hidden;}
+        #projects{ width:878px; overflow:hidden; }
+        .unit{ width:205px; height:235px; float:left;  margin-right:13px; margin-bottom:20px; position:relative;}
+        .unit img{ width:205px;height:205px;}
+        .unit_word{ width:205px; height: 30px; color: #022a65; font-size: 12px; line-height: 15px; top: 212px;font-family:'Microsoft YaHei','STHeiti Light','SimHei';position:absolute;}
+    </style>
 </head>
 <body>
 
 
+    <div id="inner_content">
 
-<div class="container">
+            <div id="projects">
+                <volist name="list" id="article">
+                    <div class="unit"><a class="inner-link" href="{:U('././',array('pics'=>$article[id]))}" border="0"><img src="/upload/thumb_{$article.image}"><div class="unit_word">{$article.title}</div></a></div>
+                </volist>
+            </div>
 
-	
-	<div class="row">
-	
-		<hr><h2>带图文章展示</h2><hr>
-		
-		<volist name="article_images" id="article_image">
-			<img src="/git/pcms/upload/{$article_image}"><br>
-		</volist>
-			
-		文章题目：{$article.title}<br>
-		置顶标签：{$article.create_date|time_icon=###}<br>
-	        发布时间：{$article.create_date|time_top=###}<br>
-	        点击次数：{$article.hits}<br>
-	        文章来源：{$article.source}<br> 
-	        简短描述：{$article.short_intro}<br>   
-	        文章内容：{$article.content}<br>
-	                
-	</div>
+            <div class="custom_page">{$page}</div>
 
+    </div>
 
-
-</div>
-
+    <script>
+        $('.num').addClass('inner-link');
+        $('.next').addClass('inner-link');
+        $('.prev').addClass('inner-link');
+    </script>
 </body>
 </html>

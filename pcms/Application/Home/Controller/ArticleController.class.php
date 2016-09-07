@@ -148,7 +148,7 @@ class ArticleController extends Controller {
     	$tag_id = I('get.tags');
     	$count = $article_tag->where('tag_id = '.$tag_id)->count();
     	   
-    	$Page      = new \Think\Page($count,12);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    	$Page      = new \Think\Page($count,8);// 实例化分页类 传入总记录数和每页显示的记录数
     	$Page->setConfig('next','下一页');
     	$Page->setConfig('prev','上一页');
     	$Page->setConfig('first','首页');
