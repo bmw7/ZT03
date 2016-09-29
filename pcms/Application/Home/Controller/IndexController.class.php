@@ -22,6 +22,11 @@ class IndexController extends Controller {
     	$this->display();
     }
     
+    // 首页默认加载
+    public function index_show(){
+    	
+    }
+    
     
     // 安装数据库
     public function install_database(){
