@@ -9,10 +9,11 @@
 <div class="swiper-container">
     <!-- 滑动区 -->
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="__PUBLIC__/client/img/4.png"></div>
-        <div class="swiper-slide"><img src="__PUBLIC__/client/img/1.jpg"></div>
-        <div class="swiper-slide"><img src="__PUBLIC__/client/img/2.jpg"></div>
-        <div class="swiper-slide"><img src="__PUBLIC__/client/img/3.jpg"></div>
+    
+    	<volist name="article_images" id="article_image">
+    		<div class="swiper-slide"><img src="/upload/{$article_image}"></div>
+		</volist>
+
     </div>
     <!-- 分页器 -->
     <div class="swiper-pagination"></div>

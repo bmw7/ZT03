@@ -18,13 +18,15 @@ class IndexController extends Controller {
     	$this->display();
     }
     
-    public function index_show(){
-    	$this->display();
-    }
     
     // 首页默认加载
     public function index_show(){
+    	/** 获取文章对象所附属图像 */
+    	$article_image = M('article_image');
+    	$article_images = $article_image->where('article_id = 39')->order('orders asc')->getField('filename',true);
     	
+    	$this->assign('article_images',$article_images);
+    	$this->display();
     }
     
     

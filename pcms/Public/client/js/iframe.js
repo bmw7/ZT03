@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	
+	
 	/** 首页默认加载 */
 	$.ajax({
 		type:"post",

@@ -83,12 +83,10 @@ class ArticleController extends Controller {
 		if ($article['seo_keywords'] == ''){ $article['seo_keywords'] = $article['title']; }
 		// 未设置内容描述，则以正文内容截取前255字代替。msubstr为自定义函数
 		if ($article['seo_description'] == ''){ $article['seo_description'] = msubstr($article['content'],0,255,'utf-8',false); }
-	
 		
 		/** 获取文章对象所附属图像 */
 		$article_image = M('article_image');
 		$article_images = $article_image->where('article_id ='.$id)->order('orders asc')->getField('filename',true);
-
 		
 		$this->assign('article',$article);
 		$this->assign('article_images',$article_images);
