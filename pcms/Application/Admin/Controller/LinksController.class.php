@@ -100,7 +100,7 @@ class LinksController extends AuthController {
     		$upload->maxSize  = 3145728 ;// 设置附件上传大小
     		$upload->exts     = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
     		$upload->rootPath = './Public/upload/'; // 设置附件上传根目录
-    		$upload->saveName = 'com_create_guid';
+    		$upload->saveName = array('uniqid',$_SERVER['REQUEST_TIME']);
     		// 上传单个文件
     		$info   =   $upload->uploadOne($_FILES['logofile']);
     		if(!$info) {// 上传错误提示错误信息
