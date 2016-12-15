@@ -42,8 +42,13 @@
 
                         <present name="item['subs']">
                             <div class="menu_left_item_sub">
-                            <volist name="item['subs']" id="sub">
+                            <volist name="item['subs']" id="sub">                                                           
                                 <div class="sub_item"><a href="{$sub.url}" class="outer-link">{$sub.name}</a></div>
+                                <if condition="$sub.url eq '/tags/5.html'">
+                                <div class="line-outer"></div>
+                                <div id="line"><div id="line-inner"></div></div>
+                                <div class="line-outer"></div>
+                                </if>
                             </volist>
                             </div>
                         </present>
