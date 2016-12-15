@@ -1,60 +1,114 @@
-<!-- 单篇类文章展示 - 标准页面 -->
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta name="keywords" content="{$article.seo_keywords}">
-    <meta name="description" content="{$article.seo_description}">
-    
-    <title>{$article.title}</title>
-    
-    <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
-    <script src=""></script>
-    
-	<!--[if lt IE 9]>
-	<script src="__PUBLIC__/lib/js/html5shiv.min.js"></script>
-	<script src="__PUBLIC__/lib/js/respond.min.js"></script>
-	<![endif]-->
-	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="__PUBLIC__/client/css/page_inner.css" type="text/css" />
+
+<script language="javascript" src="__PUBLIC__/client/js/jquery.min.js" ></script>
+<script language="javascript" src="__PUBLIC__/client/js/dyn.js" ></script>
+
+<title>温州刑事辩护律师网</title>
+
 </head>
+
 <body>
 
+<div id="all">
+<div id="main">
+<div id="main_top_left"></div><div id="main_top_right"></div>
+<div id="main_top"></div>
+
+<div id="main_menu">
+	<div id="menu_pos">
+	<div class="list_menu"><a href="/">网站首页</a></div>
+	
+	<volist name="tree" id="navigation">
+	<div class="list_menu"><a href="{$navigation.url}">{$navigation.name}</a></div>
+	</volist>
+	
+	</div>
+</div>
+
+<div id="main_busi">
+
+	<img src="../Public/client/img/top_busi.gif" border="0" usemap="#Map" />
+	  <map name="Map" id="Map">
+	    <area shape="rect" coords="178,11,282,59" href="/doc/1820.html" />
+	    <area shape="rect" coords="296,13,395,60" href="/doc/1821.html" />
+	    <area shape="rect" coords="417,11,505,59" href="/doc/1822.html" />
+	    <area shape="rect" coords="518,11,623,60" href="/doc/1823.html" />
+	    <area shape="rect" coords="636,11,737,59" href="/doc/1824.html" />
+	    <area shape="rect" coords="750,10,844,60" href="/doc/1825.html" />
+	    <area shape="rect" coords="857,11,962,58" href="/doc/1826.html" />
+	  </map>
+
+</div>
+
+<div id="main_center">
+
+<div id="main_left">
 
 
-<div class="container">
 
-<!-- 展示方式一  -->
-<div class="row">
 
-	<hr><h2>普通文章展示</h2><hr>
-		
-	文章题目：{$article.title}<br>
-	置顶标签：{$article.create_date|time_icon=###}<br>
-        发布时间：{$article.create_date|time_top=###}<br>
-        点击次数：{$article.hits}<br>
-        文章来源：{$article.source}<br> 
-        简短描述：{$article.short_intro}<br>   
-        文章内容：{$article.content}<br>
-                
+<div id="main_left_view">
+<div id="view_gap"><a href="">更多>></a></div>
+
+<volist name="views" id="article">
+<div class="view">
+<div class="view_title">{$article.title}</div>
+<div class="view_content"><a href="../docs/{$article.id}.html">{$article.content}</a></div>
+</div>
+</volist>
+
 </div>
 
 
-<!-- 展示方式二 -->
-<div class="row">
 
-	<h2>附带额外图片文章展示</h2>
+<div id="main_left_list">
+<div id="main_left_list_gap"><a href="">更多>></a></div>
 
-		
+<volist name="medias" id="article">
+<div class="unit_expert">
+<a href="docs/{$article.id}.html"><img src="" border="0"></a>
+<div class="name">{$article.title}</div>
+<div class="content"><a href="docs/${article.id}.html">{$article.content}</a></div>
+</div>		
+</volist>
+
 </div>
 
 
 
+
 </div>
 
 
+<div id="main_right">
+<div id="main_right_title"></div>
 
-<script type="javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
-<script type="javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
+<div id="text">
+{$main.content}
+</div>
+
+</div>
+</div>
+
+<div id="main_link">
+
+<div id="main_link_gap"></div>
+<volist name="links" id="link">
+<div class="ulink"><a href="{$link.url}" target="_blank">{$link.name}</a></div>
+</volist>
+
+</div>
+<div id="main_line"></div>
+<div id="main_foot">
+<div id="bottom_inner">温州刑事辩护律师网 版权所有 浙ICP备 <a href="http://www.miibeian.gov.cn">15043901号-1</a> 业务咨询电话：13738778655；Email：cuibo2006@126.com <br>
+地 址：浙江省温州市市府路西首新益大厦A幢4楼 邮 编：325000 电 话：0577-56891918 传 真：0577-88319477</div>
+</div>
+
+</div>
+</div>
 </body>
 </html>

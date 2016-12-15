@@ -586,7 +586,7 @@ class ArticleController extends AuthController{
     		// 生成缩略图
     		$image = new \Think\Image();
     		$image->open($uploadPath);
-    		$image->thumb(150, 150)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
+    		$image->thumb(75, 100)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
     	}
     	
     	// Return Success JSON-RPC response

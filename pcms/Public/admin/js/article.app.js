@@ -1,7 +1,7 @@
 requirejs.config({
-    baseUrl: '/git/pcms/Public/plugin/webuploader/dist',
+    baseUrl: '/Public/plugin/webuploader/dist',
     paths: {
-        jquery: '/git/pcms/Public/plugin/webuploader/image-upload/jquery'
+        jquery: '/Public/plugin/webuploader/image-upload/jquery'
     }
 });
 
@@ -69,11 +69,11 @@ require([ 'webuploader.flashonly' ], function( WebUploader ) {
             },
             dnd: '#dndArea',
             paste: '#uploader',
-            swf: '/git/pcms/Public/plugin/webuploader/dist/Uploader.swf',
+            swf: '/Public/plugin/webuploader/dist/Uploader.swf',
             chunked: true,
             // runtimeOrder: 'flash',
             sendAsBinary: true,
-            server: '/git/pcms/admin/article/uploadimages',
+            server: '/admin/article/uploadimages',
             fileNumLimit: 300,
             fileSizeLimit: 200 * 1024 * 1024,    // 200 M
             fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M

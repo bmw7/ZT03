@@ -1,0 +1,87 @@
+<!-- 多篇类文章列表条目 - 标准页面 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    
+    <title>文章列表 - 标准页面</title>
+    
+    <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
+    <script src=""></script>
+    
+	<!--[if lt IE 9]>
+	<script src="__PUBLIC__/lib/js/html5shiv.min.js"></script>
+	<script src="__PUBLIC__/lib/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+<body>
+
+
+
+<div class="container">
+
+	<!-- 展示方式一 ：普通标题列表-->
+	<div class="row">
+	
+		<h2>展示方式一 ：普通标题列表</h2>	
+
+
+		<table class="table-hover table-striped" cellspacing="0" width="100%">                                
+	 		<volist name="list" id="article">
+				<tr style="height:40px">
+				
+				<td>图标</td>
+				
+				<!-- 标题 -->
+				<td>
+					{$article.create_date|time_icon=###}<a href="{:U('././',array($article[category_url]=>$article[id]))}">{$article.title}</a>
+				</td>
+				
+				<!-- 时间 -->
+				<td>{$article.create_date|time_top=###}</td>	
+				
+		   		</tr>
+			</volist>
+        </table>
+        
+        <div class="custom_page">{$page}</div>
+	        
+	</div>
+	
+	<br>
+	<br>
+	<br>
+
+	<!-- 展示方式二：图片列表方式  -->
+	<div class="row">
+	
+		<h2>展示方式二：图片列表方式 </h2>	
+
+
+		    <div class="row">                           
+	 		<volist name="list" id="article">
+				
+				<div class="col-md-4">
+				<img src="/git/pcms/upload/thumb_{$article.image}"><br>
+				<!-- 手动修改网址，不用默认 -->
+				{$article.create_date|time_icon=###}<a href="{:U('././',array('pics'=>$article[id]))}">{$article.title}</a>
+				</div>
+   		
+			</volist>
+            </div>
+        <div class="custom_page">{$page}</div>
+        
+	        
+	</div>
+
+
+</div>
+
+
+
+<script type="javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
+<script type="javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ body{ margin:0px auto; text-align:center; background:url(../img/main_bg.jpg) top
 .list_menu{ color:#FFF;font-size:12px;padding-top:4px;float:left;width:79px;text-align:center; }
 .list_menu a{ color:#FFF;font-size:12px;text-decoration:none;}
 .list_menu a:hover{ color:#FC0;}
-#notice{ width:190px;height:197px;background-image:url(../img/index_35.gif);position:relative;}
+#notice{ padding-top:10px;width:190px;height:187px;background-image:url(../img/index_35.gif);position:relative;}
 .c_notice{ color:#df1422;font-size:12px;margin-left:6px; height:25px;line-height:25px;}
 .c_notice a{ color:#4b4b4b;font-size:12px;text-decoration:none;}
 .c_notice a:hover{ color:#df1422;}

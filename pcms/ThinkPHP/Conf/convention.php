@@ -151,6 +151,7 @@ return  array(
     'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show',        // 单篇类文章展示
     								  'docs/:docs' => 'Article/shows',     // 多篇类文章展示
     								  'pics/:pics' => 'Article/showPics',  // 多篇类带图文章展示
+    								  'lists/:lists' => 'Article/showLists',  // 多篇类文章列表(图片)
     		                          'list/:list' => 'Article/showList'), // 多篇类文章列表
     								  
     'URL_MAP_RULES'         =>  array(), // URL映射定义规则
