@@ -57,7 +57,7 @@
 <volist name="views" id="article">
 <div class="view">
 <div class="view_title">{$article.title}</div>
-<div class="view_content"><a href="../docs/{$article.id}.html">{$article.content}</a></div>
+<div class="view_content"><a href="/docs/{$article.id}.html">{$article.content}</a></div>
 </div>
 </volist>
 
@@ -70,17 +70,13 @@
 
 <volist name="medias" id="article">
 <div class="unit_expert">
-<a href="docs/{$article.id}.html"><img src="" border="0"></a>
+<a href="/pics/{$article.id}.html"><img src="" border="0"></a>
 <div class="name">{$article.title}</div>
-<div class="content"><a href="docs/${article.id}.html">{$article.content}</a></div>
+<div class="content"><a href="/pics/{$article.id}.html">{$article.content}</a></div>
 </div>		
 </volist>
 
 </div>
-
-
-
-
 
 
 

@@ -82,6 +82,7 @@ class IndexController extends Controller {
     
     
     // 数据恢复
+    /*
     public function backup(){
     	$start = I('get.start');
     	$cid = I('get.cid');
@@ -190,7 +191,7 @@ class IndexController extends Controller {
     		echo '<h1>数据库已经存在。本操作系统已经记录，请勿再尝试。</h1>';
     	}
     }
-    
+    */
     
     // article表操作
     public function install_article(){
