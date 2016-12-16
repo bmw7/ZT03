@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>欢迎访问 - 温州胜诉律师网</title>
-    <link rel="stylesheet" href="_PUBLIC_/client/css/bootstrap.min.css">
-    <link rel="stylesheet" href="_PUBLIC_/resource/client/css/swiper-3.2.7.min.css">
-    <link rel="stylesheet" href="_PUBLIC_/resource/client/css/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/swiper-3.2.7.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/index.css">
     <style>
         .my-map { margin: 0 auto; width: 517px; height: 178px; }
         .my-map .icon { background: url(http://lbs.amap.com/console/public/show/marker.png) no-repeat; }
@@ -19,7 +19,7 @@
 <body>
 <div class="container-fluid">
 
-	<#include "/client/include/header.ftl" >
+	<include file="Public/include/header.html" />
 	
     <!--大图banner-->
     <div class="row" id="banner">
@@ -382,12 +382,12 @@
 
     <!-- 落款部分 -->
     <div class="row" id="footer">
-  		<#include "/client/include/footer.ftl" >
+  		<include file="Public/include/footer.html" />
     </div>
 </div>
 
-<script src="_PUBLIC_/client/js/jquery.min.js"></script>
-<script src="_PUBLIC_/client/js/swiper-3.2.7.jquery.min.js"></script>
+<script src="__PUBLIC__/client/js/jquery.min.js"></script>
+<script src="__PUBLIC__/client/js/swiper-3.2.7.jquery.min.js"></script>
 <script>
     var mySwiper = new Swiper ('.swiper-container', {
         loop: true,
