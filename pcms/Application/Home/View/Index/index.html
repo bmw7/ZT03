@@ -33,18 +33,18 @@
         <div class="row" id="group_title"></div>
         <div class="row" id="group_member">
             
-            <#list members as member>
+            <volist name="lawyers" id="member">
             <div class="group_member">
-                <div class="photo"><img src="${base}/<@articleFirstThumbnail article=member>${imageUrl}</@articleFirstThumbnail>"></div>
-                <div class="title">${member.title}</div>
-                <div class="desc">${member.seoKeywords}}</div>
-                <a href="${base}/shows/${member.id}.html"><div class="more"></div></a>
+                <div class="photo"><img src="upload/thumb_{$member.image}"></div>
+                <div class="title">{$member.title}</div>
+                <div class="desc">{$member.seo_keywords}</div>
+                <a href="/pics/{$member.id}.html"><div class="more"></div></a>
             </div>
-            </#list>
+            </volist>
        
         </div>
         <div class="row">
-            <a href="${base}/lists/1.html"><div id="group_more"></div></a>
+            <a href="/lists/1.html"><div id="group_more"></div></a>
         </div>
     </div>
 
@@ -79,9 +79,9 @@
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_23 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="notice" as article>
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title}</a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
+					</volist>
                     </div>
                 </div>
 

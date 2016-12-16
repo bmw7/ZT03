@@ -2,7 +2,7 @@
 <div class="container" id="top">
     <div class="row">
         <div class="col-md-8" id="top_left">
-            <a href="index.html"><img src="${base}/resource/client/images/logo.png" border="0"></a>
+            <a href="index.html"><img src="/Public/client/images/logo.png" border="0"></a>
         </div>
         <div class="col-md-4" id="top_right">
             <form action="#" method="post">
@@ -16,9 +16,9 @@
 <!--菜单导航-->
 <div class="row" id="menu">
     <div class="container" id="menu_extend">
-        <div class="menu_item active"><a href="/">��ҳ</a></div>
-        <#list navigations as nav>
-        	<div class="menu_item"><a href="${nav.url}">${nav.name}</a></div>
-        </#list>
+        <div class="menu_item active"><a href="/">网站首页</a></div>
+        <volist name="tree" id="nav">
+        	<div class="menu_item"><a href="{$nav.url}">{$nav.name}</a></div>
+        </volist>
     </div>
 </div>

@@ -2,7 +2,28 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-    public function index(){     
+    public function index(){ 
+    	
+    	// 实例化对象
+    	$article = M('article');
+    	$article_image = M('article_image');
+    	 
+    	// 展示顶部导航菜单
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Navigation'));
+    	
+    	// 律师团队
+    	$lawyers = $article->where('category_id = 1')->order('id desc')->limit(5)->select();
+    	foreach ($lawyers as $k => $v){
+    		// 添加新成员 image
+    		$lawyers[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
+    	}
+    	$this->assign('lawyers',$lawyers);
+    	
+    	// 通知公告
+    	$notice = $article->where('category_id = 23')->order('id desc')->limit(7)->select();
+    	$this->assign('notice',$notice);
+    	
     	$this->display();
     }
     
