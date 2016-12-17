@@ -1,9 +1,9 @@
 <div class="container">
    <div class="row">
         <ul class="list-inline" id="first">
-            <#list links as link>
-            <li><a href="${link.url}">${link.name}</a></li>
-            </#list>
+            <volist name="links" id="link">
+            <li><a href="{$link.url}" target="_blank">{$link.name}</a></li>
+            </volist>
         </ul>
     </div>
     <div class="row" id="second">

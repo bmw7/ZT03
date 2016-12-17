@@ -57,6 +57,15 @@ class ArticleController extends Controller {
 		// 未设置内容描述，则以正文内容截取前255字代替。msubstr为自定义函数
 		if ($article['seo_description'] == ''){ $article['seo_description'] = msubstr($article['content'],0,255,'utf-8',false); }
 		
+		// 展示顶部导航菜单
+		$categoryService = A('Category','Service');
+		$this->assign("tree",$categoryService->getTree('Navigation'));
+		 
+		// 友情链接
+		$links_db = M('links');
+		$links = $links_db->order('orders asc')->select();
+		$this->assign('links',$links);
+		
 		$this->assign('article',$article);
 		$this->display();
 	}
@@ -89,6 +98,15 @@ class ArticleController extends Controller {
 		$article_image = M('article_image');
 		$article_images = $article_image->where('article_id ='.$id)->order('orders asc')->getField('filename',true);
 
+		// 展示顶部导航菜单
+		$categoryService = A('Category','Service');
+		$this->assign("tree",$categoryService->getTree('Navigation'));
+			
+		// 友情链接
+		$links_db = M('links');
+		$links = $links_db->order('orders asc')->select();
+		$this->assign('links',$links);
+		
 		
 		$this->assign('article',$article);
 		$this->assign('article_images',$article_images);
@@ -102,10 +120,13 @@ class ArticleController extends Controller {
 	 *  */
 	public function showList(){
 		$article = M('article'); // 实例化User对象
+		$category = M('category');
     	$category_id = I('get.list'); // 这里用list来指代id
     	$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
+    	$categoryName = $category->where('id = '.$category_id)->getField('name');
+    	$this->assign('categoryName',$categoryName);
     	
-    	$Page      = new \Think\Page($count,12);// 实例化分页类 传入总记录数和每页显示的记录数(12)
+    	$Page      = new \Think\Page($count,25);// 实例化分页类 传入总记录数和每页显示的记录数(12)
     	$Page->setConfig('next','下一页');
     	$Page->setConfig('prev','上一页');
     	$Page->setConfig('first','首页');
@@ -129,11 +150,66 @@ class ArticleController extends Controller {
     	}
     	
     	
+    	// 展示顶部导航菜单
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Navigation'));
+    	
+    	// 友情链接
+    	$links_db = M('links');
+    	$links = $links_db->order('orders asc')->select();
+    	$this->assign('links',$links);
+    	
     	$this->assign('list',$list);// 赋值数据集
     	$this->assign('page',$show);// 赋值分页输出
     	$this->display();
 	}
 	
+	
+	public function showLists(){
+		$article = M('article'); // 实例化User对象
+		$category = M('category');
+		$category_id = I('get.lists'); // 这里用list来指代id
+		$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
+		$categoryName = $category->where('id = '.$category_id)->getField('name');
+		$this->assign('categoryName',$categoryName);
+		 
+		$Page      = new \Think\Page($count,12);// 实例化分页类 传入总记录数和每页显示的记录数(12)
+		$Page->setConfig('next','下一页');
+		$Page->setConfig('prev','上一页');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','尾页');
+		$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
+		 
+		$show      = $Page->show();// 分页显示输出
+		$list      = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		 
+		   
+		/**
+		 *【可选】- 应用于图片列表方式
+		 *
+		 * 对$list中每个文章对象，附加上其第一幅图像
+		 *【注意】 该代码片段非必须。但在图片排列时候，该代码必须附加。
+		* */
+		$article_image = M('article_image');
+		foreach ($list as $k => $v){
+			// 添加新成员 image
+			$list[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
+		}
+		 
+		 
+		// 展示顶部导航菜单
+		$categoryService = A('Category','Service');
+		$this->assign("tree",$categoryService->getTree('Navigation'));
+		 
+		// 友情链接
+		$links_db = M('links');
+		$links = $links_db->order('orders asc')->select();
+		$this->assign('links',$links);
+		 
+		$this->assign('list',$list);// 赋值数据集
+		$this->assign('page',$show);// 赋值分页输出
+		$this->display();
+	}
 	
 	
 	

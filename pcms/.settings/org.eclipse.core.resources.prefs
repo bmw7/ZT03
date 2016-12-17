@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//Application/Home/View/Guestbook/add.html=UTF-8
 encoding//Public/admin/css/custom.css=UTF-8
+encoding//Public/client/css/index.css=UTF-8
+encoding//Public/client/css/inner.css=UTF-8
 encoding//Public/include/footer.html=UTF-8
 encoding//Public/include/header.html=UTF-8
 encoding/<project>=UTF-8

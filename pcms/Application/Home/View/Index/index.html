@@ -74,13 +74,13 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_announce.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_23}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/23.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <volist name="notice" as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title}</a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
+                    <volist name="notice" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
 					</volist>
                     </div>
                 </div>
@@ -92,14 +92,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_success.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_4}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/4.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_4 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="success" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -119,14 +119,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_consultant.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_11}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/11.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_11 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="consult" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -137,14 +137,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_marriage.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_12}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/12.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_12 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="marry" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -155,14 +155,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_contract.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_14}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/14.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_14 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="contract" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -182,14 +182,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_debt.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_15}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/15.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_15 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="debt" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -200,14 +200,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_labor.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_16}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/16.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_16 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="labour" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -218,14 +218,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_traffic.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_17}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/17.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_17 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="traffic" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -245,14 +245,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_injury.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_18}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/18.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_18 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="harm" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -263,14 +263,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_real.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_19}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/19.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_19 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="real" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 
@@ -281,14 +281,14 @@
                                 <span class="content_unit_title_left"><img src="/Public/client/images/index_title_defence.png"></span>
                             </div>
                             <div class="col-md-4">
-                                <a href="${base}/list/${more_21}.html"><span class="content_unit_title_more"></span></a>
+                                <a href="/list/21.html"><span class="content_unit_title_more"></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="content_unit_main">
-                    <#list article_21 as article>
-                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/${article.id}.html"><@subTitle title="${article.title}" start=0 end=15>${title}</@subTitle></a></div><div class="time">${(article.createDate)?string("yyyy-MM-dd")}</div></div>
-					</#list>
+                    <volist name="defend" id="article">
+                        <div class="list"><div class="icon"><img src="/Public/client/images/bg_item.png"></div><div class="title"><a href="/docs/{$article.id}.html">{$article.title|msubstr=0,15,'utf-8',false}</a></div><div class="time">{$article.create_date|strtotime|date='Y-m-d',###}</div></div>
+					</volist>
                     </div>
                 </div>
 

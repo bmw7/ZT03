@@ -1,55 +1,63 @@
-<!-- 多篇类带图片文章展示 - 标准页面 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta name="keywords" content="{$article.seo_keywords}">
-    <meta name="description" content="{$article.seo_description}">
-    
-    <title>{$article.title}</title>
-    
-    <link href="__PUBLIC__/lib/css/bootstrap.min.css" rel="stylesheet">
-    <script src=""></script>
-    
-	<!--[if lt IE 9]>
-	<script src="__PUBLIC__/lib/js/html5shiv.min.js"></script>
-	<script src="__PUBLIC__/lib/js/respond.min.js"></script>
-	<![endif]-->
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{$article.title} - 温州胜诉律师网</title>
+    <link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/inner.css">
 </head>
 <body>
+<div class="container-fluid">
+    
+    <include file="Public/include/header.html" />
+
+    <!--大图banner-->
+    <div class="row" id="banner">
+
+    </div>
+
+    <!-- 正文内容 -->
+    <div class="row content">
+
+        <div class="container">
+            <div class="col-md-4 scrollspy" >
+                <div id="nav" data-spy="affix"></div>
+            </div>
+            <div class="col-md-8 main">
+                <div class="detail_title">{$article.title}</div>
+               				
+				<volist name="article_images" id="article_image">
+					<div style="text-align:center;margin-top:20px"><img src="/upload/{$article_image}"></div>
+				</volist>
+                
+                <div class="detail">{$article.content}</div>
+
+                <div id="share">
+                    <div class="bshare-custom icon-medium"><a title="分享到" class="bshare-more" id="bshare-shareto" href="http://www.bShare.cn/">分享到</a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh" type="text/javascript" charset="utf-8"></script><script src="http://static.bshare.cn/b/bshareC0.js" type="text/javascript" charset="utf-8"></script>
+                </div>
+
+            </div>
 
 
-
-<div class="container">
-
-	
-	<div class="row">
-	
-		<hr><h2>带图文章展示</h2><hr>
-		
-		<volist name="article_images" id="article_image">
-			<img src="/git/pcms/upload/{$article_image}"><br>
-		</volist>
-			
-		文章题目：{$article.title}<br>
-		置顶标签：{$article.create_date|time_icon=###}<br>
-	        发布时间：{$article.create_date|time_top=###}<br>
-	        点击次数：{$article.hits}<br>
-	        文章来源：{$article.source}<br> 
-	        简短描述：{$article.short_intro}<br>   
-	        文章内容：{$article.content}<br>
-	                
-	</div>
+        </div>
+    </div>
 
 
-
+    <!-- 落款部分 -->
+    <div class="row" id="footer">
+         <include file="Public/include/footer.html" />
+    </div>
 </div>
 
-
-
-<script type="javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
-<script type="javascript" src="__PUBLIC__/lib/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/client/js/jquery.min.js"></script>
+<script src="__PUBLIC__/client/js/bootstrap.min.js"></script>
+<script>
+    $('#nav').affix({
+        offset: {
+            top: $('#nav').offset().top
+        }
+    });
+</script>
 </body>
 </html>

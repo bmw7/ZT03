@@ -19,7 +19,7 @@
 
     <!-- 正文内容 -->
     <div class="row content">
-        
+       
         <div class="container">
             <div class="col-md-4 scrollspy" >
                 <div id="nav" data-spy="affix"></div>
@@ -27,18 +27,17 @@
             <div class="col-md-8 main">
                 <div class="title">{$categoryName}</div>
                 <div class="line"></div>
-                <table class="table-striped">
-                    
-                    <volist name="list" id="article">
-                    <tr>
-                        <td class="item_icon"><img src="/Public/client/images/bg_item.png"></td>
-                        <td class="item_title"><a href="/docs/{$article.id}.html">{$article.title}</a></td>
-                        <td class="item_time">{$article.create_date|strtotime|date='Y-m-d',###}</td>
-                    </tr>
-                    </volist>
-                      
-                </table>
-                <div class="pull-right">{$page}</div>
+            	<div style="width:120%;overflow:hidden;margin-top:22px">
+		            <volist name="list" id="member">
+		            <a href="/pics/{$member.id}.html">
+			            <div class="thumbnail" style="width:185px;float:left;margin-right:20px;">
+			                <img src="/upload/{$member.image}">
+			                <h4 style="text-align:center">{$member.title}</h4>
+			            </div>
+		            </a>
+		            </volist>
+                </div>            
+				<div class="pull-right">{$page}</div>
             </div>
 
 
