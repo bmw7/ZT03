@@ -2,7 +2,10 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
-    public function index(){     
+    public function index(){  
+    	$user = M('account');
+    	$account = $user->select();
+    	$this->assign('account',$account);
     	$this->display();
     }
     
