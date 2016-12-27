@@ -7,9 +7,11 @@
 #language a:hover{ text-decoration:none; font-weight:bold; color:#022a65;}
 
 #menu_left{ width:280px; height:auto; margin-top:42px; margin-left:-15px; margin-bottom:30px;}
+
 .menu_left_item{ width:100%; height:37px; text-indent:52px; line-height:37px;font-family:'Microsoft YaHei','STHeiti Light','SimHei';font-size:18px;}
-.menu_left_item a{ display:block;width:100%; height:37px;text-decoration:none; font-weight:normal; color:#022a65;background-image: url(../img/left_menu.jpg);background-position: 0px 0px;background-repeat: no-repeat;}
-.menu_left_item a:hover{ display:block;width:100%; height:37px;text-decoration:none; font-weight:bold; color:#022a65;background-image: url(../img/left_menu_out.jpg);background-position: 0px 0px;background-repeat: no-repeat;}
+.menu_left_item a{ font-weight:normal;background-image: url(../img/left_menu.jpg);display:block;width:100%; height:37px;text-decoration:none; color:#022a65;background-position: 0px 0px;background-repeat: no-repeat;}
+.menu_left_item a:hover{ font-weight:bold; background-image: url(../img/left_menu_out.jpg);}
+
 .menu_left_item_sub{ display: none; }
 .sub_item{ width:100%; height:27px; line-height:27px;font-family:'Microsoft YaHei','STHeiti Light','SimHei';font-size:16px;}
 .sub_item a{ display:block;text-indent:132px;text-decoration:none; font-weight:normal; color:#022a65;background-image: url(../img/left_menu.jpg);background-position: 0px 0px;background-repeat: no-repeat;}
