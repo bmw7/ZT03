@@ -95,29 +95,11 @@ class ArticleController extends Controller {
 		
 		$this->assign('main',$article);
 		$this->assign('cname',$cname);
-		
-		
+		$this->assign('cid',$article['category_id']);
+				
 		// 展示顶部导航菜单
 		$categoryService = A('Category','Service');
 		$this->assign("tree",$categoryService->getTree('Navigation'));
-		
-		// 律师观点
-		$views = $db->where('category_id = 8')->order('id desc')->limit(3)->select();
-		for ($i=0;$i<3;$i++){
-			$views[$i]['content'] = strip_tags($views[$i]['content']);
-		}
-		$this->assign('views',$views);
-		
-		
-		// 媒体顾问
-		$medias = $db->where('category_id = 11')->order('id desc')->limit(4)->select();
-		$article_image = M('article_image');
-		foreach ($medias as $k => $v){
-			// 添加新成员 image
-			$medias[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
-			$medias[$k]['content'] = strip_tags($medias[$k]['content']);
-		}
-		$this->assign('medias',$medias);
 		
 		// 友情链接
 		$links_db = M('links');
@@ -205,7 +187,7 @@ class ArticleController extends Controller {
     	
     	$count     = $article->where('category_id = '.$category_id)->count();// 查询满足要求的总记录数
     	
-    	$Page      = new \Think\Page($count,40);// 实例化分页类 传入总记录数和每页显示的记录数(12)
+    	$Page      = new \Think\Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数(12)
     	$Page->setConfig('next','下一页');
     	$Page->setConfig('prev','上一页');
     	$Page->setConfig('first','首页');
@@ -233,23 +215,6 @@ class ArticleController extends Controller {
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Navigation'));
     	
-    	// 律师观点
-    	$views = $article->where('category_id = 8')->order('id desc')->limit(3)->select();
-    	for ($i=0;$i<3;$i++){
-    		$views[$i]['content'] = strip_tags($views[$i]['content']);
-    	}
-    	$this->assign('views',$views);
-    	
-    	
-    	// 媒体顾问
-    	$medias = $article->where('category_id = 11')->order('id desc')->limit(4)->select();
-    	$article_image = M('article_image');
-    	foreach ($medias as $k => $v){
-    		// 添加新成员 image
-    		$medias[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
-    		$medias[$k]['content'] = strip_tags($medias[$k]['content']);
-    	}
-    	$this->assign('medias',$medias);
     	
     	// 友情链接
     	$links_db = M('links');
@@ -259,6 +224,8 @@ class ArticleController extends Controller {
     	
     	$this->assign('list',$list);// 赋值数据集
     	$this->assign('page',$show);// 赋值分页输出
+    	$this->assign('cid',$category_id);
+    	
     	$this->display();
 	}
 	
@@ -304,24 +271,7 @@ class ArticleController extends Controller {
 		$categoryService = A('Category','Service');
 		$this->assign("tree",$categoryService->getTree('Navigation'));
 		 
-		// 律师观点
-		$views = $article->where('category_id = 8')->order('id desc')->limit(3)->select();
-		for ($i=0;$i<3;$i++){
-			$views[$i]['content'] = strip_tags($views[$i]['content']);
-		}
-		$this->assign('views',$views);
-		 
-		 
-		// 媒体顾问
-		$medias = $article->where('category_id = 11')->order('id desc')->limit(4)->select();
-		$article_image = M('article_image');
-		foreach ($medias as $k => $v){
-			// 添加新成员 image
-			$medias[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
-			$medias[$k]['content'] = strip_tags($medias[$k]['content']);
-		}
-		$this->assign('medias',$medias);
-		 
+
 		// 友情链接
 		$links_db = M('links');
 		$links = $links_db->order('orders asc')->select();

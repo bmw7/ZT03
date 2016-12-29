@@ -1,0 +1,45 @@
+body{ margin: 0px; padding: 0px;}
+.container-fluid{ margin: 0px; padding: 0px;}
+
+#top{ height: 120px; width: 1150px; margin: 0px auto; position: relative;}
+#logo{ width: 628px; height: 46px; background-image: url('../img/logo.png');top: 37px; left:0px; position:absolute; }
+#top-tel{ position:absolute; top:33px;right:10px;font-size:18px;color:#be0000;}
+#top-tel span{ font-size:40px;font-weight: bold;font-style: italic;}
+
+#menu{ height: 46px; width: 100%; background-color: #be0000; }
+#menu-container{ width: 1150px; height: 46px; line-height: 46px; font-size:14px; font-family: "Microsoft YaHei";margin: 0px auto;}
+.menu-item{ width:127px; text-align: center;float: left; }
+.menu-item a{ color: #ffffff; text-decoration: none; }
+.active{ background-color:#ffffff; width:127px; height: 43px; margin-top: 3px; border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;-webkit-border-radius: 5px 5px 0px 0px; }
+.active a{ color: #be0000; }
+
+.banner{ height: 240px; width: 100%; position: relative; overflow: hidden;margin:0px auto;margin-bottom:20px;background-color: #eeeeee;background-image: url('../img/banner-bg.png');}
+.banner .content{ width: 1150px; height: 200px; margin: 0px auto; position: relative;}
+.banner .content .big-word{ color:#be0000; font-size: 60px; font-family: "Microsoft YaHei"; position: absolute; top:50px; right:350px;}
+.banner .content img{ position: absolute;bottom:-10px; left:70px;}
+
+.container{ width: 1150px;padding:0px;background-color: #ffffff;min-height: 850px;margin-top: -60px;z-index: 1000;position: relative;border:#e4e4e4 1px solid;}
+.container .content{ margin: 30px;height: 900px;height: auto;}
+.title{ height: 60px;width: 100%;line-height: 60px;border-bottom: #d0d0d0 1px solid;margin-bottom: 40px;}
+.line{ height: 40px; line-height: 40px;text-indent: 30px; background-image: url('../img/icon.png'); background-repeat: no-repeat; background-position: 15px 15px;}
+.line:nth-child(odd){ background-color: #f9f9f9;}
+.container a{ color:#333333; text-decoration: none;}
+.container a:hover{ color:#be0000;}
+
+
+#lawyer-content{ width: 120%; min-height: 320px; }
+.item{ width:206px;height: 290px;margin-right: 14px;float:left;margin-bottom: 30px;}
+.item img{width:206px; height: 250px;}
+.item .item-name{ width: 206px; height: 40px;line-height: 40px;text-align: center;}
+
+#main-title{ width: 1000px; height: 50px; text-align: center; font-size: 30px; font-family: "Microsoft YaHei"; }
+#main-title-sub{ text-align: center; height: 30px;line-height: 20px; width: 100%; color: #999999;margin-bottom: 20px;}
+#main-content{ line-height: 30px;height: auto;}
+
+#links{ height: 46px; width: 100%; background-color: #be0000; margin-top: 20px;line-height: 46px;text-align: center;color:#e05555;}
+#links a{ color: #ffffff; text-decoration: none; border-right:#e05555 1px solid;padding-right:10px;padding-left:10px;}
+
+#footer{ height: 100px; width: 100%;text-align: center;line-height: 25px;padding-top:13px;}
+#footer a{ color: #333333;}
+
+.custom-page{ text-align:right; margin-top:15px;margin-right:10px;width:100%;}

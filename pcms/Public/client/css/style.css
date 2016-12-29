@@ -1,0 +1,62 @@
+body{ margin: 0px; padding: 0px;}
+.container-fluid{ margin: 0px; padding: 0px;}
+
+#top{ height: 120px; width: 1150px; margin: 0px auto; position: relative;}
+#logo{ width: 628px; height: 46px; background-image: url('../img/logo.png');top: 37px; left:0px; position:absolute; }
+#top-tel{ position:absolute; top:33px;right:10px;font-size:18px;color:#be0000;}
+#top-tel span{ font-size:40px;font-weight: bold;font-style: italic;}
+
+#menu{ height: 46px; width: 100%; background-color: #be0000; }
+#menu-container{ width: 1150px; height: 46px; line-height: 46px; font-size:14px; font-family: "Microsoft YaHei";margin: 0px auto;}
+.menu-item{ width:127px; text-align: center;float: left; }
+.menu-item a{ color: #ffffff; text-decoration: none; }
+.active{ background-color:#ffffff; width:127px; height: 43px; margin-top: 3px; border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;-webkit-border-radius: 5px 5px 0px 0px; }
+.active a{ color: #be0000; }
+
+.banner{ height: 415px; width: 100%; position: relative; margin:0px auto;margin-bottom:20px;padding: 0px;}
+.banner-list{width: 120%; height: 415px; }
+.banner-list ul li{width: 100%; height: 415px;}
+.banner .hd{width:100%; position:absolute; z-index:1; bottom:5px; left:0; height:30px; line-height:30px; text-align:center;}
+.banner .hd ul li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; width:12px; height:12px; margin: 0 5px; border-radius: 50%; text-indent: -9999px; background: #be0000; }
+.banner .hd ul .on{background: none; border: 2px solid #be0000; filter:alpha(opacity=100);opacity:1;  }
+
+.container{ width: 1150px;padding:0px;}
+
+#headline{ width: 756px; height:360px; margin-right: 23px;float: left;margin-bottom: 20px;overflow: hidden;border:#cdcdcf 1px solid;padding:20px;}
+#head-time{ width: 96px;height:32px; background-color: #be0000; color:#ffffff; text-align: center; line-height: 32px; float:left; font-size: 20px;margin-top: 3px;}
+#head-title{ width: 600px; height:36px; float:left; color: #be0000; font-size:27px;text-indent: 25px;line-height: 36px;}
+#head-content{ line-height: 28px;height:250px;margin-top: 50px;overflow: hidden;}
+#head-content img{ float:left;margin-right: 20px;margin-bottom: 5px;margin-top:10px;width: 300px;height: 120px;}
+#head-content a{ color:#333333; text-decoration: none;}
+
+
+
+.unit{ width: 370px; height: 360px; float: left; position: relative;margin-bottom: 20px;overflow: hidden;border:#cdcdcf 1px solid;padding:20px;}
+.unit-gap{width: 20px; height: 360px; float: left; }
+.unit .title{ width: 328px; height: 31px; background-image: url('../img/title.png'); position: relative; }
+.title-word{ font-weight: bold; font-family: "Microsoft YaHei"; font-size: 18px;height: 31px;line-height:18px; width: 100px;text-indent: 18px;}
+.title-more{ width: 41px; height: 11px; background-image: url('../img/more.png'); position: absolute;right:0px;top:7px;}
+
+.unit a{ color:#333333; text-decoration: none;}
+.unit a:hover{ color:#be0000;}
+.line{ height: 30px; line-height: 30px;text-indent: 15px; background-image: url('../img/icon.png'); background-repeat: no-repeat; background-position: 0px 11px;}
+
+.unit-primary{ width: 370px; height: 360px; float: left; position: relative;margin-bottom: 20px;background-image: url('../img/lawyer.png');}
+.unit-primary .title{ width: 328px; height: 31px; background-image: url('../img/title.png'); position: relative; margin-top:20px; margin-left:20px;}
+
+
+#lawyer{ width: 100%; height: 360px;float: left;margin-bottom:20px;border:#cdcdcf 1px solid; padding:20px;overflow: hidden;}
+#lawyer .title{ width: 100%; height: 31px; background-image: url('../img/title-lawyer.png'); position:relative;}
+
+#lawyer-content{ width: 2200px; height: 280px; }
+.item{ width:206px;height: 290px;margin-right: 20px;float:left;}
+.item img{width:206px; height: 250px;}
+.item .item-name{ width: 206px; height: 40px;line-height: 40px;text-align: center;}
+
+#links{ height: 46px; width: 100%; background-color: #be0000; margin-top: 20px;line-height: 46px;text-align: center;color:#e05555;}
+#links a{ color: #ffffff; text-decoration: none; border-right:#e05555 1px solid;padding-right:10px;padding-left:10px;}
+
+#footer{ height: 100px; width: 100%;text-align: center;line-height: 25px;padding-top:13px;position:relative;}
+#footer a{ color: #333333;}
+#admin{width:50px;height:50px;position:absolute;bottom:0px;right:0px;}
+.container-fluid{ width:100%;overflow:hidden;}

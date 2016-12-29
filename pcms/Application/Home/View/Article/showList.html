@@ -1,128 +1,80 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="__PUBLIC__/client/css/page_inner.css" type="text/css" />
-<link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css" type="text/css" />
-<script language="javascript" src="__PUBLIC__/client/js/jquery.min.js" ></script>
-<script language="javascript" src="__PUBLIC__/client/js/dyn.js" ></script>
-<title>温州刑事辩护律师网</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>欢迎访问 温州行政诉讼律师网 | 民告官专业律师团队</title>
+    <link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/inner.css">
 </head>
-
 <body>
-<div id="all">
-<div id="main">
-<div id="main_top_left"></div><div id="main_top_right"></div>
-<div id="main_top"></div>
 
-<div id="main_menu">
-	<div id="menu_pos">
-		<div class="list_menu"><a href="/">网站首页</a></div>
-		<volist name="tree" id="navigation">
-		<div class="list_menu"><a href="{$navigation.url}">{$navigation.name}</a></div>
-		</volist>	
-	</div>
-</div>
+<div class="container-fluid">
 
-<div id="main_busi">
+    <!--头部区域-->
+    <div id="top">
+        <a href="/index.html"><div id="logo"></div></a>
+        <div id="top-tel">律师热线：<span>137-3877-8655</span></div>
+    </div>
 
-	<img src="/Public/client/img/top_busi.gif" border="0" usemap="#Map" />
-	  <map name="Map" id="Map">
-	    <area shape="rect" coords="178,11,282,59" href="/doc/1820.html" />
-	    <area shape="rect" coords="296,13,395,60" href="/doc/1821.html" />
-	    <area shape="rect" coords="417,11,505,59" href="/doc/1822.html" />
-	    <area shape="rect" coords="518,11,623,60" href="/doc/1823.html" />
-	    <area shape="rect" coords="636,11,737,59" href="/doc/1824.html" />
-	    <area shape="rect" coords="750,10,844,60" href="/doc/1825.html" />
-	    <area shape="rect" coords="857,11,962,58" href="/doc/1826.html" />
-	  </map>
+    <!--菜单-->
+    <div id="menu">
+        <div id="menu-container">
+        <div class="menu-item"><a href="/index.html">网站首页</a></div>
+        <volist name="tree" id="navigation">
+              
+        	<if condition="$navigation.id eq $cid">
+        	  	<div class="menu-item active">
+        	<else/>
+        	  	<div class="menu-item">
+        	</if>   
+        	
+        	<a href="{$navigation.url}">{$navigation.name}</a></div>
+		</volist>
+        </div>
+    </div>
 
-</div>
+    <!--轮播区域-->
+    <div class="banner">
+        <div class="content"></div>
+    </div>
 
-<div id="main_center">
+    <!--正文-->
+    <div class="container">
 
-<div id="main_left">
+        <div class="content">
 
+            <div class="title">
+                <span class="pull-left">当前位置：<a href="/index.html">首页</a>&nbsp;&nbsp;>&nbsp;&nbsp;{$name}</span>
+                <span class="pull-right"><a href="javascript:;" onclick="window.history.back()">返回上一页</a></span>
+            </div>
 
+            <div class="main">
+            
+            <volist name="list" id="article">
+                <div class="line"><a href="/docs/{$article.id}.html">{$article.title}</a><span class="pull-right">{$article.create_date||strtotime|date='Y/m/d',###}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            </volist>
+            
+            <div class="custom-page">{$page}&nbsp;&nbsp;</div>
+            
+            </div>
 
+        </div>
 
+    </div>
 
-<div id="main_left_view">
-<div id="view_gap"><a href="">更多>></a></div>
-<volist name="views" id="article">
-<div class="view">
-<div class="view_title">{$article.title}</div>
-<div class="view_content"><a href="/docs/{$article.id}.html">{$article.content}</a></div>
-</div>
-</volist>
-</div>
+    <div id="links">
+    <volist name="links" id="link">
+		<a href="{$link.url}" target="_blank">{$link.name}</a>
+	</volist>
+    </div>
+    <div id="footer">
+        地 址：浙江省温州市市府路西首新益大厦A幢4楼&nbsp;&nbsp;&nbsp;&nbsp;邮 编：325000&nbsp;&nbsp;&nbsp;&nbsp;手 机：13738778655&nbsp;&nbsp;&nbsp;&nbsp;电 话：0577-56891918&nbsp;&nbsp;&nbsp;&nbsp;传 真：0577-88319477&nbsp;&nbsp;&nbsp;&nbsp;站长统计<br>
+        温州行政诉讼律师网&nbsp;&nbsp;版权所有&nbsp;&nbsp;&nbsp;&nbsp;Copyright ©2016 ALL RIGHTS RECERVED.&nbsp;&nbsp;&nbsp;&nbsp;浙ICP备<a href="http://www.miibeian.gov.cn" target="_blank">15043901号-3</a>&nbsp;&nbsp;&nbsp;&nbsp;技术支持：<a href="http://www.webm.com.cn" target="_blank"> 沧海软件(北京)有限公司</a>
 
-
-
-<div id="main_left_list">
-<div id="main_left_list_gap"><a href="">更多>></a></div>
-<volist name="medias" id="article">
-<div class="unit_expert">
-<a href="/pics/{$article.id}.html"><img src="" border="0"></a>
-<div class="name">{$article.title}</div>
-<div class="content"><a href="/pics/{$article.id}.html">{$article.content}</a></div>
-</div>		
-</volist>
-</div>
-
-
-
-
-
-
-
-
+    </div>
 
 </div>
-
-<div id="main_right">
-<div id="main_right_title">
-{$name}
-</div>
-
-<table cellpadding="0" cellspacing="0" border="0" width="97%" align="center">
-
-
-
-<volist name="list" id="article">
-<tr>
-<td align="center" width="30"><img src="/Public/client/img/icon.png" /></td>
-<td><a href="/docs/{$article.id}.html">{$article.title}</a></td>
-<td width="80" align="right">{$article.create_date||strtotime|date='Y-m-d',###}&nbsp;&nbsp;</td>
-</tr>
-
-</volist>
-
-</table>
-
-<div class="pull-right">{$page}&nbsp;&nbsp;</div>
-
-</div>
-
-
-
-</div>
-
-<div id="main_link">
-
-<div id="main_link_gap"></div>
-<volist name="links" id="link">
-<div class="ulink"><a href="{$link.url}" target="_blank">{$link.name}</a></div>
-</volist>
-
-</div>
-<div id="main_line"><div id="foot_inner"></div></div>
-<div id="main_foot">
-<div id="bottom_inner">温州刑事辩护律师网 版权所有 浙ICP备 <a href="http://www.miibeian.gov.cn">15043901号-1</a> 业务咨询电话：13738778655；Email：cuibo2006@126.com <br>
-地 址：浙江省温州市市府路西首新益大厦A幢4楼 邮 编：325000 电 话：0577-56891918 传 真：0577-88319477</div>
-</div>
-
-</div>
-</div>
+<script type="text/javascript" src="__PUBLIC__/client/js/jquery.min.js"></script>
 </body>
 </html>

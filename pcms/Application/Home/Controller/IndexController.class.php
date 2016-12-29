@@ -11,66 +11,49 @@ class IndexController extends Controller {
     	$categoryService = A('Category','Service');
     	$this->assign("tree",$categoryService->getTree('Navigation'));
     	
-    	// 通知公告
-    	$notice = $article->where('category_id = 7')->order('id desc')->limit(7)->select();
-    	$this->assign('notice',$notice);
-    	
-    	// 热点资讯
-    	$hots = $article->where('category_id = 5')->order('id desc')->limit(8)->select();
-    	$this->assign('hots',$hots);
-    	
-    	// 律师观点 
-    	$views = $article->where('category_id = 8')->order('id desc')->limit(3)->select();
-    	for ($i=0;$i<3;$i++){
-    		$views[$i]['content'] = strip_tags($views[$i]['content']);
-    	}
-    	$this->assign('views',$views);
-    	
     	// 律师团队
-    	$lawyers = $article->where('category_id = 9')->order('id desc')->limit(8)->select();
+    	$lawyers = $article->where('category_id = 1')->order('id desc')->limit(5)->select();
     	foreach ($lawyers as $k => $v){
     		// 添加新成员 image
     		$lawyers[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
     	}
     	$this->assign('lawyers',$lawyers);
     	
-    	// 常见问题
-    	$faqs = $article->where('category_id = 6')->order('id desc')->limit(6)->select();
-    	$this->assign('faqs',$faqs);
+    	// 业务领域
+    	$business = $article->where('category_id = 2')->order('id desc')->limit(9)->select();
+    	$this->assign('business',$business);
     	
+    	// 媒体报道
+    	$media = $article->where('category_id = 3')->order('id desc')->limit(9)->select();
+    	$this->assign('media',$media);
+    	    
     	// 经典案例
-    	$examples = $article->where('category_id = 4')->order('id desc')->limit(6)->select();
+    	$examples = $article->where('category_id = 4')->order('id desc')->limit(9)->select();
     	$this->assign('examples',$examples);
     	
-    	// 专家顾问
-    	$experts = $article->where('category_id = 10')->order('id desc')->limit(4)->select();
-    	foreach ($experts as $k => $v){
-    		// 添加新成员 image
-    		$experts[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
-    		$experts[$k]['content'] = strip_tags($experts[$k]['content']);
-    	}
-    	$this->assign('experts',$experts);
+    	// 文书范本
+    	$paper = $article->where('category_id = 5')->order('id desc')->limit(9)->select();
+    	$this->assign('paper',$paper);
     	
-    	// 媒体顾问
-    	$medias = $article->where('category_id = 11')->order('id desc')->limit(4)->select();
-    	foreach ($medias as $k => $v){
-    		// 添加新成员 image
-    		$medias[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
-    		$medias[$k]['content'] = strip_tags($medias[$k]['content']);
-    	}
-    	$this->assign('medias',$medias);
-    	
-    	// 辩护技巧
-    	$defends = $article->where('category_id = 1')->order('id desc')->limit(8)->select();
+    	// 维权技巧
+    	$defends = $article->where('category_id = 6')->order('id desc')->limit(9)->select();
     	$this->assign('defends',$defends);
-    	
-    	// 罪名解析
-    	$guilts = $article->where('category_id = 2')->order('id desc')->limit(8)->select();
-    	$this->assign('guilts',$guilts);
-    	
+    	 
     	// 法律法规
-    	$rules = $article->where('category_id = 3')->order('id desc')->limit(8)->select();
+    	$rules = $article->where('category_id = 7')->order('id desc')->limit(9)->select();
     	$this->assign('rules',$rules);
+    	
+    	$article_ids = M('article_tag')->where('tag_id = 1')->getField('article_id',true);
+    	
+    	if (count($article_ids) > 0){
+    		$list  = $article->where(array('id'=>array('IN',$article_ids)))->order('create_date desc')->limit(1)->select();
+    	}else{
+    		$list = array();
+    	}
+    	
+    	$headline = $list[0];
+    	$headline['content'] = strip_tags($headline['content']);
+    	$this->assign('headline',$headline);
     	
     	// 友情链接
     	$links_db = M('links');
@@ -165,12 +148,13 @@ class IndexController extends Controller {
     	$this->display();
     }
     
+    
     // 安装数据库
     public function install_database(){
     	$link = mysql_connect(C('DB_HOST'), C('DB_USER'), C('DB_PWD'));
     	$result = mysql_select_db(C('DB_NAME'), $link); // 若存在，则值为 1
     
-    	// 数据库不存在，创建
+    	// 有数据库，执行建表语句
     	if ($result == 1){
     		// 该句必加。否则乱码
     		mysql_query("SET NAMES utf8");
@@ -188,10 +172,10 @@ class IndexController extends Controller {
     		}
     
     	}else{
-    		echo '<h1>数据库已经存在。本操作系统已经记录，请勿再尝试。</h1>';
+    		echo '<h1>数据库不存在或操作失败</h1>';
     	}
     }
-    */
+    
     
     // article表操作
     public function install_article(){
@@ -218,6 +202,6 @@ class IndexController extends Controller {
     	}else{
     		echo '<h1>数据库已经存在。本操作系统已经记录，请勿再尝试。</h1>';
     	}
-    }
+    }*/
     
 }
