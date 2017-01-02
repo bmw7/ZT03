@@ -79,3 +79,6 @@ background-color:#f7f7f7;
 
 #bottom{ width:1019px;height:81px;position:relative;}
 #bottom_inner{ text-align:center;font-size:12px;color:#6f6f6f;height:50px;line-height:18px;margin-top:10px;}
+
+#admin{position:absolute; width:40px;height:40px;bottom:0px;right:0px;}
+#stat{ position:absolute; width:40px;height:40px;top:0px;right:0px;}
