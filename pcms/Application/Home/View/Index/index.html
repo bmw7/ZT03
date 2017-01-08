@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>欢迎访问 - 温州胜诉律师网</title>
     <link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/client/css/swiper-3.2.7.min.css">
     <link rel="stylesheet" href="__PUBLIC__/client/css/index.css">
     <style>
         .my-map { margin: 0 auto; width: 517px; height: 178px; }
@@ -298,18 +297,20 @@
 
     <!-- 联系及链接 -->
     <div class="row" id="contact">
+    
+    	
+    	
         <div class="container">
         
-          <form action="" method="post">
-                <input type="text" name="phone" id="phone" placeholder="请输入手机号码">
-                <input type="text" name="email" id="email" placeholder="请输入电子邮件">
-                <textarea name="message" id="message" placeholder="请输入案件描述"></textarea>
-          </form>
+            <div id="tijiao"></div>
+            <div id="reset"></div>
+            <a href="/guestbook"><span class="content_unit_title_more"></span></a>
             
-            
-            
-            
-            
+            <input type="text" name="phone" id="phone" placeholder="请输入手机号码">
+            <input type="text" name="email" id="email" placeholder="请输入电子邮件">
+            <textarea name="guest_content" id="message" placeholder="请输入案件描述"></textarea>
+          
+            	
             
 		    <div id="wrap" class="my-map">
 		        <div id="mapContainer"></div>
@@ -370,12 +371,7 @@
 		    </script>            
             
             
-            
-            
-            
-            
-            
-            
+
             
         </div>
     </div>
@@ -387,42 +383,65 @@
 </div>
 
 <script src="__PUBLIC__/client/js/jquery.min.js"></script>
-<script src="__PUBLIC__/client/js/swiper-3.2.7.jquery.min.js"></script>
 <script>
-    var mySwiper = new Swiper ('.swiper-container', {
-        loop: true,
-        autoplay: 3000,
-        paginationClickable :true,
-        effect : 'fade',
-        fade: {
-            crossFade: false,
-        },
-        // 如果需要分页器
-        pagination: '.swiper-pagination',
-    })
-
-
-    $(document).ready(function(){
-        // 律师团队
-        $('.group_member').hover(
-            function(){
-                $(this).find('.photo').find('img').animate({
-                    'width':'186px',
-                    'height':'186px',
-                    'margin-top':'14px',
-                    'margin-left':'14px'
-                },500);
-            },
-            function(){
-                $(this).find('.photo').find('img').animate({
-                    'width':'214px',
-                    'height':'214px',
-                    'margin-top':'0px',
-                    'margin-left':'0px'
-                },500);
-            }
-        );
+$(document).ready(function(){
+    // 留言
+    $('#tijiao').click(function(){
+		
+    	$email = $('#email').val();
+		$phone = $('#phone').val();
+		$guest_content = $('#message').val();
+		
+		if($email == '' || $phone == '' || $guest_content == ''){
+			
+			alert('留言信息不完整！');
+			
+		}else{
+			
+	        $.ajax({
+	        	url:'/guestbook/save',
+	        	type:'POST',
+	            data:{phone:$phone,email:$email,guest_content:$guest_content},
+	            success:function(data){
+					alert('留言成功！请留意站长回复！');
+					window.location.href='/guestbook';
+	            }
+	        });
+			
+		}
+  		
+       
     });
+    
+    // 重置
+    $('#reset').click(function(){
+    	$('#email').val('');
+    	$('#phone').val('');
+    	$('#message').val('');
+    });
+    
+	// 律师团队
+     $('.group_member').hover(
+         function(){
+             $(this).find('.photo').find('img').animate({
+                 'width':'186px',
+                 'height':'186px',
+                 'margin-top':'14px',
+                 'margin-left':'14px'
+             },500);
+         },
+         function(){
+             $(this).find('.photo').find('img').animate({
+                 'width':'214px',
+                 'height':'214px',
+                 'margin-top':'0px',
+                 'margin-left':'0px'
+             },500);
+         }
+     );
+     
+     
+});
 </script>
 </body>
 </html>

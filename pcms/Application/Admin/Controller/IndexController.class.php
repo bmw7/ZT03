@@ -25,6 +25,11 @@ class IndexController extends AuthController {
     	$this->assign('login_count',$info[1]);
     	$this->assign('login_date',$info[2]);
     	$this->assign('login_address',$info[3]);
+    	
+    	$guestbook = M('guestbook'); // 实例化User对象
+    	$count = $guestbook->where("reply_content is null")->count();
+    	$this->assign('count',$count);
+    	
     	$this->display();
     }
 }

@@ -8,6 +8,49 @@ use Think\Controller;
 
 class ArticleController extends Controller {
 
+	// 搜索
+	public function search(){
+		$word = I('search');
+		$word_high = '<span style="color:#f43fd4;font-weight:bold">'.$word.'</span>';
+		
+		
+		$article = M('Article');
+		
+ 		$count     = $article->where("title like '%".$word."%'")->count();// 查询满足要求的总记录数
+		 
+// 		$Page      = new \Think\Page($count,25);// 实例化分页类 传入总记录数和每页显示的记录数(12)
+// 		$Page->setConfig('next','下一页');
+// 		$Page->setConfig('prev','上一页');
+// 		$Page->setConfig('first','首页');
+// 		$Page->setConfig('last','尾页');
+// 		$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
+		
+		 
+// 		$show      = $Page->show();// 分页显示输出
+// 		$list      = $article->where("title like '%".$word."%'")->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		$list      = $article->where("title like '%".$word."%'")->order('create_date desc')->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		
+		for ($i = 0; $i<count($list); $i++){
+			$list[$i]['title'] = str_replace($word,$word_high,$list[$i]['title']);
+		}
+		
+    	// 展示顶部导航菜单
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Navigation'));
+    	
+    	// 友情链接
+    	$links_db = M('links');
+    	$links = $links_db->order('orders asc')->select();
+    	$this->assign('links',$links);
+    	
+    	$this->assign('list',$list);// 赋值数据集
+    	$this->assign('count',$count);// 赋值数据集
+    	//$this->assign('page',$show);// 赋值分页输出
+    	$this->display();
+		   
+		
+	}
+	
 	/** 
 	 * 展示 单篇类 文章 
 	 * 前台访问网址为 doc/id.html 例如 doc/22.html 

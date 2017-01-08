@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>欢迎访问 - 温州胜诉律师网</title>
+    <link rel="stylesheet" href="__PUBLIC__/client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/client/css/inner.css">
+    <style type="text/css">
+    	tr{ border:#eeeeee 1px solid; margin-bottom:20px;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    
+    <include file="Public/include/header.html" />
+
+    <!--大图banner-->
+    <div class="row" id="banner">
+
+    </div>
+
+    <!-- 正文内容 -->
+    <div class="row content">
+        
+        <div class="container">
+            <div class="col-md-4 scrollspy" >
+                <div id="nav" data-spy="affix"></div>
+            </div>
+            <div class="col-md-8 main">
+                <div class="title">访客留言</div>
+                <div class="line"></div>
+                <table class="table-striped">
+                    <tr>
+                        <td class="item_icon"><b>是否回复</b></td>
+                        <td class="item_title" style="text-align:center"><b>留言内容&nbsp;(&nbsp;点击查看详情&nbsp;)</b></td>
+                        <td class="item_time"><b>留言时间</b></td>
+                    </tr>
+                    <volist name="list" id="article">
+                    <tr name="{$article.id}">
+                        <td class="item_icon">
+                        	<if condition="$article.reply_content eq ''">
+                        		<img src="/Public/client/images/reply-no.png">
+                        	<else/>
+                        		<img src="/Public/client/images/reply-yes.png">
+                        	</if>              
+                        </td>
+                        <td class="item_title" name="{$article.id}">{$article.guest_content|msubstr=0,50,'utf-8',false}</td>
+                        <td class="item_time">{$article.create_date|strtotime|date='Y-m-d',###}</td>
+                    </tr>
+                    </volist>
+                      
+                </table>
+                <div class="pull-right">{$page}</div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- 落款部分 -->
+    <div class="row" id="footer">
+          <include file="Public/include/footer.html" />
+    </div>
+</div>
+
+<script src="__PUBLIC__/client/js/jquery.min.js"></script>
+<script src="__PUBLIC__/client/js/layer/layer.js"></script>
+<script src="__PUBLIC__/client/js/bootstrap.min.js"></script>
+
+<script>
+$('#nav').affix({
+    offset: {
+        top: $('#nav').offset().top
+    }
+});
+
+
+$(document).ready(function(){
+	
+    $('.item_title').on('click',function(){
+    	
+    	$id = $(this).attr('name');
+    
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 1,
+            area: ['600px', '560px'],
+            shadeClose: true,
+            content: ['/guestbook/detail/id/' + $id,'no']
+        });
+    });
+    
+});
+</script>
+</body>
+</html>

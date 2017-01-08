@@ -25,9 +25,9 @@
 .content .title{ color: #10a8fe; font-size: 28px; height: 70px; line-height: 70px; margin-top:20px;}
 .content .line { border-top:1px solid #ececec;}
 .content table{ margin-top: 20px;}
-.content .item_icon{ width: 40px; text-indent:10px;line-height: 10px;}
-.content .item_title{ width: 750px;}
-.content .item_time{ width: 82px; color:#b3b3b3;}
+.content .item_icon{ width: 80px; text-indent:10px;line-height: 10px;text-align:center;}
+.content .item_title{ width: 640px;cursor:pointer;}
+.content .item_time{ width: 112px; color:#b3b3b3;text-align:center;}
 .content tr{ height: 40px; font-size: 12px; }
 .content tr a{ color: #706c6d; }
 .content tr a:hover{ color: #10a8fe; text-decoration: none;}

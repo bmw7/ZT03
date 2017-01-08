@@ -1,4 +1,5 @@
 .container{ width: 1152px; padding:0px;}
+.container-fluid{ padding:0px;}
 
 /** 顶部区域*/
 #top{ height: 106px; }
@@ -15,14 +16,7 @@
 #menu .menu_item{ width: 64px; height: 44px; font-size: 12px; float: left; overflow: hidden; text-align: center; }
 #menu .active{ width: 64px; height: 44px; background-color: #a6dfff; }
 
-/** swiper轮播 */
-.swiper-container{ width: 820px; height: 331px; }
-.swiper-slide img{ width: 820px; height: 331px;}
-.swiper-pagination-bullet-active{background:#fff;}
-
-#banner{ height: 630px; background-image: url("../images/bg_banner.png"); background-repeat: repeat-x; background-position-y: 498px; text-align: center; }
-#banner_swiper{ width: 820px; height: 331px; }
-
+#banner{ height: 488px; width:100%; background-image: url("../images/banner1.png");background-position:center;background-repeat:no-repeat;}
 
 #group{ height: 674px; padding-left: 15px;overflow: hidden;}
 #group_title{ height:146px; background-image: url("../images/bg_group_title.png"); }
@@ -36,6 +30,7 @@
 .group_member:hover{ background-color: #10a8fe; }
 .group_member:hover .title{ color: #ffffff; }
 .group_member:hover .desc{ color: #ffffff; }
+
 
 
 /* 内容区块 */
@@ -63,11 +58,15 @@
 .content_unit_main .list:hover .time{ color: #ffffff; }
 
 #contact{ height: 557px; background-color: #f3f3f3; font-size: 12px; color: #706c6d;}
-#contact .container{ margin-top:55px; height: 430px; background-image: url("../images/bg_contact.png");background-repeat: no-repeat; }
+#contact .container{ margin-top:55px; height: 430px; background-image: url("../images/bg_contact.png");background-repeat: no-repeat; position:relative;}
 #contact input{ width: 572px; height: 42px; border: none; text-indent: 13px;}
 #contact #phone{ margin-top: 73px;margin-left: 576px;}
 #contact #email{ margin-top: 40px;margin-left: 576px;}
 #contact #message{ margin-top: 44px;margin-left: 576px; width: 572px;height:122px; border: none;text-indent: 13px;line-height: 30px;}
+#contact .container #tijiao{ width:274px; height:43px;  position:absolute;top: 385px;right: 3px; cursor:pointer;}
+#contact .container #reset{ width:274px; height:43px;  position:absolute;top: 385px;right: 304px; cursor:pointer;}
+#contact .container .content_unit_title_more{ position:absolute;top: -15px;right: 4px; }
+
 
 #footer{ height: 124px; background-color: #535353; text-align: center; font-size: 12px;}
 #footer a{ color:#fdfdfd;}
@@ -78,3 +77,4 @@
 #footer #second{ color:#959595; }
 #footer #second a{ color:#959595; text-decoration: underline;}
 #footer #second a:hover{ text-decoration: none; color:#10a8fe;}
+
