@@ -12,7 +12,7 @@ class IndexController extends Controller {
     	$this->assign("tree",$categoryService->getTree('Navigation'));
     	
     	// 律师团队
-    	$lawyers = $article->where('category_id = 1')->order('id desc')->limit(5)->select();
+    	$lawyers = $article->where('category_id = 1')->order('id asc')->limit(5)->select();
     	foreach ($lawyers as $k => $v){
     		// 添加新成员 image
     		$lawyers[$k]['image'] = $article_image->where('article_id ='.$v['id'])->order('orders asc')->limit(1)->getField('filename');
