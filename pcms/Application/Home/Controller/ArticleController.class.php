@@ -224,7 +224,7 @@ class ArticleController extends Controller {
 		$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%  共 %TOTAL_ROW% 条记录');
 		 
 		$show      = $Page->show();// 分页显示输出
-		$list      = $article->where('category_id = '.$category_id)->order('create_date desc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		$list      = $article->where('category_id = '.$category_id)->order('create_date asc')->limit($Page->firstRow.','.$Page->listRows)->select();	// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		 
 		   
 		/**
