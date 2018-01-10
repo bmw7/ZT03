@@ -29,6 +29,7 @@ class ArticleController extends AuthController{
     	$this->display();
     }
     
+    
     /** 添加-保存  */
     public function save(){
     	
@@ -109,6 +110,125 @@ class ArticleController extends AuthController{
     }
         
     }
+    
+    
+    
+    /** 添加产品页面  */
+    public function add_pro(){
+    	$categoryService = A('Category','Service');
+    	$this->assign("tree",$categoryService->getTree('Category'));
+    	$this->assign("length",7);
+    	// 标签
+    	$tag_group = M('tag_group');
+    	$group = $tag_group->select();
+    	if (count($group) > 0){
+    		$tag = M('tag');
+    		foreach ($group as $k => $v){
+    			$group[$k]['tags'] = $tag->where('group_id ='.$v['id'])->select();
+    		}
+    		$this->assign("groups",$group);
+    		$this->assign("length",5);
+    	}
+    	 
+    	$this->display();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /** 产品添加-保存  */
+    public function save_pro(){
+    	 
+    	if (trim(I('post.title')) == '' || trim(I('post.category_id')) == ''){
+    		$this->error('表单填写不完整，请重新填写！',U('admin/article/add_pro'));
+    	}else{
+    		 
+    		 
+    		 
+    		$Article = M('article');
+    		$Article->create();
+    		$Article->content = $_POST['content']; //为了防止转义html字符
+    		$Article->create_date = Date('Y-m-d H:i:s');
+    
+    		// 获取该栏目对应基础网址
+    		$category = M('category');
+    		$category_type = M('category_type');
+    
+    		$type_id = $category->where('id = '.I('post.category_id'))->getField('type_id');
+    		$Article->category_url = $category_type->where('id = '.$type_id)->getField('url');
+    
+    		/**
+    		 * 选中置顶，当前年份加1000年
+    		 * 故前台判断顶置的条件是数据表中时间 >3000年
+    		* */
+    		if(I('post.isTop')){
+    			$year = date('Y') + 1000;
+    			$Article->create_date = $year.'-'.date('m-d H:i:s');
+    		}
+    
+    		// 存在外链，设置link值供前台调用
+    		if(trim($_POST['outer_link']) != ''){
+    			$this->assign('link',trim($_POST['outer_link']));
+    		}
+    
+    		if ($Article->add()){
+    			 
+    			// 文章id
+    			$article_id = $Article->getLastInsID();
+    			 
+    			// 上传图片session存在
+    			if (session('?images')){
+    				$article_image = M('article_image');
+    				$images = session('images');
+    				for ($i=0;$i<count($images);$i++){
+    					// 保存图片名称和文章id
+    					$article_image->article_id = $article_id;
+    					$article_image->filename = $images[$i];
+    					$article_image->add();
+    					// 更新orders = id
+    					$id = $article_image->getLastInsID();
+    					$article_image->orders = $id;
+    					$article_image->where('id = '.$id)->save();
+    				}
+    				// 处理完毕，销毁session
+    				session('images',null);
+    			}
+    			 
+    			// 标签存在
+    			if (count($_POST['tags']) > 0){
+    				$article_tag = M('Article_tag');
+    				$tags = $_POST['tags'];
+    				for ($i = 0;$i < count($tags);$i++){
+    					$article_tag->article_id = $article_id;
+    					$article_tag->title = I('post.title');
+    					$article_tag->tag_id = $tags[$i];
+    					$article_tag->add();
+    				}
+    			}
+    			   			
+    			$this->success('操作成功！',U('admin/article/add_pro'));
+    		}else{
+    			$this->success('操作失败！',U('admin/article/add_pro'));
+    		}
+    
+    		 
+    
+    	}
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /** 文章管理  */
     public function manage(){

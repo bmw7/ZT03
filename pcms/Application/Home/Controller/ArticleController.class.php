@@ -90,8 +90,52 @@ class ArticleController extends Controller {
 		
 		$this->assign('article',$article);
 		$this->assign('article_images',$article_images);
+		$this->assign('size',count($article_images));
 		$this->display();
 	}
+	
+	
+	
+	/**
+	 * 展示  多篇类 产品页面 
+	 * 前台访问网址为 pros/id.html 例如 pros/22.html
+	 * 使用了url默认路由设置，其真实对应的完整模块地址为 article/showPics/pics/id.html
+	 *  */
+	public function showPros(){
+		$id = I('get.pros'); // 这里用pros来指代id
+		$db = M('Article');  // 暂时借用Article数据库
+		$arr = $db->where('id = '.$id)->select();
+		$article = $arr[0];
+	
+		// 点击次数+1 并更新数据库
+		$article['hits'] = $article['hits'] + 1;
+		$db->where('id = '.$id)->setField('hits',$article['hits']);
+	
+		// 未设置文章来源，则以“本站”代替
+		if ($article['source'] == ''){  $article['source'] = '本站';  }
+		// 未设置关键词，则以标题代替
+		if ($article['seo_keywords'] == ''){ $article['seo_keywords'] = $article['title']; }
+		// 未设置内容描述，则以正文内容截取前255字代替。msubstr为自定义函数
+		if ($article['seo_description'] == ''){ $article['seo_description'] = msubstr($article['content'],0,255,'utf-8',false); }
+	
+		/** 获取文章对象所附属图像 */
+		$article_image = M('article_image');
+		$article_images = $article_image->where('article_id ='.$id)->order('orders asc')->getField('filename',true);
+	
+		// 折后价格
+		$price = $article['price'];
+		$discount = $price * 0.2;
+		$this->assign('discount',$discount);
+		$this->assign('preferential',$price - $discount);
+		
+		$this->assign('article',$article);
+		$this->assign('article_images',$article_images);
+		$this->assign('size',count($article_images));
+		$this->display();
+	}
+	
+	
+	
 	
 	/**
 	 * 列表展示 多篇类 文章条目

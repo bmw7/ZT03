@@ -9,26 +9,28 @@
 
 1、  为缩短网址，本系统开启了针对模块默认路由规则设置  。 在 ThinkPHP/conf/convention.php 中，修改了如下项目
 	'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
-	'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show','docs/:docs' => 'Article/shows'), 
+	'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show','docs/:docs' => 'Article/shows'),  151行  
 	
 	说明：前台网址勿用article开头，因后台已经使用
 	doc/1.html 用于单篇文章展示 - 例如 公司简介
 	docs/1.html 用于多篇类文章展示 - 例如 新闻栏目 的一篇文章
 	list/1.html 用于某类文章条目列表 - 例如某类新闻栏目的所有文章列表
   
-2、  发布项目前，关于上传图片的修改如下
+2、  发布项目前，关于上传图片的修改说明
         
-        请修改图片上传设置 Public/admin/js/article.app.js 修改至相对于域名访问的相对地址
+        请修改图片上传设置 Public/admin/js/article.app.js 修改至相对于[根域名]访问的相对地址
 	02行 - baseUrl: '/Public/plugin/webuploader/dist',
 	04行 - jquery: '/Public/plugin/webuploader/image-upload/jquery'
 	72行 - swf: '/Public/plugin/webuploader/dist/Uploader.swf',
 	76行 - server: '/admin/article/uploadimages',
- 
+	
+        图片管理管理区域，Application/Admin/View/article/edit.html 修改至如下   
+    222行 - <img src="/upload/thumb_{$image.filename}">
+    
        修改缩略图尺寸在  在 admin/article/uploadimages方法内 
     589行 - $image->thumb(150, 150)->save($uploadDir . DIRECTORY_SEPARATOR . "thumb_".$randomFileName);// 按照原图的比例生成一个最大为150*150的缩略图并保存
        
-       图片管理管理区域，Application/Admin/View/article/edit.html 修改至如下   
-    222行 - <img src="/upload/thumb_{$image.filename}">
+   /*-- 浏览器用QQ浏览器的兼容模式已证明可行  --/
     
 3、 Ueditor 编辑框处理,修改 ueditor.config.js,放开此行注释并修改为true 避免浏览器自动长高问题
    284行 - ,scaleEnabled:true
@@ -116,7 +118,7 @@ CREATE TABLE `tp_category_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* ​系统内置栏目类型*/
-insert into tp_category_type(name,url) values('标题类型','title'),('多篇内容','docs'),('单篇内容','doc'),('图文类型','pics'),('保留类型','res');
+insert into tp_category_type(name,url) values('标题类型','title'),('产品类型','pros'),('多篇内容','docs'),('单篇内容','doc'),('图文类型','pics'),('保留类型','res');
 
 /** 栏目导航  -- 顶级栏目parent_id为0  */
 CREATE TABLE `tp_navigation` (

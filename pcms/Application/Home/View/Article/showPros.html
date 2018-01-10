@@ -1,4 +1,4 @@
-<!-- 多篇类带图片文章展示 - 标准页面 -->
+<!-- 多篇类产品展示页面 - 标准页面 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,21 +12,40 @@
  
 	<style>
 		#etitle{ font-family: 'Microsoft YaHei','SimHei';font-size:22px;}
+		#product{ width:100%;height:200px;}
+		#details{ width:100%;}
 	</style>
 	
 </head>
 <body>
 
-   	<volist name="article_images" id="article_image">
-   	  <if condition="$key gt 0">  <!-- 把第一张缩略图略掉的方案 -->
-   		<div><img src="/git/pcms/upload/{$article_image}" style="width:280px"></div>
-   	  </if> 
-	</volist>
-<br>
+<!-- 产品名称 -->
 <div id="etitle">{$article.title}</div><br>
 
+<!-- 产品图片 -->
+<div id="product">
+	<volist name="article_images" id="article_image">
+		<div style="float:left"><img src="/git/pcms/upload/{$article_image}" style="width:280px"></div> 
+	</volist>
+</div>
+
+<div id="details">
+产品价格：{$article.price}<br>
+</div>
+
+<!-- 提示信息 -->
+优惠20%价格：{$discount}<br>
+折后价格：{$preferential}
+
+<!-- 产品描述 -->
 {$article.content}
 
+
+
+
+
+<!-- 购买按钮 -->
+<input type="button" value="购买">
 
 <br><br>
 
