@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    
+    <title>用户注册</title>
+</head>
+<body>
+
+
+
+<div id="inner_content">
+
+<h2>用户注册</h2><br><br>
+用户名<input type="text" name="username" id="username" placeholder="请输入用户名" size=30> <br>
+密码<input type="password" name="password" id="password" placeholder="请输入密码" size=30> <br>
+再次输入密码<input type="password" name="repassword" id="repassword" placeholder="再次输入密码" size=30> <br>
+<input type="button" value="提交" id="submit">
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/client/js/jquery-1.11.1.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+
+	
+	$('#submit').click(function(){
+		
+		$username = $('#username').val();
+		$pwd = $('#password').val();
+		$repwd = $('#repassword').val();
+		
+
+		
+		
+		if($username == '' || $pwd == '' || $repwd == ''){
+			alert('null');
+		}else if($pwd != $repwd){
+			alert('not equal!');
+		}else{
+			
+			
+			$.ajax({
+				method : 'POST',
+				url : "{:U('user/only')}",
+				data : {'username':$username},
+				success: function(re){ 
+					alert(re);					
+				}
+			});
+			
+			
+			
+
+		}
+	});
+	
+
+});
+
+</script>
+</body>
+</html>

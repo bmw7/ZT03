@@ -1,0 +1,14 @@
+					if(re == 'false'){
+						alert('用户名重复！');
+						}else{	
+								
+							
+							$.ajax({
+								method : 'POST',
+								url : "{:U('user/save')}",
+								data : {'username':$username,'password':$pwd},
+								success: function(data){ alert('success'); }
+							});
+						
+						
+					}

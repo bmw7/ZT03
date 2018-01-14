@@ -69,7 +69,7 @@ CREATE TABLE `tp_user` (
   `address` varchar(255) default NULL,
   `phone` varchar(100) default NULL,
   `login_address` varchar(100) default NULL,
-  `login_count` int NOT NULL,
+  `login_count` int default 0,
   `create_date` TIMESTAMP default CURRENT_TIMESTAMP,
   `login_date` datetime default NULL,
   `double` int default 0,
