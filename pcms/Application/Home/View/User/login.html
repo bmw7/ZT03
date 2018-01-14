@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    
+    <title>用户登录</title>
+</head>
+<body>
+
+
+
+<div id="inner_content">
+
+<h2>用户登录</h2><br>
+<div id="tips"></div><br>
+手机号码<input type="text" name="phone" id="phone" placeholder="请输入手机号码" size=30></div><br>
+用户密码<input type="password" name="password" id="password" placeholder="请输入密码" size=30> <br>
+<input type="button" value="登录" id="submit">
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/client/js/jquery-1.11.1.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+
+	
+	$('#submit').click(function(){
+		
+		$phone = $('#phone').val();
+		$pwd = $('#password').val();
+	
+		
+		if($phone == '' || $pwd == ''){
+			alert('null');
+		}else{
+			
+			$.ajax({
+				method : 'POST',
+				url : "{:U('user/login_submit')}",
+				data : {'phone':$phone,'password':$pwd},
+				success: function(data){
+					if(data == "success"){
+						window.location.href="{:U('user/user')}";
+					}else{
+						alert("登录失败！");
+						self.location.reload();
+					}				
+				}
+			});
+
+		}
+	});
+	
+
+});
+
+</script>
+</body>
+</html>

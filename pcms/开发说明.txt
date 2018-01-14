@@ -63,7 +63,7 @@ CREATE TABLE `tp_account` (
 /** 用户  */
 CREATE TABLE `tp_user` (
   `id` int NOT NULL auto_increment,
-  `username` varchar(100) NOT NULL,
+  `username` varchar(100) default NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) default NULL,
   `address` varchar(255) default NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `tp_user` (
   `double` int default 0,
   `wallet` int default 0,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `phone` (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /* ​系统内置账号  password is dever*/
