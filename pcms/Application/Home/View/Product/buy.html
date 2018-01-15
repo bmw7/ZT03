@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商品购买页面</title>
+</head>
+<body>
+您的收货地址：{$user.username},{$user.phone},{$user.address}<br><a href="">修改</a><br><br>
+<if condition="$tips neq null">
+{$tips}
+</if>
+商品名称：{$product.title}<br>
+商品价格：{$product.price}<br>
+购买数量：<br>
+
+<input type="button" value="购买" id="buy">
+</body>
+</html>

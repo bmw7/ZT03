@@ -151,9 +151,10 @@ return  array(
     'URL_ROUTE_RULES'       =>  array('doc/:doc' => 'Article/show',        // 单篇类文章展示
     								  'docs/:docs' => 'Article/shows',     // 多篇类文章展示
     								  'pics/:pics' => 'Article/showPics',  // 多篇类带图文章展示
-    		                          'pros/:pros' => 'Article/showPros',  // 多篇类产品页面展示
     								  'tags/:tags' => 'Article/showTags',  // 多篇类带图文章列表展示 - 以tag_id为取值
-    		                          'list/:list' => 'Article/showList'), // 多篇类文章列表
+    		                          'list/:list' => 'Article/showList', // 多篇类文章列表
+                                      'pro/:pro'   => 'Product/show',  // 多篇类产品页面展示
+                                      'pros/:pros' => 'Product/lists'),     // 多篇类带图产品列表展示
     								  
     'URL_MAP_RULES'         =>  array(), // URL映射定义规则
 

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<if condition="$Think.session.info neq null">
+您的密码是：{$Think.session.info.password}
+<else /> 
+请登录
+</if>
+</body>
+</html>

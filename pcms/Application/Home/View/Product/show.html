@@ -7,7 +7,7 @@
     <meta name="keywords" content="{$article.seo_keywords}">
     <meta name="description" content="">
     
-    <title>{$article.title}</title>
+    <title>{$product.title} | 产品详情</title>
     <link type="text/css" rel="stylesheet" href="__PUBLIC__/client/css/.css" >
  
 	<style>
@@ -18,19 +18,22 @@
 	
 </head>
 <body>
-
+      
+<!-- 用户登录信息包含 -->
+<include file="Application/Home/View/User/info.html" />
+    
 <!-- 产品名称 -->
-<div id="etitle">{$article.title}</div><br>
+<div id="etitle">{$product.title}</div><br>
 
 <!-- 产品图片 -->
 <div id="product">
-	<volist name="article_images" id="article_image">
-		<div style="float:left"><img src="/git/pcms/upload/{$article_image}" style="width:280px"></div> 
+	<volist name="product_images" id="product_image">
+		<div style="float:left"><img src="/git/pcms/upload/{$product_image}" style="width:280px"></div> 
 	</volist>
 </div>
 
 <div id="details">
-产品价格：{$article.price}<br>
+产品价格：{$product.price}<br>
 </div>
 
 <!-- 提示信息 -->
@@ -38,18 +41,37 @@
 折后价格：{$preferential}
 
 <!-- 产品描述 -->
-{$article.content}
+{$product.content}
 
 
 
 
 
 <!-- 购买按钮 -->
-<input type="button" value="购买">
+<input type="button" id="buy" value="购买">
 
 <br><br>
 
 
 <script type="text/javascript" src="__PUBLIC__/lib/js/jquery.min.js"></script>
+<!-- U函数传Js参数简直服了 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#buy').click(function(){
+		
+		user_id = '{$Think.session.info.id}';
+		pro_id = '{$product.id}';
+		
+		if(user_id == ''){
+			alert('请登录购买');
+			window.location.href = "{:U('user/login')}";
+		}else{
+		    window.location.href = "{:U('product/buy')}?uid="+user_id+'&pid='+pro_id;							
+		}
+		
+		
+	});
+});
+</script>
 </body>
 </html>

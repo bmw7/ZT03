@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="keywords" content="{$article.seo_keywords}">
+    <meta name="description" content="">
+    
+    <title>产品展示页面</title>
+   
+	<style>
+        #inner_content{ width:858px;overflow:hidden;}
+        #projects{ width:878px; overflow:hidden; }
+        .unit{ width:205px; height:235px; float:left;  margin-right:13px; margin-bottom:20px; position:relative;}
+        .unit img{ width:205px;height:205px;}
+        .unit_word{ width:205px; height: 30px; color: #022a65; font-size: 12px; line-height: 15px; top: 212px;font-family:' FangSong','SimSun','SimHei';position:absolute;}
+        .custom_page{ text-align: right;margin-bottom: 12px; color: #002b64;}
+        .custom_page a{ color: #002b64;}
+        .num{ width: 15px; height: 15px; display:inline-block;line-height:12px;padding-left:-10px;padding-right:2px;magin-left:3px;margin-right:3px;}
+        .current{border:#002b64 1px solid;background-color:#002b64;color:#ffffff;width: 15px; height: 15px; display:inline-block;line-height:12px;padding-left:-10px;padding-right:2px;magin-left:3px;margin-right:3px;}
+    </style>
+</head>
+<body>
+    <!-- 用户登录信息包含 -->
+    <include file="Application/Home/View/User/info.html" />
+    
+    <div id="inner_content">
+
+            <div id="projects">
+                <volist name="list" id="product">
+                    <div class="unit"><a class="inner-link" href="{:U('././',array('pro'=>$product[id]))}" border="0"><img src="/git/pcms/upload/thumb_{$product.image}"><div class="unit_word">{$product.title}--价格：{$product.price}</div></a></div>
+                </volist>
+            </div>
+
+            <div class="custom_page">{$page}</div>
+
+    </div>
+
+    <script>
+        $('.num').addClass('inner-link');
+        $('.next').addClass('inner-link');
+        $('.prev').addClass('inner-link');
+    </script>
+</body>
+</html>

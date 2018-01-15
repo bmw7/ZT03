@@ -75,4 +75,8 @@ class UserController extends Controller {
 		$this->redirect('/index');		
 	}
 	
+	
+	public function info(){
+	    $this->display();
+	}
 }
